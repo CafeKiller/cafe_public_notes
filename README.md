@@ -10,3 +10,7 @@
 - sorting_algorithm: 收录了比较经典的排序算法
 
 - codes: 收录各类代码
+
+- linuxs: 收录和 Linux 操作系统相关的文章
+
+- nginxs: 收录和 nginx 服务相关的文章
