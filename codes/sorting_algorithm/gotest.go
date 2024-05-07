@@ -131,9 +131,63 @@ func partition(arr []int, left, right int) int {
     swap(arr, pivot, index-1)
     return index - 1
 }
+// 快速排序交换, 堆排序交换
 func swap(arr []int, i, j int) {
     arr[i], arr[j] = arr[j], arr[i]
 }
+
+
+func heapSort(arr []int) []int {
+    arrLen := len(arr)
+    buildMaxHeap(arr, arrLen)
+    for i := arrLen - 1; i >= 0; i-- {
+        swap(arr, 0, i)
+        arrLen -= 1
+        heapify(arr, 0, arrLen)
+    }
+    return arr
+}
+func buildMaxHeap(arr []int, arrLen int) {
+    for i := arrLen / 2; i >= 0; i-- {
+        heapify(arr, i, arrLen)
+    }
+}
+func heapify(arr []int, i, arrLen int) {
+    left := 2*i + 1
+    right := 2*i + 2
+    largest := i
+    if left < arrLen && arr[left] > arr[largest] {
+        largest = left
+    }
+    if right < arrLen && arr[right] > arr[largest] {
+        largest = right
+    }
+    if largest != i {
+        swap(arr, i, largest)
+        heapify(arr, largest, arrLen)
+    }
+}
+
+
+// countingSort 计数排序
+func countingSort(arr []int, maxValue int) []int {
+    bucketLen := maxValue + 1
+    bucket := make([]int, bucketLen) // 初始为0的数组
+    sortedIndex := 0
+    length := len(arr)
+    for i := 0; i < length; i++ {
+        bucket[arr[i]] += 1
+    }
+    for j := 0; j < bucketLen; j++ {
+        for bucket[j] > 0 {
+            arr[sortedIndex] = j
+            sortedIndex += 1
+            bucket[j] -= 1
+        }
+    }
+    return arr
+}
+
 
 func main() {
 

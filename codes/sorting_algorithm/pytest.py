@@ -97,10 +97,79 @@ def partition(arr, left, right):
     swap(arr,pivot,index-1)
     return index-1
 
-# 快速排序交换
+# 快速排序交换, 堆排序交换
 def swap(arr, i, j):
     arr[i], arr[j] = arr[j], arr[i]
 
+
+# 堆排序
+def buildMaxHeap(arr):
+    import math
+    for i in range(math.floor(len(arr)/2),-1,-1):
+        heapify(arr,i)
+
+def heapify(arr, i):
+    left = 2*i+1
+    right = 2*i+2
+    largest = i
+    if left < arrLen and arr[left] > arr[largest]:
+        largest = left
+    if right < arrLen and arr[right] > arr[largest]:
+        largest = right
+    if largest != i:
+        swap(arr, i, largest)
+        heapify(arr, largest)
+
+def heapSort(arr):
+    global arrLen
+    arrLen = len(arr)
+    buildMaxHeap(arr)
+    for i in range(len(arr)-1,0,-1):
+        swap(arr,0,i)
+        arrLen -=1
+        heapify(arr, 0)
+    return arr
+
+
+# 计数排序
+def countingSort(arr, maxValue):
+    bucketLen = maxValue+1
+    bucket = [0]*bucketLen
+    sortedIndex =0
+    arrLen = len(arr)
+    for i in range(arrLen):
+        if not bucket[arr[i]]:
+            bucket[arr[i]]=0
+        bucket[arr[i]]+=1
+    for j in range(bucketLen):
+        while bucket[j]>0:
+            arr[sortedIndex] = j
+            sortedIndex+=1
+            bucket[j]-=1
+    return arr
+
+
+# 基数排序
+def radix(arr):
+    digit = 0
+    max_digit = 1
+    max_value = max(arr)
+    #找出列表中最大的位数
+    while 10**max_digit < max_value:
+        max_digit = max_digit + 1
+    while digit < max_digit:
+        temp = [[] for i in range(10)]
+        for i in arr:
+            #求出每一个元素的个、十、百位的值
+            t = int((i/10**digit)%10)
+            temp[t].append(i)
+        coll = []
+        for bucket in temp:
+            for i in bucket:
+                coll.append(i)
+        arr = coll
+        digit = digit + 1
+    return arr
 
 if __name__ == '__main__':
     print('test start')
