@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// bubbleSort Ã°ÅİÅÅĞò
+// bubbleSort å†’æ³¡æ’åº
 func bubbleSort(arr []int) []int {
     length := len(arr)
     for i := 0; i < length; i++ {
@@ -20,7 +20,7 @@ func bubbleSort(arr []int) []int {
 }
 
 
-// selectionSort Ñ¡ÔñÅÅĞò
+// selectionSort é€‰æ‹©æ’åº
 func selectionSort(arr []int) []int {
     length := len(arr)
     for i := 0; i < length-1; i++ {
@@ -35,7 +35,7 @@ func selectionSort(arr []int) []int {
     return arr
 }
 
-// insertionSort ²åÈëÅÅĞò
+// insertionSort æ’å…¥æ’åº
 func insertionSort(arr []int) []int {
     for i := range arr {
         preIndex := i - 1
@@ -50,7 +50,7 @@ func insertionSort(arr []int) []int {
 }
 
 
-// shellSort Ï£¶ûÅÅĞò
+// shellSort å¸Œå°”æ’åº
 func shellSort(arr []int) []int {
     length := len(arr)
     gap := 1
@@ -72,7 +72,7 @@ func shellSort(arr []int) []int {
     return arr
 }
 
-// mergeSort ¹é²¢ÅÅĞò
+// mergeSort å½’å¹¶æ’åº
 func mergeSort(arr []int) []int {
     length := len(arr)
     if length < 2 {
@@ -84,7 +84,7 @@ func mergeSort(arr []int) []int {
     return merge(mergeSort(left), mergeSort(right))
 }
 
-// merge ¹é²¢µİ¹é´¦Àíº¯Êı
+// merge å½’å¹¶é€’å½’å¤„ç†å‡½æ•°
 func merge(left []int, right []int) []int {
     var result []int
     for len(left) != 0 && len(right) != 0 {
@@ -107,7 +107,7 @@ func merge(left []int, right []int) []int {
     return result
 }
 
-// quickSort ¿ìËÙÅÅĞò
+// quickSort å¿«é€Ÿæ’åº
 func quickSort(arr []int) []int {
     return _quickSort(arr, 0, len(arr)-1)
 }
@@ -131,7 +131,7 @@ func partition(arr []int, left, right int) int {
     swap(arr, pivot, index-1)
     return index - 1
 }
-// ¿ìËÙÅÅĞò½»»», ¶ÑÅÅĞò½»»»
+// å¿«é€Ÿæ’åºäº¤æ¢, å †æ’åºäº¤æ¢
 func swap(arr []int, i, j int) {
     arr[i], arr[j] = arr[j], arr[i]
 }
@@ -169,10 +169,10 @@ func heapify(arr []int, i, arrLen int) {
 }
 
 
-// countingSort ¼ÆÊıÅÅĞò
+// countingSort è®¡æ•°æ’åº
 func countingSort(arr []int, maxValue int) []int {
     bucketLen := maxValue + 1
-    bucket := make([]int, bucketLen) // ³õÊ¼Îª0µÄÊı×é
+    bucket := make([]int, bucketLen) // åˆå§‹ä¸º0çš„æ•°ç»„
     sortedIndex := 0
     length := len(arr)
     for i := 0; i < length; i++ {

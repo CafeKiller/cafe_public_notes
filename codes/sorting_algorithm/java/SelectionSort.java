@@ -2,17 +2,17 @@ public class SelectionSort {
     
     public int[] sort(int[] sourceArray) throws Exception {
         int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
-        // ×Ü¹²Òª¾­¹ı N-1 ÂÖ±È½Ï
+        // æ€»å…±è¦ç»è¿‡ N-1 è½®æ¯”è¾ƒ
         for (int i = 0; i < arr.length - 1; i++) {
             int min = i;
-            // Ã¿ÂÖĞèÒª±È½ÏµÄ´ÎÊı N-i
+            // æ¯è½®éœ€è¦æ¯”è¾ƒçš„æ¬¡æ•° N-i
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[j] < arr[min]) {
-                    // ¼ÇÂ¼Ä¿Ç°ÄÜÕÒµ½µÄ×îĞ¡ÖµÔªËØµÄÏÂ±ê
+                    // è®°å½•ç›®å‰èƒ½æ‰¾åˆ°çš„æœ€å°å€¼å…ƒç´ çš„ä¸‹æ ‡
                     min = j;
                 }
             }
-            // ½«ÕÒµ½µÄ×îĞ¡ÖµºÍiÎ»ÖÃËùÔÚµÄÖµ½øĞĞ½»»»
+            // å°†æ‰¾åˆ°çš„æœ€å°å€¼å’Œiä½ç½®æ‰€åœ¨çš„å€¼è¿›è¡Œäº¤æ¢
             if (i != min) {
                 int tmp = arr[i];
                 arr[i] = arr[min];

@@ -1,141 +1,141 @@
-# NginxµÄ»ù±¾Ê¹ÓÃ
+# Nginxçš„åŸºæœ¬ä½¿ç”¨
 
-> Ö÷Òª²Î¿¼Êé/×ÊÁÏ:   
-> [nginx´ÓÈëÃÅµ½¾«Í¨](https://www.bookstack.cn/read/nginx-tutorial/README.md)  
-> [nginx ¼«¼ò½Ì³Ì](https://www.bookstack.cn/read/dunwu-nginx-tutorial/docs-nginx-introduction.md)  
+> ä¸»è¦å‚è€ƒä¹¦/èµ„æ–™:   
+> [nginxä»å…¥é—¨åˆ°ç²¾é€š](https://www.bookstack.cn/read/nginx-tutorial/README.md)  
+> [nginx æç®€æ•™ç¨‹](https://www.bookstack.cn/read/dunwu-nginx-tutorial/docs-nginx-introduction.md)  
 
-±¾ÎÄÕÂ¸ü¶àµÄÊÇ°ïÖúÄã¿ìËÙµÄ´î½¨Ò»¸ö nginx ·şÎñ£¬¸ü¶àµÄÆ«ÏòÊµÕ½£¬Èç¹ûÄãÏëÁË½â¸ü¶àÏêÏ¸µÄ nginx µÄÖªÊ¶£¬½¨Òé¿´Ò»ÏÂÉÏÎÄµÄ²Î¿¼Êé/×ÊÁÏÁ´½Ó¡£
+æœ¬æ–‡ç« æ›´å¤šçš„æ˜¯å¸®åŠ©ä½ å¿«é€Ÿçš„æ­å»ºä¸€ä¸ª nginx æœåŠ¡ï¼Œæ›´å¤šçš„åå‘å®æˆ˜ï¼Œå¦‚æœä½ æƒ³äº†è§£æ›´å¤šè¯¦ç»†çš„ nginx çš„çŸ¥è¯†ï¼Œå»ºè®®çœ‹ä¸€ä¸‹ä¸Šæ–‡çš„å‚è€ƒä¹¦/èµ„æ–™é“¾æ¥ã€‚
 
-## »ù±¾²Ù×÷
+## åŸºæœ¬æ“ä½œ
 
-windows Ö±½ÓÇ°Íù[¹Ù·½ÏÂÔØ](https://nginx.org/en/download.html)°²×°¼´¿É¡£
+windows ç›´æ¥å‰å¾€[å®˜æ–¹ä¸‹è½½](https://nginx.org/en/download.html)å®‰è£…å³å¯ã€‚
 
 ```shell
-sudo apt-get install nginx # °²×°, ubuntu ÏµÍ³
+sudo apt-get install nginx # å®‰è£…, ubuntu ç³»ç»Ÿ
 
-nginx -s stop       # ¿ìËÙ¹Ø±ÕNginx£¬¿ÉÄÜ²»±£´æÏà¹ØĞÅÏ¢£¬²¢Ñ¸ËÙÖÕÖ¹web·şÎñ¡£
-nginx -s quit       # Æ½ÎÈ¹Ø±ÕNginx£¬±£´æÏà¹ØĞÅÏ¢£¬ÓĞ°²ÅÅµÄ½áÊøweb·şÎñ¡£
-nginx -s reload     # Òò¸Ä±äÁËNginxÏà¹ØÅäÖÃ£¬ĞèÒªÖØĞÂ¼ÓÔØÅäÖÃ¶øÖØÔØ¡£
-nginx -s reopen     # ÖØĞÂ´ò¿ªÈÕÖ¾ÎÄ¼ş¡£
-nginx -c filename   # Îª Nginx Ö¸¶¨Ò»¸öÅäÖÃÎÄ¼ş£¬À´´úÌæÈ±Ê¡µÄ¡£
-nginx -t            # ²»ÔËĞĞ£¬½ö½ö²âÊÔÅäÖÃÎÄ¼ş¡£nginx ½«¼ì²éÅäÖÃÎÄ¼şµÄÓï·¨µÄÕıÈ·ĞÔ£¬²¢³¢ÊÔ´ò¿ªÅäÖÃÎÄ¼şÖĞËùÒıÓÃµ½µÄÎÄ¼ş¡£
-nginx -v            # ÏÔÊ¾ nginx µÄ°æ±¾¡£
-nginx -V            # ÏÔÊ¾ nginx µÄ°æ±¾£¬±àÒëÆ÷°æ±¾ºÍÅäÖÃ²ÎÊı¡£
+nginx -s stop       # å¿«é€Ÿå…³é—­Nginxï¼Œå¯èƒ½ä¸ä¿å­˜ç›¸å…³ä¿¡æ¯ï¼Œå¹¶è¿…é€Ÿç»ˆæ­¢webæœåŠ¡ã€‚
+nginx -s quit       # å¹³ç¨³å…³é—­Nginxï¼Œä¿å­˜ç›¸å…³ä¿¡æ¯ï¼Œæœ‰å®‰æ’çš„ç»“æŸwebæœåŠ¡ã€‚
+nginx -s reload     # å› æ”¹å˜äº†Nginxç›¸å…³é…ç½®ï¼Œéœ€è¦é‡æ–°åŠ è½½é…ç½®è€Œé‡è½½ã€‚
+nginx -s reopen     # é‡æ–°æ‰“å¼€æ—¥å¿—æ–‡ä»¶ã€‚
+nginx -c filename   # ä¸º Nginx æŒ‡å®šä¸€ä¸ªé…ç½®æ–‡ä»¶ï¼Œæ¥ä»£æ›¿ç¼ºçœçš„ã€‚
+nginx -t            # ä¸è¿è¡Œï¼Œä»…ä»…æµ‹è¯•é…ç½®æ–‡ä»¶ã€‚nginx å°†æ£€æŸ¥é…ç½®æ–‡ä»¶çš„è¯­æ³•çš„æ­£ç¡®æ€§ï¼Œå¹¶å°è¯•æ‰“å¼€é…ç½®æ–‡ä»¶ä¸­æ‰€å¼•ç”¨åˆ°çš„æ–‡ä»¶ã€‚
+nginx -v            # æ˜¾ç¤º nginx çš„ç‰ˆæœ¬ã€‚
+nginx -V            # æ˜¾ç¤º nginx çš„ç‰ˆæœ¬ï¼Œç¼–è¯‘å™¨ç‰ˆæœ¬å’Œé…ç½®å‚æ•°ã€‚
 ```
 
-windowsÏÂ¿ÉÒÔ±àĞ´Ò»¸ö `startup.bat` ½Å±¾À´Æô¶¯ nginx, ÕâÑù»á·½±ãºÜ¶à¡£
+windowsä¸‹å¯ä»¥ç¼–å†™ä¸€ä¸ª `startup.bat` è„šæœ¬æ¥å¯åŠ¨ nginx, è¿™æ ·ä¼šæ–¹ä¾¿å¾ˆå¤šã€‚
 
 ```bat
 @echo off
-rem Èç¹ûÆô¶¯Ç°ÒÑ¾­Æô¶¯nginx²¢¼ÇÂ¼ÏÂpidÎÄ¼ş£¬»ákillÖ¸¶¨½ø³Ì
+rem å¦‚æœå¯åŠ¨å‰å·²ç»å¯åŠ¨nginxå¹¶è®°å½•ä¸‹pidæ–‡ä»¶ï¼Œä¼škillæŒ‡å®šè¿›ç¨‹
 nginx.exe -s stop
 
-rem ²âÊÔÅäÖÃÎÄ¼şÓï·¨ÕıÈ·ĞÔ
+rem æµ‹è¯•é…ç½®æ–‡ä»¶è¯­æ³•æ­£ç¡®æ€§
 nginx.exe -t -c conf/nginx.conf
 
-rem ÏÔÊ¾°æ±¾ĞÅÏ¢
+rem æ˜¾ç¤ºç‰ˆæœ¬ä¿¡æ¯
 nginx.exe -v
 
-rem °´ÕÕÖ¸¶¨ÅäÖÃÈ¥Æô¶¯nginx
+rem æŒ‰ç…§æŒ‡å®šé…ç½®å»å¯åŠ¨nginx
 nginx.exe -c conf/nginx.conf
 ```
 
-## Http ·´Ïò´úÀí
+## Http åå‘ä»£ç†
 
-> ×¢£ºconf/nginx.conf ÊÇ nginx µÄÄ¬ÈÏÅäÖÃÎÄ¼ş¡£ÄãÒ²¿ÉÒÔÊ¹ÓÃ nginx -c Ö¸¶¨ÄãµÄÅäÖÃÎÄ¼ş
+> æ³¨ï¼šconf/nginx.conf æ˜¯ nginx çš„é»˜è®¤é…ç½®æ–‡ä»¶ã€‚ä½ ä¹Ÿå¯ä»¥ä½¿ç”¨ nginx -c æŒ‡å®šä½ çš„é…ç½®æ–‡ä»¶
 
 ```conf
 # ########################################################
-# Çë½«ÏÂÎÄÖĞµÄ D:/Tools/nginx-1.10.1 Ìæ»»ÎªÄã±¾»únginxµÄ°²×°Â·¾¶
-# ÏÂÎÄ location ¾²Ì¬ÎÄ¼şµÄ root Â·¾¶ÇëÌæ»»Îª Äã±¾»úµÄ¾²Ì¬×ÊÔ´Â·¾¶
-# ½¨ÒéÊ¹ÓÃ Ctrl + H ½øĞĞÅúÁ¿Ìæ»», ·ÀÖ¹´íÎó
+# è¯·å°†ä¸‹æ–‡ä¸­çš„ D:/Tools/nginx-1.10.1 æ›¿æ¢ä¸ºä½ æœ¬æœºnginxçš„å®‰è£…è·¯å¾„
+# ä¸‹æ–‡ location é™æ€æ–‡ä»¶çš„ root è·¯å¾„è¯·æ›¿æ¢ä¸º ä½ æœ¬æœºçš„é™æ€èµ„æºè·¯å¾„
+# å»ºè®®ä½¿ç”¨ Ctrl + H è¿›è¡Œæ‰¹é‡æ›¿æ¢, é˜²æ­¢é”™è¯¯
 # ########################################################
 
-#ÔËĞĞÓÃ»§
+#è¿è¡Œç”¨æˆ·
 #user somebody;
 
-#Æô¶¯½ø³Ì,Í¨³£ÉèÖÃ³ÉºÍcpuµÄÊıÁ¿ÏàµÈ
+#å¯åŠ¨è¿›ç¨‹,é€šå¸¸è®¾ç½®æˆå’Œcpuçš„æ•°é‡ç›¸ç­‰
 worker_processes  1;
 
-#È«¾Ö´íÎóÈÕÖ¾
+#å…¨å±€é”™è¯¯æ—¥å¿—
 error_log  D:/Tools/nginx-1.10.1/logs/error.log;
 error_log  D:/Tools/nginx-1.10.1/logs/notice.log  notice;
 error_log  D:/Tools/nginx-1.10.1/logs/info.log  info;
 
-#PIDÎÄ¼ş£¬¼ÇÂ¼µ±Ç°Æô¶¯µÄnginxµÄ½ø³ÌID
+#PIDæ–‡ä»¶ï¼Œè®°å½•å½“å‰å¯åŠ¨çš„nginxçš„è¿›ç¨‹ID
 pid        D:/Tools/nginx-1.10.1/logs/nginx.pid;
 
-#¹¤×÷Ä£Ê½¼°Á¬½ÓÊıÉÏÏŞ
+#å·¥ä½œæ¨¡å¼åŠè¿æ¥æ•°ä¸Šé™
 events {
-    worker_connections 1024;    #µ¥¸öºóÌ¨worker process½ø³ÌµÄ×î´ó²¢·¢Á´½ÓÊı
+    worker_connections 1024;    #å•ä¸ªåå°worker processè¿›ç¨‹çš„æœ€å¤§å¹¶å‘é“¾æ¥æ•°
 }
 
-#Éè¶¨http·şÎñÆ÷£¬ÀûÓÃËüµÄ·´Ïò´úÀí¹¦ÄÜÌá¹©¸ºÔØ¾ùºâÖ§³Ö
+#è®¾å®šhttpæœåŠ¡å™¨ï¼Œåˆ©ç”¨å®ƒçš„åå‘ä»£ç†åŠŸèƒ½æä¾›è´Ÿè½½å‡è¡¡æ”¯æŒ
 http {
-    #Éè¶¨mimeÀàĞÍ(ÓÊ¼şÖ§³ÖÀàĞÍ),ÀàĞÍÓÉmime.typesÎÄ¼ş¶¨Òå
+    #è®¾å®šmimeç±»å‹(é‚®ä»¶æ”¯æŒç±»å‹),ç±»å‹ç”±mime.typesæ–‡ä»¶å®šä¹‰
     include       D:/Tools/nginx-1.10.1/conf/mime.types;
     default_type  application/octet-stream;
 
-    #Éè¶¨ÈÕÖ¾
+    #è®¾å®šæ—¥å¿—
     log_format  main  '[$remote_addr] - [$remote_user] [$time_local] "$request" '
                       '$status $body_bytes_sent "$http_referer" '
                       '"$http_user_agent" "$http_x_forwarded_for"';
     access_log    D:/Tools/nginx-1.10.1/logs/access.log main;
     rewrite_log     on;
 
-    #sendfile Ö¸ÁîÖ¸¶¨ nginx ÊÇ·ñµ÷ÓÃ sendfile º¯Êı£¨zero copy ·½Ê½£©À´Êä³öÎÄ¼ş£¬¶ÔÓÚÆÕÍ¨Ó¦ÓÃ£¬
-    #±ØĞëÉèÎª on,Èç¹ûÓÃÀ´½øĞĞÏÂÔØµÈÓ¦ÓÃ´ÅÅÌIOÖØ¸ºÔØÓ¦ÓÃ£¬¿ÉÉèÖÃÎª off£¬ÒÔÆ½ºâ´ÅÅÌÓëÍøÂçI/O´¦ÀíËÙ¶È£¬½µµÍÏµÍ³µÄuptime.
+    #sendfile æŒ‡ä»¤æŒ‡å®š nginx æ˜¯å¦è°ƒç”¨ sendfile å‡½æ•°ï¼ˆzero copy æ–¹å¼ï¼‰æ¥è¾“å‡ºæ–‡ä»¶ï¼Œå¯¹äºæ™®é€šåº”ç”¨ï¼Œ
+    #å¿…é¡»è®¾ä¸º on,å¦‚æœç”¨æ¥è¿›è¡Œä¸‹è½½ç­‰åº”ç”¨ç£ç›˜IOé‡è´Ÿè½½åº”ç”¨ï¼Œå¯è®¾ç½®ä¸º offï¼Œä»¥å¹³è¡¡ç£ç›˜ä¸ç½‘ç»œI/Oå¤„ç†é€Ÿåº¦ï¼Œé™ä½ç³»ç»Ÿçš„uptime.
     sendfile        on;
     #tcp_nopush     on;
 
-    #Á¬½Ó³¬Ê±Ê±¼ä
+    #è¿æ¥è¶…æ—¶æ—¶é—´
     keepalive_timeout  120;
     tcp_nodelay        on;
 
-    #gzipÑ¹Ëõ¿ª¹Ø
+    #gzipå‹ç¼©å¼€å…³
     #gzip  on;
 
-    #Éè¶¨Êµ¼ÊµÄ·şÎñÆ÷ÁĞ±í
+    #è®¾å®šå®é™…çš„æœåŠ¡å™¨åˆ—è¡¨
     upstream my_server1{
         server 127.0.0.1:8089;
     }
-    #HTTP·şÎñÆ÷
+    #HTTPæœåŠ¡å™¨
     server {
-        #¼àÌı80¶Ë¿Ú£¬80¶Ë¿ÚÊÇÖªÃû¶Ë¿ÚºÅ£¬ÓÃÓÚHTTPĞ­Òé
+        #ç›‘å¬80ç«¯å£ï¼Œ80ç«¯å£æ˜¯çŸ¥åç«¯å£å·ï¼Œç”¨äºHTTPåè®®
         listen       80;
 
-        #¶¨ÒåÊ¹ÓÃwww.xx.com·ÃÎÊ
+        #å®šä¹‰ä½¿ç”¨www.xx.comè®¿é—®
         server_name  www.helloworld.com;
 
-        #Ê×Ò³
+        #é¦–é¡µ
         index index.html
 
-        #Ö¸ÏòwebappµÄÄ¿Â¼
+        #æŒ‡å‘webappçš„ç›®å½•
         root D:\01_Workspace\Project\github\zp\SpringNotes\spring-security\spring-shiro\src\main\webapp;
 
-        #±àÂë¸ñÊ½
+        #ç¼–ç æ ¼å¼
         charset utf-8;
 
-        #´úÀíÅäÖÃ²ÎÊı
+        #ä»£ç†é…ç½®å‚æ•°
         proxy_connect_timeout 180;
         proxy_send_timeout 180;
         proxy_read_timeout 180;
         proxy_set_header Host $host;
         proxy_set_header X-Forwarder-For $remote_addr;
 
-        #·´Ïò´úÀíµÄÂ·¾¶£¨ºÍupstream°ó¶¨£©£¬location ºóÃæÉèÖÃÓ³ÉäµÄÂ·¾¶
+        #åå‘ä»£ç†çš„è·¯å¾„ï¼ˆå’Œupstreamç»‘å®šï¼‰ï¼Œlocation åé¢è®¾ç½®æ˜ å°„çš„è·¯å¾„
         location / {
             proxy_pass http://my_server1;
         }
 
-        #¾²Ì¬ÎÄ¼ş£¬nginx×Ô¼º´¦Àí
+        #é™æ€æ–‡ä»¶ï¼Œnginxè‡ªå·±å¤„ç†
         location ~ ^/(images|javascript|js|css|flash|media|static)/ {
             root D:\01_Workspace\Project\github\zp\SpringNotes\spring-security\spring-shiro\src\main\webapp\views;
-            #¹ıÆÚ30Ìì£¬¾²Ì¬ÎÄ¼ş²»ÔõÃ´¸üĞÂ£¬¹ıÆÚ¿ÉÒÔÉè´óÒ»µã£¬Èç¹ûÆµ·±¸üĞÂ£¬Ôò¿ÉÒÔÉèÖÃµÃĞ¡Ò»µã¡£
+            #è¿‡æœŸ30å¤©ï¼Œé™æ€æ–‡ä»¶ä¸æ€ä¹ˆæ›´æ–°ï¼Œè¿‡æœŸå¯ä»¥è®¾å¤§ä¸€ç‚¹ï¼Œå¦‚æœé¢‘ç¹æ›´æ–°ï¼Œåˆ™å¯ä»¥è®¾ç½®å¾—å°ä¸€ç‚¹ã€‚
             expires 30d;
         }
 
-        #Éè¶¨²é¿´Nginx×´Ì¬µÄµØÖ·
+        #è®¾å®šæŸ¥çœ‹NginxçŠ¶æ€çš„åœ°å€
         location /NginxStatus {
             stub_status           on;
             access_log            on;
@@ -143,12 +143,12 @@ http {
             auth_basic_user_file  conf/htpasswd;
         }
 
-        #½ûÖ¹·ÃÎÊ .htxxx ÎÄ¼ş
+        #ç¦æ­¢è®¿é—® .htxxx æ–‡ä»¶
         location ~ /\.ht {
             deny all;
         }
 
-        #´íÎó´¦ÀíÒ³Ãæ£¨¿ÉÑ¡ÔñĞÔÅäÖÃ£©
+        #é”™è¯¯å¤„ç†é¡µé¢ï¼ˆå¯é€‰æ‹©æ€§é…ç½®ï¼‰
         error_page   404              /404.html;
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
@@ -158,38 +158,38 @@ http {
 }
 ```
 
-Êµ¼ù²½Öè:  
+å®è·µæ­¥éª¤:  
 
-1. Æô¶¯ webapp£¬×¢ÒâÆô¶¯°ó¶¨µÄ¶Ë¿ÚÒªºÍ nginx ÖĞµÄ `upstream` ÉèÖÃµÄ¶Ë¿Ú±£³ÖÒ»ÖÂ£»
-2. ¸ü¸Ä host£ºÔÚ C:\Windows\System32\drivers\etc Ä¿Â¼ÏÂµÄ host ÎÄ¼şÖĞÌí¼ÓÒ»Ìõ DNS ¼ÇÂ¼£º`127.0.0.1 www.helloworld.com`
-3. Æô¶¯Ç°ÎÄÖĞ startup.bat µÄÃüÁî
-4. ÔÚä¯ÀÀÆ÷ÖĞ·ÃÎÊ www.helloworld.com£¬²»³öÒâÍâ£¬ÒÑ¾­¿ÉÒÔ·ÃÎÊÁË¡£
+1. å¯åŠ¨ webappï¼Œæ³¨æ„å¯åŠ¨ç»‘å®šçš„ç«¯å£è¦å’Œ nginx ä¸­çš„ `upstream` è®¾ç½®çš„ç«¯å£ä¿æŒä¸€è‡´ï¼›
+2. æ›´æ”¹ hostï¼šåœ¨ C:\Windows\System32\drivers\etc ç›®å½•ä¸‹çš„ host æ–‡ä»¶ä¸­æ·»åŠ ä¸€æ¡ DNS è®°å½•ï¼š`127.0.0.1 www.helloworld.com`
+3. å¯åŠ¨å‰æ–‡ä¸­ startup.bat çš„å‘½ä»¤
+4. åœ¨æµè§ˆå™¨ä¸­è®¿é—® www.helloworld.comï¼Œä¸å‡ºæ„å¤–ï¼Œå·²ç»å¯ä»¥è®¿é—®äº†ã€‚
 
-## Https ·´Ïò´úÀí
+## Https åå‘ä»£ç†
 
-ÆäËûºÍ http ·´Ïò´úÀí»ù±¾Ò»Ñù£¬Ö»ÊÇÔÚ Server ²¿·ÖÅäÖÃÓĞĞ©²»Í¬¡£ 
+å…¶ä»–å’Œ http åå‘ä»£ç†åŸºæœ¬ä¸€æ ·ï¼Œåªæ˜¯åœ¨ Server éƒ¨åˆ†é…ç½®æœ‰äº›ä¸åŒã€‚ 
 
 ```conf
-  #HTTP·şÎñÆ÷
+  #HTTPæœåŠ¡å™¨
   server {
 
-      #¼àÌı443¶Ë¿Ú¡£443ÎªÖªÃû¶Ë¿ÚºÅ£¬Ö÷ÒªÓÃÓÚHTTPSĞ­Òé
+      #ç›‘å¬443ç«¯å£ã€‚443ä¸ºçŸ¥åç«¯å£å·ï¼Œä¸»è¦ç”¨äºHTTPSåè®®
       listen       443 ssl;
 
-      #¶¨ÒåÊ¹ÓÃwww.xx.com·ÃÎÊ
+      #å®šä¹‰ä½¿ç”¨www.xx.comè®¿é—®
       server_name  www.helloworld.com;
 
-      #sslÖ¤ÊéÎÄ¼şÎ»ÖÃ(³£¼ûÖ¤ÊéÎÄ¼ş¸ñÊ½Îª£ºcrt/pem)
+      #sslè¯ä¹¦æ–‡ä»¶ä½ç½®(å¸¸è§è¯ä¹¦æ–‡ä»¶æ ¼å¼ä¸ºï¼šcrt/pem)
       ssl_certificate      cert.pem;
 
-      #sslÖ¤ÊékeyÎ»ÖÃ
+      #sslè¯ä¹¦keyä½ç½®
       ssl_certificate_key  cert.key;
 
-      #sslÅäÖÃ²ÎÊı£¨Ñ¡ÔñĞÔÅäÖÃ£©
+      #sslé…ç½®å‚æ•°ï¼ˆé€‰æ‹©æ€§é…ç½®ï¼‰
       ssl_session_cache    shared:SSL:1m;
       ssl_session_timeout  5m;
 
-      #Êı×ÖÇ©Ãû£¬´Ë´¦Ê¹ÓÃMD5
+      #æ•°å­—ç­¾åï¼Œæ­¤å¤„ä½¿ç”¨MD5
       ssl_ciphers  HIGH:!aNULL:!MD5;
       ssl_prefer_server_ciphers  on;
 

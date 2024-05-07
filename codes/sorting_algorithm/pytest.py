@@ -1,4 +1,4 @@
-# Ã°ÅİÅÅĞò
+# å†’æ³¡æ’åº
 def bubbleSort(arr):
     for i in range(1, len(arr)):
         for j in range(0, len(arr)-i):
@@ -7,21 +7,21 @@ def bubbleSort(arr):
     return arr
 
 
-# Ñ¡ÔñÅÅĞò
+# é€‰æ‹©æ’åº
 def selectionSort(arr):
     for i in range(len(arr) - 1):
-        # ¼ÇÂ¼×îĞ¡ÊıµÄË÷Òı
+        # è®°å½•æœ€å°æ•°çš„ç´¢å¼•
         minIndex = i
         for j in range(i + 1, len(arr)):
             if arr[j] < arr[minIndex]:
                 minIndex = j
-        # i ²»ÊÇ×îĞ¡ÊıÊ±£¬½« i ºÍ×îĞ¡Êı½øĞĞ½»»»
+        # i ä¸æ˜¯æœ€å°æ•°æ—¶ï¼Œå°† i å’Œæœ€å°æ•°è¿›è¡Œäº¤æ¢
         if i != minIndex:
             arr[i], arr[minIndex] = arr[minIndex], arr[i]
     return arr
 
 
-# ²åÈëÅÅĞò
+# æ’å…¥æ’åº
 def insertionSort(arr):
     for i in range(len(arr)):
         preIndex = i-1
@@ -33,7 +33,7 @@ def insertionSort(arr):
     return arr
 
 
-# Ï£¶ûÅÅĞò
+# å¸Œå°”æ’åº
 def shellSort(arr):
     import math
     gap=1
@@ -51,7 +51,7 @@ def shellSort(arr):
     return arr
 
 
-# ¹é²¢ÅÅĞò
+# å½’å¹¶æ’åº
 def mergeSort(arr):
     import math
     if(len(arr)<2):
@@ -60,7 +60,7 @@ def mergeSort(arr):
     left, right = arr[0:middle], arr[middle:]
     return merge(mergeSort(left), mergeSort(right))
 
-# ¹é²¢µİ¹é´¦Àíº¯Êı
+# å½’å¹¶é€’å½’å¤„ç†å‡½æ•°
 def merge(left,right):
     result = []
     while left and right:
@@ -74,7 +74,7 @@ def merge(left,right):
         result.append(right.pop(0));
     return result
 
-# ¿ìËÙÅÅĞò
+# å¿«é€Ÿæ’åº
 def quickSort(arr, left=None, right=None):
     left = 0 if not isinstance(left,(int, float)) else left
     right = len(arr)-1 if not isinstance(right,(int, float)) else right
@@ -84,7 +84,7 @@ def quickSort(arr, left=None, right=None):
         quickSort(arr, partitionIndex+1, right)
     return arr
 
-# ¿ìËÙÅÅĞò´¦Àí»ù×¼
+# å¿«é€Ÿæ’åºå¤„ç†åŸºå‡†
 def partition(arr, left, right):
     pivot = left
     index = pivot+1
@@ -97,12 +97,12 @@ def partition(arr, left, right):
     swap(arr,pivot,index-1)
     return index-1
 
-# ¿ìËÙÅÅĞò½»»», ¶ÑÅÅĞò½»»»
+# å¿«é€Ÿæ’åºäº¤æ¢, å †æ’åºäº¤æ¢
 def swap(arr, i, j):
     arr[i], arr[j] = arr[j], arr[i]
 
 
-# ¶ÑÅÅĞò
+# å †æ’åº
 def buildMaxHeap(arr):
     import math
     for i in range(math.floor(len(arr)/2),-1,-1):
@@ -131,7 +131,7 @@ def heapSort(arr):
     return arr
 
 
-# ¼ÆÊıÅÅĞò
+# è®¡æ•°æ’åº
 def countingSort(arr, maxValue):
     bucketLen = maxValue+1
     bucket = [0]*bucketLen
@@ -149,18 +149,18 @@ def countingSort(arr, maxValue):
     return arr
 
 
-# »ùÊıÅÅĞò
+# åŸºæ•°æ’åº
 def radix(arr):
     digit = 0
     max_digit = 1
     max_value = max(arr)
-    #ÕÒ³öÁĞ±íÖĞ×î´óµÄÎ»Êı
+    #æ‰¾å‡ºåˆ—è¡¨ä¸­æœ€å¤§çš„ä½æ•°
     while 10**max_digit < max_value:
         max_digit = max_digit + 1
     while digit < max_digit:
         temp = [[] for i in range(10)]
         for i in arr:
-            #Çó³öÃ¿Ò»¸öÔªËØµÄ¸ö¡¢Ê®¡¢°ÙÎ»µÄÖµ
+            #æ±‚å‡ºæ¯ä¸€ä¸ªå…ƒç´ çš„ä¸ªã€åã€ç™¾ä½çš„å€¼
             t = int((i/10**digit)%10)
             temp[t].append(i)
         coll = []

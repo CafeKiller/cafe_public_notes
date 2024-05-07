@@ -1,17 +1,17 @@
 /**
- * »ùÊıÅÅĞò
- * ¿¼ÂÇ¸ºÊıµÄÇé¿ö»¹¿ÉÒÔ²Î¿¼£º https://code.i-harness.com/zh-CN/q/e98fa9
+ * åŸºæ•°æ’åº
+ * è€ƒè™‘è´Ÿæ•°çš„æƒ…å†µè¿˜å¯ä»¥å‚è€ƒï¼š https://code.i-harness.com/zh-CN/q/e98fa9
  */
 public class RadixSort {
     
     public int[] sort(int[] sourceArray) throws Exception {
-        // ¶Ô arr ½øĞĞ¿½±´£¬²»¸Ä±ä²ÎÊıÄÚÈİ
+        // å¯¹ arr è¿›è¡Œæ‹·è´ï¼Œä¸æ”¹å˜å‚æ•°å†…å®¹
         int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
         int maxDigit = getMaxDigit(arr);
         return radixSort(arr, maxDigit);
     }
     /**
-     * »ñÈ¡×î¸ßÎ»Êı
+     * è·å–æœ€é«˜ä½æ•°
      */
     private int getMaxDigit(int[] arr) {
         int maxValue = getMaxValue(arr);
@@ -40,7 +40,7 @@ public class RadixSort {
         int mod = 10;
         int dev = 1;
         for (int i = 0; i < maxDigit; i++, dev *= 10, mod *= 10) {
-            // ¿¼ÂÇ¸ºÊıµÄÇé¿ö£¬ÕâÀïÀ©Õ¹Ò»±¶¶ÓÁĞÊı£¬ÆäÖĞ [0-9]¶ÔÓ¦¸ºÊı£¬[10-19]¶ÔÓ¦ÕıÊı (bucket + 10)
+            // è€ƒè™‘è´Ÿæ•°çš„æƒ…å†µï¼Œè¿™é‡Œæ‰©å±•ä¸€å€é˜Ÿåˆ—æ•°ï¼Œå…¶ä¸­ [0-9]å¯¹åº”è´Ÿæ•°ï¼Œ[10-19]å¯¹åº”æ­£æ•° (bucket + 10)
             int[][] counter = new int[mod * 2][0];
             for (int j = 0; j < arr.length; j++) {
                 int bucket = ((arr[j] % mod) / dev) + mod;
@@ -56,7 +56,7 @@ public class RadixSort {
         return arr;
     }
     /**
-     * ×Ô¶¯À©Èİ£¬²¢±£´æÊı¾İ
+     * è‡ªåŠ¨æ‰©å®¹ï¼Œå¹¶ä¿å­˜æ•°æ®
      *
      * @param arr
      * @param value

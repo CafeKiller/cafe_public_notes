@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
  
-// ÑÏÎµÃô¡¶Êı¾İ½á¹¹¡·±ê×¼·Ö¸îº¯Êı
+// ä¸¥è”šæ•ã€Šæ•°æ®ç»“æ„ã€‹æ ‡å‡†åˆ†å‰²å‡½æ•°
 int Paritition1(int A[], int low, int high) {
     int pivot = A[low];
     while (low < high) {
@@ -18,7 +18,7 @@ int Paritition1(int A[], int low, int high) {
     return low;
 }
 
-void QuickSort(int A[], int low, int high) //¿ìÅÅÄ¸º¯Êı
+void QuickSort(int A[], int low, int high) //å¿«æ’æ¯å‡½æ•°
 {
     if (low < high) {
         int pivot = Paritition1(A, low, high);

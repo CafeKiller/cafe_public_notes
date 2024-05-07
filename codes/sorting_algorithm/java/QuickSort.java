@@ -1,7 +1,7 @@
 public class QuickSort{
     
     public int[] sort(int[] sourceArray) throws Exception {
-        // ¶Ô arr ½øĞĞ¿½±´£¬²»¸Ä±ä²ÎÊıÄÚÈİ
+        // å¯¹ arr è¿›è¡Œæ‹·è´ï¼Œä¸æ”¹å˜å‚æ•°å†…å®¹
         int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
         return quickSort(arr, 0, arr.length - 1);
     }
@@ -14,7 +14,7 @@ public class QuickSort{
         return arr;
     }
     private int partition(int[] arr, int left, int right) {
-        // Éè¶¨»ù×¼Öµ£¨pivot£©
+        // è®¾å®šåŸºå‡†å€¼ï¼ˆpivotï¼‰
         int pivot = left;
         int index = pivot + 1;
         for (int i = index; i <= right; i++) {

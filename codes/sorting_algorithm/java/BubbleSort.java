@@ -1,10 +1,10 @@
 public class BubbleSort {
 
     public int[] sort(int[] sourceArray) throws Exception {
-        // ¶Ô arr ½øĞĞ¿½±´£¬²»¸Ä±ä²ÎÊıÄÚÈİ
+        // å¯¹ arr è¿›è¡Œæ‹·è´ï¼Œä¸æ”¹å˜å‚æ•°å†…å®¹
         int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
         for (int i = 1; i < arr.length; i++) {
-            // Éè¶¨Ò»¸ö±ê¼Ç£¬ÈôÎªtrue£¬Ôò±íÊ¾´Ë´ÎÑ­»·Ã»ÓĞ½øĞĞ½»»»£¬Ò²¾ÍÊÇ´ıÅÅĞòÁĞÒÑ¾­ÓĞĞò£¬ÅÅĞòÒÑ¾­Íê³É¡£
+            // è®¾å®šä¸€ä¸ªæ ‡è®°ï¼Œè‹¥ä¸ºtrueï¼Œåˆ™è¡¨ç¤ºæ­¤æ¬¡å¾ªç¯æ²¡æœ‰è¿›è¡Œäº¤æ¢ï¼Œä¹Ÿå°±æ˜¯å¾…æ’åºåˆ—å·²ç»æœ‰åºï¼Œæ’åºå·²ç»å®Œæˆã€‚
             boolean flag = true;
             for (int j = 0; j < arr.length - i; j++) {
                 if (arr[j] > arr[j + 1]) {

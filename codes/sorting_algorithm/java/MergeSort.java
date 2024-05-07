@@ -1,7 +1,7 @@
 public class MergeSort {
     
     public int[] sort(int[] sourceArray) throws Exception {
-        // ¶Ô arr ½øĞĞ¿½±´£¬²»¸Ä±ä²ÎÊıÄÚÈİ
+        // å¯¹ arr è¿›è¡Œæ‹·è´ï¼Œä¸æ”¹å˜å‚æ•°å†…å®¹
         int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
         if (arr.length < 2) {
             return arr;

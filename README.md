@@ -1,16 +1,16 @@
 # cafe_public_notes
 
-��¼һЩ���Թ������ʱ��ıʼǡ��ʼǵ���Ҫ��¼��ʽΪ markdown �ı����淶��ο���[Markdown��д�淶](./rules/Markdown.md)
+收录一些可以公开访问本的笔记。笔记的主要记录格式为 markdown 文本。规范请参考：[Markdown书写规范](./rules/Markdown.md)
 
 
-## Ŀ¼˵��
+## 目录说明
 
-- rules����¼����淶��ıʼ�
+- rules：收录各类规范类的笔记
 
-- sorting_algorithm: ��¼�˱ȽϾ���������㷨
+- sorting_algorithm: 收录了比较经典的排序算法
 
-- codes: ��¼�������
+- codes: 收录各类代码
 
-- linuxs: ��¼�� Linux ����ϵͳ��ص�����
+- linuxs: 收录和 Linux 操作系统相关的文章
 
-- nginxs: ��¼�� nginx ������ص�����
+- nginxs: 收录和 nginx 服务相关的文章
