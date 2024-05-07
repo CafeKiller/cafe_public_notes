@@ -8,3 +8,5 @@
 - rules：收录各类规范类的笔记
 
 - sorting_algorithm: 收录了比较经典的排序算法
+
+- codes: 收录各类代码
