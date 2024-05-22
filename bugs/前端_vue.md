@@ -24,3 +24,10 @@ info Visit https://yarnpkg.com/en/docs/cli/create for documentation about this c
 ```
 
 > 解决方案: https://segmentfault.com/a/1190000043503907
+
+
+## TS2307: Cannot find module './App.vue' or its corresponding type declarations.
+
+这个错误一般出现在 WebStorm 上, 原因是 vue 添加了 typescript 依赖后, 只认 .ts 不认 .vue
+
+> 解决方案: https://blog.csdn.net/peng2hui1314/article/details/135481952
