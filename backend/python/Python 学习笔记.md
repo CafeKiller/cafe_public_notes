@@ -264,3 +264,63 @@ python 中的文件读出与操作对比起其他语言来说是非常简单的,
 - `'t'`	文本模式（默认）
 - `'+'`	更新（既可以读又可以写）
 
+__处理JSON格式数据__
+
+> 使用内置的 json 模块配合文件操作即可.  
+
+json模块主要有四个比较重要的函数，分别是：  
+
+- `dump` - 将Python对象按照JSON格式序列化到文件中
+- `dumps` - 将Python对象处理成JSON格式的字符串
+- `load` - 将文件中的JSON数据反序列化成对象
+- `loads` - 将字符串的内容反序列化成Python对象
+
+__异常处理__
+
+> 和其他语言类似, 使用 try 块, 但对应的不是 cache, 而是 except  
+> 需要主动抛出异常时, 使用 raise, 如果你需要传递异常, 直接使用 raise 即可(不带任何参数) 
+> 尽量使用 python 内置封装的异常处理语法糖, 来对异常进行处理, 如 with 和 getattr()
+> 参考文章: https://segmentfault.com/a/1190000007736783  
+```
+try:
+    # 可能触发异常的代码
+    pass
+except XXXXXError:
+    # 处理异常1
+    pass
+except XXXXXError:
+    # 处理异常2
+    pass
+finally:
+    # 收尾工作(如回收资源)
+    pass
+
+# 主动抛出异常
+raise XXXError('bad apple!')
+
+# 自定义异常
+class MyError(Exception)
+```
+with 与 getattr() 语法糖
+```python
+# 未使用 with 语法糖
+try:
+    f = open(a_file)
+    do_something(f)
+finally:
+    f.close()
+    
+# 使用 with 语法糖
+with open(a_file) as f:
+    do_something(f)
+
+# 未使用 getattr 语法糖
+try:
+    test = Test()
+    name = test.name  # not sure if we can get its name
+except AttributeError:
+    name = 'default'
+
+# 使用 getattr 语法糖
+name = getattr(test, 'name', 'default')
+```
