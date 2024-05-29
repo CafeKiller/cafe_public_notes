@@ -213,6 +213,163 @@ rpush mylist1 "three"               # (integer) 3
 lpop mylist1                        # "one"
 lrange mylist1 0 -1                 # "two" "three"
 
-
+# ltrim key start stop 
+# 修剪(trim)一个已存在的 list，这样 list 就会只包含指定范围的指定元素。
+# start 和 stop 都是由0开始计数的， 这里的 0 是列表里的第一个元素（表头），1 是第二个元素，以此类推。
+# -1 最后一个元素 -2 最后第二个元素
+rpush mylist1 "ha"                  # (integer) 1
+rpush mylist1 "haha"                # (integer) 2
+rpush mylist1 "hahaha"              # (integer) 3
+rpush mylist1 "hahahaha"            # (integer) 4
+ltrim mylist1 1 -2                  # "haha" "hahaha"
 ```
 
+### set 集合
+
+Set 就是一个集合,集合的概念就是一堆不重复值的组合。利用 Redis 提供的 Set 数据结构,可以存储一些集合性的数据。　　
+
+> 因为 Redis 非常人性化的为集合提供了 求交集、并集、差集等操作, 那么就可以非常方便的实现如共同关注、共同喜好、二度好友等功能, 对上面的所有集合操作,你还可以使用不同的命令选择将结果返回给客户端还是存集到一个新的集合中。　　
+> 比如在 微博应用中,可以将一个用户所有的关注人存在一个集合中,将其所有粉丝存在一个集合。
+
+```shell
+# sadd key member [member …]
+# 添加一个或多个指定的member元素到集合的 key中
+sadd myset 'hello'                  # (integer) 1
+sadd myset 'world'                  # (integer) 1
+sadd myset 'hello'                  # (integer) 0
+smembers myset                      # 'world' 'hello' 
+
+# scard key 返回集合存储的key的基数 (集合元素的数量).
+scard myset                         # (integer) 2
+
+# sdiff key [key ...]
+sadd key1 'a' 'b' 'c'
+sadd key2 'c' 'd' 'e'
+sdiff key1 key2                     # 'a' 'b'
+sdiff key2 key1                     # 'd' 'e'
+```
+
+### sort set 有序集合
+
+Redis 有序集合和集合一样也是string类型元素的集合,且不允许重复的成员。  
+不同的是每个元素都会关联一个 double 类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。  
+有序集合的成员是唯一的，但分数(score)却可以重复。  
+集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是O(1)。 集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)。  
+
+```shell
+# zadd key score member
+# 将所有指定成员添加到键为key有序集合（sorted set）里面
+zadd myzset 1 'one'
+zadd myzset 1 'uno'
+zadd myzset 2 'two' 3 'three'
+zrange myzset 0 -1 withscores           # 'one' '1' 'uno' '1' 'two' '2' 'three' '3'
+
+# zcount key min max
+# 返回有序集key中，score值在min和max之间(默认包括score值等于min或max)的成员
+zadd myzset1 1 'one'
+zadd myzset1 2 'two'
+zadd myzset1 3 'three'
+zcount myzset1 -inf +inf                # (integer) 3
+zcount myzset1 (1 3                     # (integer) 2
+
+# zincrby key increment member
+# 为有序集key的成员 member 的 score 值加上增量 increment
+
+zadd myzset 1 "one"                     # (integer) 1
+zadd myzset 2 "two"                     # (integer) 1
+zincrby myzset 2 "one"                  # "3"
+zrange myzset 0 -1 withscores           # "two" 2 "one" "3"
+```
+
+## 订阅和发布模式
+
+Redis 发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息。  
+
+Redis 客户端可以订阅任意数量的频道。  
+
+> 频道 channel1 ， 以及订阅这个频道的三个客户端 —— client2、client5 和 client1 之间的关系  
+> ![img](https://static.bookstack.cn/projects/redis-tutorial/e15be5905805e04e38cc9656a7223963.png)  
+> 当有新消息通过 PUBLISH 命令发送给频道 channel1 时， 这个消息就会被发送给订阅它的三个客户端  
+> ![img](https://static.bookstack.cn/projects/redis-tutorial/572365ab2d08fed5896a8ce543de77ca.png)  
+
+```shell
+# subscribe channel [channel …]
+# 订阅给指定频道的信息。
+
+# publish channel message
+# 将信息 message 发送到指定的频道 channel
+
+# 以下为简单示例
+# 微信班级群 class:20240101，发布订阅模型。学生 A B C:
+
+# 学生C：订阅一个主题名叫： class:20240101
+subscribe class:20240101
+# "subscribe"
+# "redisChat"
+
+# 学生A：针对 class:20240101 主题发送 消息，那么所有订阅该主题的用户都能够收到该数据
+publish class:20240101 'hello!'
+
+# 学生B：针对 class:20240101 主题发送 消息，那么所有订阅该主题的用户都能够收到该数据
+publish class:20240101 'world?'
+
+# 最后学生C会收到 A 和 B 发送过来的消息
+# 1) "subscribe"
+# 2) "class:20240101"
+# 3) (integer) 1
+
+# 1) "message"
+# 2) "class:20240101"
+# 3) "hello!"
+
+# 1) "message"
+# 2) "class:20240101"
+# 3) "hello!"
+
+# 1) "message"
+# 2) "class:20240101"
+# 3) "world?"
+```
+
+## 事务
+
+Redis事务允许一组命令在单一步骤中执行。事务有两个属性，说明如下：  
+
+- 事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断；
+
+- Redis事务是原子的。原子意味着要么所有的命令都执行，要么都不执行。
+
+一个事务从开始到执行会经历以下三个阶段：
+- 开始事务
+- 命令入队
+- 执行事务
+
+```shell
+multi       # OK
+# List of commands here
+exec
+
+# 案例
+set zhangsan 60000          # OK
+set lisi 200                # OK
+
+multi                       # ok
+incrby zhangsan -10000      # queued
+incrby lisi 10000           # queued
+exec
+# 1) (integer) 50000
+# 2) (integer) 10200
+```
+
+## 数据备份与恢复
+
+```shell
+# 该命令将在 redis 安装目录中创建dump.rdb文件。
+save    # ok
+
+# 如果需要恢复数据，只需将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可。获取 redis 目录可以使用 CONFIG 命令
+config get dir
+
+# 创建 redis 备份文件也可以使用命令 BGSAVE，该命令在后台执行。
+bgsave 
+```
