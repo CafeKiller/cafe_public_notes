@@ -373,3 +373,75 @@ config get dir
 # 创建 redis 备份文件也可以使用命令 BGSAVE，该命令在后台执行。
 bgsave 
 ```
+
+## 持久化
+
+目前Redis持久化的方式有两种： `RDB` 和 `AOF`  
+
+首先，我们应该明确持久化的数据有什么用, 答案是: __用于重启后的数据恢复__  
+
+Redis 是一个内存数据库，无论是 RDB 还是 AOF，都是其保证数据恢复的措施。  
+
+所以 Redis 在利用 RDB 和 AOF 进行恢复的时候，都会读取 RDB 或 AOF 文件，重新加载到内存中。 
+
+### RDB
+
+RDB就是Snapshot快照存储，是默认的持久化方式。  
+可理解为半持久化模式，即按照一定的策略周期性的将数据保存到磁盘。
+对应产生的数据文件为dump.rdb，快照的周期通过配置文件中的save参数来定义。  
+
+默认的快照设置:  
+```shell
+dbfilename dump.rdb
+# save <seconds> <changes>
+save 900 1    #当有一条Keys数据被改变时，900秒刷新到Disk一次
+save 300 10   #当有10条Keys数据被改变时，300秒刷新到Disk一次
+save 60 10000 #当有10000条Keys数据被改变时，60秒刷新到Disk一次
+```
+
+Redis的RDB文件不会坏掉，因为其写操作是在一个新进程中进行的。  
+当生成一个新的RDB文件时，Redis生成的子进程会先将数据写到一个临时文件中，然后通过原子性rename系统调用将临时文件重命名为RDB文件。   
+这样在任何时候出现故障，Redis的RDB文件都总是可用的。  
+
+同时，Redis的RDB文件也是Redis主从同步内部实现中的一环。  
+
+> 第一次Slave向Master同步的实现是： Slave向Master发出同步请求，Master先dump出rdb文件，然后将rdb文件全量传输给slave，然后Master把缓存的命令转发给Slave，初次同步完成。  
+> 第二次以及以后的同步实现是： Master将变量的快照直接实时依次发送给各个Slave。 但不管什么原因导致Slave和Master断开重连都会重复以上两个步骤的过程。  
+
+Redis的主从复制是建立在内存快照的持久化基础上的，只要有Slave就一定会有内存快照发生。  
+可以很明显的看到，RDB有它的不足，就是一旦数据库出现问题，那么我们的RDB文件中保存的数据并不是全新的。  
+从上次RDB文件生成到Redis停机这段时间的数据全部丢掉了。  
+
+### AOF（Append-only file）方式
+
+AOF(Append-Only File)比RDB方式有更好的持久化性。  
+
+- 在使用AOF持久化方式时，Redis会将每一个收到的写命令都通过Write函数追加到文件中，类似于MySQL的binlog。
+
+- 当Redis重启是会通过重新执行文件中保存的写命令来在内存中重建整个数据库的内容。
+
+在Redis重启时会逐个执行AOF文件中的命令来将硬盘中的数据载入到内存中,所以说，载入的速度相较RDB会慢一些
+
+- 在Redis重启时会逐个执行AOF文件中的命令来将硬盘中的数据载入到内存中,所以说，载入的速度相较RDB会慢一些：
+```shell
+appendonly yes          #启用aof持久化方式
+
+appendfsync always      #每次收到写命令就立即强制写入磁盘，最慢的，但是保证完全的持久化，不推荐使用
+
+appendfsync everysec    #每秒钟强制写入磁盘一次，在性能和持久化方面做了很好的折中，推荐
+```
+
+- AOF文件和RDB文件的保存文件夹位置相同,都是通过dir参数设置的,默认的文件名是 `appendonly.aof`, 可以通过`appendfilename` 参数修改 `appendfilename appendonly.aof`
+
+- AOF的完全持久化方式同时也带来了另一个问题，持久化文件会变得越来越大。
+
+为了压缩AOF的持久化文件，Redis提供了bgrewriteaof命令。收到此命令后Redis将使用与快照类似的方式将内存中的数据以命令的方式保存到临时文件中，最后替换原来的文件，以此来实现控制AOF文件的增长。  
+
+配置redis自动重写AOF文件的参数
+```shell
+no-appendfsync-on-rewrite yes #在AOF重写时，不进行命令追加操作，而只是将其放在缓冲区里，避免与命令的追加造成DISK IO上的冲突。
+
+auto-aof-rewrite-percentage 100 #当前AOF文件大小是上次日志重写得到AOF文件大小的二倍时，自动启动新的日志重写过程。
+
+auto-aof-rewrite-min-size 64mb #当前AOF文件启动新的日志重写过程的最小值，避免刚刚启动Reids时由于文件尺寸较小导致频繁的重写。
+```
