@@ -121,4 +121,70 @@ public record Point(int x, int y) {
 - 断言
     - 断言（Assertion）是一种调试程序的方式。在Java中，使用assert关键字来实现断言。
     - Java断言的特点是：断言失败时会抛出 `AssertionError`，导致程序结束退出。因此，断言不能用于可恢复的程序错误，只应该用于开发和测试阶段。
-    
+
+## 进阶
+
+### 动态代理
+
+总所周知 java 中的 interface 是不能直接实例化, 但如果我们想要在运行期间, 不通过实现类创建 interface 实例呢?   
+
+Java标准库提供了一种动态代理（Dynamic Proxy）的机制：可以在运行期动态创建某个interface的实例。  
+
+先定义了接口，但是我们并不去编写实现类，而是直接通过JDK提供的一个 `Proxy.newProxyInstance()` 创建了一个 接口对象。  
+
+这种没有实现类但是在运行期动态创建了一个接口对象的方式，我们称为动态代码。JDK提供的动态创建接口对象的方式，就叫动态代理。
+
+```java
+// 一个简单的动态代理示例
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+public class Main {
+    public static void main(String[] args) {
+        InvocationHandler handler = new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                System.out.println(method);
+                if (method.getName().equals("morning")) {
+                    System.out.println("Good morning, " + args[0]);
+                }
+                return null;
+            }
+        };
+        Hello hello = (Hello) Proxy.newProxyInstance(
+            Hello.class.getClassLoader(), // 传入ClassLoader
+            new Class[] { Hello.class }, // 传入要实现的接口
+            handler); // 传入处理调用方法的InvocationHandler
+        hello.morning("Bob");
+    }
+}
+
+// 定义接口
+public interface Hello {
+    void morning(String name);
+}
+
+// 将上面的代码转换为静态实现, 大致如下:
+public class HelloDynamicProxy implements Hello {
+    InvocationHandler handler;
+    public HelloDynamicProxy(InvocationHandler handler) {
+        this.handler = handler;
+    }
+    public void morning(String name) {
+        handler.invoke(
+           this,
+           Hello.class.getMethod("morning", String.class),
+           new Object[] { name });
+    }
+}
+```
+
+整体步骤基本如下:  
+
+1. 定义一个InvocationHandler实例，它负责实现接口的方法调用；  
+2. 通过Proxy.newProxyInstance()创建interface实例，它需要3个参数：  
+    1. 使用的ClassLoader，通常就是接口类的ClassLoader；
+    2. 需要实现的接口数组，至少需要传入一个接口进去；
+    3. 用来处理接口方法调用的InvocationHandler实例。 
+3. 将返回的Object强制转型为接口。
