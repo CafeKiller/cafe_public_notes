@@ -129,3 +129,125 @@ setLang(s);  // 正确
 
 注意，as const断言只能用于字面量，不能用于变量。
 
+## TypeScript 命名空间 (namespace)
+
+因为 `TypeScript` 的作者本身也是 `C#` 的作者, 所以 `TypeScript` 有不少特性是借鉴自 `C#` 的, 比如这个命名空间。
+
+`namespace` 是一种将相关代码组织在一起的方式，中文译为“命名空间”。  
+
+不过，它出现在 `ES` 模块诞生之前，作为 `TypeScript` 自己的模块格式而发明的。但是，自从有了 `ES` 模块，官方已经不推荐使用 `namespace` 了。  
+
+此处只做简单了解即可。
+
+```ts
+// namespace 用来建立一个容器，内部的所有变量和函数，都必须在这个容器里面使用。
+namespace Utils {
+  function isString(value:any) {
+    return typeof value === 'string';
+  }
+
+  // 正确
+  isString('yes');
+}
+Utils.isString('no'); // 报错
+
+// 如果要在命名空间以外使用内部成员，就必须为该成员加上export前缀，表示对外输出该成员。
+namespace Utility {
+  export function log(msg:string) {
+    console.log(msg);
+  }
+  export function error(msg:string) {
+    console.error(msg);
+  }
+}
+Utility.log('Call me');
+Utility.error('maybe!');
+
+// namespace 内部还可以使用import命令输入外部成员，相当于为外部成员起别名。当外部成员的名字比较长时，别名能够简化代码。
+namespace Utils {
+  export function isString(value:any) {
+    return typeof value === 'string';
+  }
+}
+namespace App {
+  import isString = Utils.isString;
+  isString('yes');
+  // 等同于
+  Utils.isString('yes');
+}
+
+// import命令也可以在 namespace 外部，指定别名。
+namespace Shapes {
+  export namespace Polygons {
+    export class Triangle {}
+    export class Square {}
+  }
+}
+import polygons = Shapes.Polygons;
+// 等同于 new Shapes.Polygons.Square()
+let sq = new polygons.Square();
+
+// namespace 是允许嵌套的
+namespace Utils {
+  export namespace Messaging {
+    export function log(msg:string) {
+      console.log(msg);
+    }
+  }
+}
+Utils.Messaging.log('hello') // "hello"
+```
+
+多个同名的命名空间是允许合并的. 
+
+
+## 装饰器
+
+装饰器（Decorator）是一种语法结构，用来在定义时修改类（class）的行为。
+
+在语法上，装饰器有如下几个特征:
+
+- 第一个字符（或者说前缀）是@，后面是一个表达式。
+- @后面的表达式，必须是一个函数（或者执行后可以得到一个函数）。
+- 这个函数接受所修饰对象的一些相关值作为参数。
+- 这个函数要么不返回值，要么返回一个新对象取代所修饰的目标对象。
+
+```ts
+// 简单示例, 函数simpleDecorator()用作装饰器，附加在类A之上，后者在代码解析时就会打印一行日志。
+function simpleDecorator() {
+  console.log('hi');
+}
+@simpleDecorator
+class A {} // "hi"
+
+// 类A在执行前会先执行装饰器simpleDecorator()，并且会向装饰器自动传入参数就可以了。
+function simpleDecorator(
+  value:any,
+  context:any
+) {
+  console.log(`hi, this is ${context.kind} ${context.name}`);
+  return value;
+}
+@simpleDecorator
+class A {} // "hi, this is class A"
+
+// 装饰器有多种形式，基本上只要在@符号后面添加表达式都是可以的。下面都是合法的装饰器。
+@myFunc
+@myFuncFactory(arg1, arg2)
+
+@libraryModule.prop
+@someObj.method(123)
+
+@(wrap(dict['prop']))
+// 注意，@后面的表达式，最终执行后得到的应该是一个函数。
+```
+
+TypeScript 从早期开始，就支持装饰器。但是，装饰器的语法后来发生了变化。  
+
+ECMAScript 标准委员会最终通过的语法标准，与 TypeScript 早期使用的语法有很大差异。
+
+目前，TypeScript 5.0 同时支持两种装饰器语法。标准语法可以直接使用，传统语法需要打开--experimentalDecorators编译参数。  
+
+```shell
+tsc --target ES5 --experimentalDecorators
+```
