@@ -251,3 +251,120 @@ ECMAScript 标准委员会最终通过的语法标准，与 TypeScript 早期使
 ```shell
 tsc --target ES5 --experimentalDecorators
 ```
+
+### 类装饰器
+
+类装饰器接受两个参数：value（当前类本身）和context（上下文对象）。其中，context对象的kind属性固定为字符串class。
+
+类装饰器一般用来对类进行操作，可以不返回任何值
+
+```ts
+type ClassDecorator = (
+      value: Function,
+      context: {
+            kind: 'class';
+            name: string | undefined;
+            addInitializer(initializer: () => void): void;
+      }
+) => Function | void;
+```
+
+类装饰器的上下文对象context的addInitializer()方法，用来定义一个类的初始化函数，在类完全定义结束后执行。
+
+### 方法装饰器
+
+方法装饰器用来装饰类的方法（method）。
+
+```ts
+type ClassMethodDecorator = (
+      value: Function,
+      context: {
+            kind: 'method';
+            name: string | symbol;
+            static: boolean;
+            private: boolean;
+            access: { get: () => unknown };
+            addInitializer(initializer: () => void): void;
+      }
+) => Function | void;
+// 根据上面的类型，方法装饰器是一个函数，接受两个参数：value和context。
+```
+参数value是方法本身，参数context是上下文对象，有以下属性: 
+
+- kind：值固定为字符串method，表示当前为方法装饰器。
+- name：所装饰的方法名，类型为字符串或 Symbol 值。
+- static：布尔值，表示是否为静态方法。该属性为只读属性。
+- private：布尔值，表示是否为私有方法。该属性为只读属性。
+- access：对象，包含了方法的存取器，但是只有get()方法用来取值，没有set()方法进行赋值。
+- addInitializer()：为方法增加初始化函数。
+
+### 属性装饰器
+
+属性装饰器用来装饰定义在类顶部的属性（field）。
+
+```ts
+type ClassFieldDecorator = (
+      value: undefined,
+      context: {
+            kind: 'field';
+            name: string | symbol;
+            static: boolean;
+            private: boolean;
+            access: { get: () => unknown, set: (value: unknown) => void };
+            addInitializer(initializer: () => void): void;
+      }
+) => (initialValue: unknown) => unknown | void;
+```
+
+注意，装饰器的第一个参数value的类型是undefined，这意味着这个参数实际上没用的，装饰器不能从value获取所装饰属性的值。另外，第二个参数context对象的kind属性的值为字符串field，而不是“property”或“attribute”，这一点是需要注意的。
+
+属性装饰器要么不返回值，要么返回一个函数，该函数会自动执行，用来对所装饰属性进行初始化。该函数的参数是所装饰属性的初始值，该函数的返回值是该属性的最终值。
+
+属性装饰器的返回值函数，可以用来更改属性的初始值。
+
+### `getter` 装饰器 & `setter` 装饰器
+
+getter 装饰器和 setter 装饰器，是分别针对类的取值器（getter）和存值器（setter）的装饰器。
+
+```ts
+type ClassGetterDecorator = (
+    value: Function,
+    context: {
+        kind: 'getter';
+        name: string | symbol;
+        static: boolean;
+        private: boolean;
+        access: { get: () => unknown };
+        addInitializer(initializer: () => void): void;
+    }
+) => Function | void;
+
+type ClassSetterDecorator = (
+    value: Function,
+    context: {
+        kind: 'setter';
+        name: string | symbol;
+        static: boolean;
+        private: boolean;
+        access: { set: (value: unknown) => void };
+        addInitializer(initializer: () => void): void;
+    }
+) => Function | void;
+```
+
+注意，getter 装饰器的上下文对象context的access属性，只包含get()方法；setter 装饰器的access属性，只包含set()方法。
+
+这两个装饰器要么不返回值，要么返回一个函数，取代原来的取值器或存值器。
+
+### 装饰器的执行顺序
+
+装饰器的执行分为两个阶段:
+
+1. 评估（evaluation）：计算@符号后面的表达式的值，得到的应该是函数。
+
+2. 应用（application）：将评估装饰器后得到的函数，应用于所装饰对象。
+
+也就是说，装饰器的执行顺序是，先评估所有装饰器表达式的值，再将其应用于当前类。
+
+应用装饰器时，顺序依次为方法装饰器和属性装饰器，然后是类装饰器。
+
