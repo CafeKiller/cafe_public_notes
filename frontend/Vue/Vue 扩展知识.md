@@ -71,3 +71,94 @@ export default {
 > 参考:   
 > https://vue3js.cn/interview/vue/observable.html   
 > https://blog.csdn.net/qq_32682301/article/details/105419673  
+
+## Vue2: 直接添加属性的问题
+
+### 问题描述
+
+```vue
+// 我们从一个例子开始
+// 定义一个p标签，通过v-for指令进行遍历
+// 然后给 botton 标签绑定点击事件，我们预期点击按钮时，数据新增一个属性，界面也 新增一行
+
+<template>
+    <p v-for="(value,key) in item" :key="key">
+        {{ value }}
+    </p>
+    <button @click="addProperty">动态添加新属性</button>
+</template>
+
+// 实例化一个vue实例，定义data属性和methods方法
+<script>
+    const app = new Vue ({
+        el:"#app",
+        data:()=>{
+            item:{
+                oldProperty:"旧属性"
+            }
+        },
+        methods:{
+            addProperty(){
+                this.items.newProperty = "新属性"  // 为items添加新属性
+                console.log(this.items)  // 输出带有newProperty的items
+            }
+        }
+    })
+</script>
+// 点击按钮，发现结果不及预期，数据虽然更新了（console打印出了新属性），但页面并没有更新
+```
+
+### 原理分析
+
+```js
+// vue2是用过Object.defineProperty实现数据响应式
+const obj = {}
+Object.defineProperty(obj, 'foo', {
+    get() {
+        console.log(`get foo:${val}`);
+        return val
+    },
+    set(newVal) {
+        if (newVal !== val) {
+            console.log(`set foo:${newVal}`);
+            val = newVal
+        }
+    }
+})
+
+// 当我们访问foo属性或者设置foo值的时候都能够触发setter与getter
+obj.foo
+obj.foo = 'new'
+// 但是我们为obj添加新属性的时候，却无法触发事件属性的拦截
+obj.bar  = '新属性'
+// 原因是一开始obj的foo属性被设成了响应式数据，而bar是后面新增的属性，并没有通过Object.defineProperty设置成响应式数据
+```
+
+### 解决方案
+
+Vue 不允许在已经创建的实例上动态添加新的响应式属性, 若想实现数据与视图同步更新，可采取下面三种解决方案：
+
+- `Vue.set()`
+  - Vue.set( target, propertyName/index, value )
+  - 参数: `{Object | Array} target` `{string | number} propertyName/index`  `{any} value`
+  - 返回值：设置的值
+  - 通过Vue.set向响应式对象中添加一个property，并确保这个新 property同样是响应式的，且触发视图更新
+
+- `Object.assign()`
+  - 直接使用Object.assign()添加到对象的新属性不会触发更新
+  - 应创建一个新的对象，合并原对象和混入对象的属性
+  - `this.someObject = Object.assign({},this.someObject,{newProperty1:1,newProperty2:2 ...})`
+
+- `$forcecUpdated()`
+  - 如果你发现你自己需要在 Vue中做一次强制更新，99.9% 的情况，是你在某个地方做错了事
+  - `$forceUpdate` 迫使 Vue 实例重新渲染
+  - __PS__：仅仅影响实例本身和插入插槽内容的子组件，而不是所有子组件。
+
+> 参考链接:   
+> https://vue3js.cn/interview/vue/data_object_add_attrs.html
+
+## Vue3: `Treeshaking`
+
+`Tree shaking` 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 `Dead code elimination`
+
+简单来讲，就是在保持代码运行结果不变的前提下，去除无用的代码

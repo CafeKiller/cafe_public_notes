@@ -368,3 +368,128 @@ type ClassSetterDecorator = (
 
 应用装饰器时，顺序依次为方法装饰器和属性装饰器，然后是类装饰器。
 
+## declare 关键字
+
+declare 关键字用来告诉编译器，某个类型是存在的，可以在当前文件中使用。
+
+它的主要作用，就是让当前文件可以使用其他文件声明的类型。
+
+> 举例来说，自己的脚本使用外部库定义的函数，编译器会因为不知道外部函数的类型定义而报错，这时就可以在自己的脚本里面使用declare关键字，告诉编译器外部函数的类型。  
+> 这样的话，编译单个脚本就不会因为使用了外部类型而报错。
+
+declare 关键字可以描述以下类型: 
+
+- 变量（const、let、var 命令声明）
+- type 或者 interface 命令声明的类型
+- class
+- enum
+- 函数（function）
+- 模块（module）
+- 命名空间（namespace）
+
+declare 关键字的重要特点是，它只是通知编译器某个类型是存在的，不用给出具体实现。比如，只描述函数的类型，不给出函数的实现，如果不使用declare，这是做不到的。
+
+declare 只能用来描述已经存在的变量和数据结构，不能用来声明新的变量和数据结构。另外，所有 declare 语句都不会出现在编译后的文件里面。
+
+### declare variable 
+
+declare 关键字可以给出外部变量的类型描述。
+
+```ts
+x = 123; // 报错
+// 上面示例中，变量x是其他脚本定义的，当前脚本不知道它的类型，编译器就会报错。
+
+// 这时使用 declare 命令给出它的类型，就不会报错了。
+declare let x:number; // 如果不指定类型的话, 默认就是any
+x = 1;
+
+// 下面的例子是脚本使用浏览器全局对象document。
+declare var document;
+document.title = 'Hello';
+// 上面示例中，declare 告诉编译器，变量document的类型是外部定义的（具体定义在 TypeScript 内置文件lib.d.ts）。
+// 如果 TypeScript 没有找到document的外部定义，这里就会假定它的类型是any。
+
+// 注意，declare 关键字只用来给出类型描述，是纯的类型代码，不允许设置变量的初始值，即不能涉及值。
+declare let y:number = 1; // 报错
+```
+
+### declare function
+
+declare 关键字可以给出外部函数的类型描述。
+
+```ts
+// 下面示例中，declare 命令给出了sayHello()的类型描述，表示这个函数是由外部文件定义的，因此这里可以直接使用该函数。
+declare function sayHello( name:string ):void;
+sayHello('张三');
+
+// 注意，这种单独的函数类型声明语句，只能用于declare命令后面。
+// 一方面，TypeScript 不支持单独的函数类型声明语句；另一方面，declare 关键字后面也不能带有函数的具体实现。
+function sayHello2( name:string ):void; // 报错
+
+let foo = 'bar';
+function sayHello2(name:string) {
+    return '你好，' + name;
+}
+```
+
+### declare class 
+
+```ts
+// declare 用于 class 上的示例
+declare class Animal {
+  constructor(name:string);
+  eat():void;
+  sleep():void;
+}
+// 稍微复杂点的
+declare class C {
+    // 静态成员
+    public static s0():string;
+    private static s1:string;
+
+    // 属性
+    public a:number;
+    private b:number;
+
+    // 构造函数
+    constructor(arg:number);
+
+    // 方法
+    m(x:number, y:number):number;
+
+    // 存取器
+    get c():number;
+    set c(value:number);
+
+    // 索引签名
+    [index:string]:any;
+}
+```
+
+### declare module & declare namespace
+
+如果想把变量、函数、类组织在一起，可以将 declare 与 module 或 namespace 一起使用。
+
+```ts
+declare namespace AnimalLib {
+  class Animal {
+    constructor(name:string);
+    eat():void;
+    sleep():void;
+  }
+
+  type Animals = 'Fish' | 'Dog';
+}
+
+// 或者
+declare module AnimalLib {
+  class Animal {
+    constructor(name:string);
+    eat(): void;
+    sleep(): void;
+  }
+
+  type Animals = 'Fish' | 'Dog';
+}
+```
+
