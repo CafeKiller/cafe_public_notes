@@ -493,3 +493,82 @@ declare module AnimalLib {
 }
 ```
 
+## TS 泛型
+
+> 参考链接:  
+> [你不知道的 TypeScript 泛型](https://segmentfault.com/a/1190000022993503)  
+
+泛型的主要使用场合: 函数、接口、类、别名(type)
+
+```typescript
+// 方法
+function func1<T>(arg:T):T {
+  return arg;
+}
+// 方法, 但是是以变量形式定义的. 有两种写法
+let myId:<T>(arg:T) = T = func1;
+let myId:{ <T>(arg:T): T } = func1;
+
+
+
+// 接口
+interface Box<Type> {
+  contents: Type;
+}
+let box:Box<string>;
+// 这也是接口的一种 
+interface Comparator<T> {
+  compareTo(value:T): number;
+}
+class Rectangle implements Comparator<Rectangle> {
+  compareTo(value:Rectangle): number { ... }
+}
+// 还有这种也是接口的
+interface Fn {
+  <Type>(arg:Type): Type;
+}
+function id<Type>(arg:Type): Type {
+  return arg;
+}
+let myId:Fn = id;
+// 上面示例中，Fn的类型参数Type的具体类型，需要函数id在使用时提供。所以，最后一行的赋值语句不需要给出Type的具体类型。
+// 这种写法还有一个差异之处。
+// 那就是它的类型参数定义在某个方法之中，其他属性和方法不能使用该类型参数。
+// 前面的第一种写法，类型参数定义在整个接口，接口内部的所有属性和方法都可以使用该类型参数。
+
+
+// 类
+class Pair<K, V> {
+  key: K;
+  value: V;
+}
+
+class A<T> {
+  value: T;
+}
+class B extends A<any> {
+}
+
+// 别名
+type Nullable<T> = T | undefined | null;
+
+type Tree<T> = {
+  value: T;
+  left: Tree<T> | null;
+  right: Tree<T> | null;
+};
+```
+
+### 类型参数的默认值
+
+类型参数可以设置默认值。使用时，如果没有给出类型参数的值，就会使用默认值。
+
+```typescript
+function getFirst<T = string>(
+    arr:T[]
+):T {
+    return arr[0];
+}
+```
+
+

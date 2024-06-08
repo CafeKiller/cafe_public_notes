@@ -359,3 +359,229 @@ func main() {
 	}
 }
 ```
+
+### map映射
+
+map 映射将键映射到值.
+
+映射的零值为 nil 。nil 映射既没有键，也不能添加键。
+
+make 函数会返回给定类型的映射，并将其初始化备用。
+
+```go
+type Vertex struct {
+	lat, long float64
+}
+
+var m map[string]Vertex
+
+func main() {
+	m = make(map[string]Vertex)
+	m["Bell Labs"] = Vertex {
+		40.68433, -74.39967
+	}
+
+	fmt.Println(m["Bell Labs"])
+}
+```
+
+### 映射字面量
+
+映射的字面量和结构体类似，只不过必须有键名。
+
+```go
+type Vertex struct {
+	Lat, Long float64
+}
+
+var m = map[string]Vertex {
+	"Bell Labs": Vertex {
+		40.68433, -74.3333
+	},
+	"Google": Vertex {
+		123.123, 233.233
+	},
+}
+
+// 若顶层类型只是一个类型名，那么你可以在字面量的元素中省略它。
+
+var m2 = map[string]Vertex {
+	"Bell Labs": { 40.68433, -74.3333 },
+	"Google": Vertex { 123.123, 233.233 },
+}
+
+func main() {
+	fmt.Println(m)
+}
+```
+
+### 修改映射
+
+在映射 m 中插入或修改元素：`m[key] = value`
+
+获取元素: `elem = m[key]`
+
+删除元素: `delete(m, key)`
+
+通过双赋值检测某个键是否存在: `elem, ok = m[key]`
+
+- 若 key 在 m 中，ok 为 true ；否则，ok 为 false
+- 若 key 不在映射中，则 elem 是该映射元素类型的零值
+
+```go
+func main() {
+	m := make(map[string]int)
+
+	m['done'] = 43
+	fmt.Println("值: ", m['done'])
+	delete(m, 'done')
+	
+	v1, ok := m['done']
+	fmt.Println("值: ", v , "是否存在: ", ok)
+}
+```
+
+### 函数值
+
+函数也是值。它们可以像其他值一样传递。
+
+函数值可以用作函数的参数或返回值。
+
+```go
+func computer(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
+}
+
+func main() {
+	hypot := func(x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+	fmt.Println(hypot(5, 12))
+
+	fmt.Println(compute(hypot))
+	fmt.Println(compute(math.Pow))
+}
+
+```
+
+__函数闭包__
+
+Go 函数可以是一个闭包。闭包是一个函数值，它引用了其函数体之外的变量。 该函数可以访问并赋予其引用的变量值，换句话说，该函数被“绑定”到了这些变量。
+
+```go
+// 函数 adder 返回一个闭包。每个闭包都被绑定在其各自的 sum 变量上。
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
+func main() {
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
+}
+```
+
+## 方法和接口
+
+> GO 并不是面向对象设计的语言, 但它也是支持面向对象的, 所以方法和接口的实现与其他语言是较为不同的.
+
+### 方法
+
+> 对象的函数叫做: 方法, 不依赖对象的叫函数.
+
+Go 没有类。不过你可以为类型定义方法。
+
+方法就是一类带特殊的 接收者 参数的函数。
+
+方法接收者在它自己的参数列表内，位于 func 关键字和方法名之间。
+
+```go
+type Verter struct{
+	lat, long float64
+}
+
+func (v Verter) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+func main() {
+	v := Verter{4.444, 5.555}
+	fmt.Println(v.Abs())
+}
+```
+
+__方法即函数__
+
+记住：在 golang 里方法只是个带接收者参数的函数。
+
+```go
+type Vertex struct {
+	X, Y float64
+}
+// 将上面的 Abs 方法用普通函数的方式实现也是没问题的.
+func Abs(v Vertex) float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+func main() {
+	v := Vertex{3, 4}
+	fmt.Println(Abs(v))
+}
+```
+
+也可以为非结构体类型声明方法。
+
+```go
+// 一个带 Abs 方法的数值类型 MyFloat。
+type MyFloat float64
+func (f MyFloat) Abs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+func main() {
+	f := MyFloat(-math.Sqrt2)
+	fmt.Println(f.Abs())
+}
+```
+
+能为在同一个包中定义的接收者类型声明方法，而不能为其它别的包中定义的类型 （包括 int 之类的内置类型）声明方法。
+
+### 指针类型的接收者
+
+可以为指针类型的接收者声明方法。
+
+这意味着对于某类型 T，接收者的类型可以用 *T 的文法。 （此外，T 本身不能是指针，比如不能是 *int。）
+
+```go
+type Vertex{
+	lat, long float64
+}
+
+func (v Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+// 指针接收者的方法可以修改接收者指向的值（如这里的 Scale 所示）。 由于方法经常需要修改它的接收者，指针接收者比值接收者更常用。
+func (v *Vertex) Scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+func main() {
+	v := Vertex{3, 4}
+	v.Scale(10)
+	fmt.Println(v.Abs())
+	// 若使用值接收者，那么 Scale 方法会对原始 Vertex 值的副本进行操作。
+	// Scale 方法必须用指针接收者来更改 main 函数中声明的 Vertex 的值。
+}
+```
