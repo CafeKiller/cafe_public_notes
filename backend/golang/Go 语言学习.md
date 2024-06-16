@@ -585,3 +585,283 @@ func main() {
 	// Scale 方法必须用指针接收者来更改 main 函数中声明的 Vertex 的值。
 }
 ```
+
+### 方法与指针重定向
+
+带指针参数的函数必须接受一个指针
+
+```go
+var v Vertex
+ScaleFunc(v, 5)  // 编译错误！
+ScaleFunc(&v, 5) // OK
+
+// 而接收者为指针的的方法被调用时，接收者既能是值又能是指针
+var v Vertex
+v.Scale(5)  // OK
+p := &v
+p.Scale(10) // OK
+// 对于语句 v.Scale(5) 来说，即便 v 是一个值而非指针，带指针接收者的方法也能被直接调用。 
+// 也就是说，由于 Scale 方法有一个指针接收者，为方便起见，Go 会将语句 v.Scale(5) 解释为 (&v).Scale(5)。
+
+type Vertex struct {
+	X, Y float64
+}
+func (v *Vertex) Scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+func ScaleFunc(v *Vertex, f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+func main() {
+	v := Vertex{3, 4}
+	v.Scale(2)
+	ScaleFunc(&v, 10)
+
+	p := &Vertex{4, 3}
+	p.Scale(3)
+	ScaleFunc(p, 8)
+
+	fmt.Println(v, p)
+}
+```
+
+接受一个值作为参数的函数必须接受一个指定类型的值
+
+```go
+var v Vertex
+fmt.Println(AbsFunc(v))  // OK
+fmt.Println(AbsFunc(&v)) // 编译错误！
+
+// 而以值为接收者的方法被调用时，接收者既能为值又能为指针
+var v Vertex
+fmt.Println(v.Abs()) // OK
+p := &v
+fmt.Println(p.Abs()) // OK
+// 这种情况下，方法调用 p.Abs() 会被解释为 (*p).Abs()。
+```
+
+__选择值或指针作为接收者__
+
+使用指针接收者的原因有二：
+
+- 方法能够修改其接收者指向的值。
+- 这样可以避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样会更加高效。
+
+> 在本例中，Scale 和 Abs 接收者的类型为 *Vertex，即便 Abs 并不需要修改其接收者。
+
+通常来说，所有给定类型的方法都应该有值或指针接收者，但并不应该二者混用。 
+
+### 接口
+
+**接口类型** 的定义为一组方法签名。
+
+接口类型的变量可以持有任何实现了这些方法的值。
+
+```go
+type Abser interface {
+	Abs() float64
+}
+
+func main() {
+	var a Abser
+	f := MyFloat(-math.Sqrt2)
+	v := Vertex{3, 4}
+
+	a = f  // a MyFloat 实现了 Abser
+	a = &v // a *Vertex 实现了 Abser
+
+	// 下面一行，v 是一个 Vertex（而不是 *Vertex）
+	// 所以没有实现 Abser。
+	a = v
+
+	fmt.Println(a.Abs()) // 报错
+}
+
+type MyFloat float64
+
+func (f MyFloat) Abs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+type Vertex struct{
+	X, Y float64
+}
+
+func (v *Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+```
+
+__接口与隐式实现__
+
+类型通过实现一个接口的所有方法来实现该接口。
+
+既然无需专门显式声明，也就没有“implements”关键字。
+
+隐式接口从接口的实现中解耦了定义，这样接口的实现可以出现在任何包中，无需提前准备。
+
+因此，也就无需在每一个实现上增加新的接口名称，这样同时也鼓励了明确的接口定义。
+
+```go
+type I interface {
+	Func1()
+}
+
+type T struct {
+	Str string
+}
+
+func (t T) Func1() {
+	fmt.Println(t.Str)
+}
+
+func main() {
+	var i I = T{"Hello"}
+	i.Func1()
+}
+```
+
+__接口值__
+
+接口也是值。它们可以像其它值一样传递。
+
+接口值可以用作函数的参数或返回值。
+
+在内部，接口值可以看做包含值和具体类型的元组：`(value, type)`
+
+接口值保存了一个具体底层类型的具体值。
+
+接口值调用方法时会执行其底层类型的同名方法。
+
+```go
+type I interface {
+	Fun1()
+}
+
+type T struct {
+	Str string
+}
+
+func (t *T) Fun1() {
+	fmt.Println(t.Str)
+}
+
+type F64 Float64 
+
+func (f F64) Fun1() {
+	fmt.Println(f)
+}
+
+func main() {
+	var i I
+	i = &T{'Hello'}
+	describe(i)
+	i.Fun1()
+
+	i = F(math.Pi)
+	describe(i)
+	i.Fun1()
+}
+
+func describe(i I) {
+	fmt.Println("(%v, %T)", i, i)
+}
+```
+
+__底层值为 nil 的接口值__
+
+即便接口内的具体值为 nil，方法仍然会被 nil 接收者调用。
+
+在一些语言中，这会触发一个空指针异常，但在 Go 中可以写一些方法来更优雅地处理它。
+
+**注意**: 保存了 nil 具体值的接口其自身并不为 nil。
+
+```go
+type I interface {
+	M()
+}
+
+type T struct {
+	S string
+}
+
+func (t *T) M() {
+	if t == nil {
+		fmt.Println("<nil>")
+		return
+	}
+	fmt.Println(t.S)
+}
+
+func main() {
+	var i I
+
+	var t *T
+	i = t
+	describe(i)
+	i.M()
+
+	i = &T{"hello"}
+	describe(i)
+	i.M()
+}
+
+func describe(i I) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
+```
+
+__nil 接口值__
+
+nil 接口值既不保存值也不保存具体类型。
+
+为 nil 接口调用方法会产生运行时错误，因为接口的元组内并未包含能够指明该调用哪个 具体 方法的类型。
+
+```go
+// 运行后会出现一个错误
+type I interface {
+	M()
+}
+
+func main() {
+	var i I
+	describe(i)
+	i.M()
+}
+
+func describe(i I) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
+```
+
+__空接口__
+
+指定了零个方法的接口值被称为 *空接口：* `interface{}`
+
+空接口可保存任何类型的值。（因为每个类型都至少实现了零个方法。）
+
+空接口被用来处理未知类型的值。例如，fmt.Print 可接受类型为 interface{} 的任意数量的参数。
+
+> 有点类似于 TypeScript 中的 any 类型
+
+```go
+func main() {
+	var i interface{}
+	describe(i)
+
+	i = 42
+	describe(i)
+
+	i = "hello"
+	describe(i)
+}
+
+func describe(i interface{}) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
+```
