@@ -257,3 +257,87 @@ function controlFlowAnalysisWithNever(foo: Foo) {
     }
 }
 ```
+
+### any
+
+在 TypeScript 中，任何类型都可以被归为 any 类型。这让 any 类型成为了类型系统的顶级类型。
+
+如果是一个普通类型，在赋值过程中改变类型是不被允许的。但如果是 any 类型，则允许被赋值为任意类型。
+
+在any上访问任何属性都是允许的，也允许调用任何方法。
+
+__变量如果在声明的时候，未指定其类型，那么它会被识别为 `any` 类型__
+
+> 切记，不要大量的使用且无理由的使用 any 类型，因为这样会失去大部分的 typescript 提供的保护机制，这样使用 typescript 就没有意义了。总之万万别把代码写成 anyscript 了。
+
+```ts
+let anyThing: any = 'hello'
+console.log(anyThing.myName)
+console.log(anyThing.myName.firstName)
+
+let anyThing: any = 'Tom'
+anyThing.setName('Jerry')
+anyThing.setName('Jerry').sayHello()
+anyThing.myName.setFirstName('Cat')
+```
+
+### unknown
+
+unknown 与 any 一样，所有类型都可以分配给 unknown
+
+unknown 与 any 的最大区别是： 任何类型的值可以赋值给any，同时any类型的值也可以赋值给任何类型。
+
+而 unknown 任何类型的值都可以赋值给它，但它只能赋值给 unknown 和 any。
+
+```ts
+let notSure: unknown = 4
+let uncertain: any = notSure // OK
+
+let notSure: any = 4
+let uncertain: unknown = notSure // OK
+
+let notSure: unknown = 4
+let uncertain: number = notSure // Error
+
+// 如果不缩小类型，就无法对unknown类型执行任何操作
+function getDog() {
+ return '123'
+}
+ 
+const dog: unknown = {hello: getDog}
+dog.hello() // Error
+```
+> 这种机制起到了很强的预防性，更安全，这就要求我们必须缩小类型，我们可以使用typeof、类型断言等方式来缩小未知范围
+
+### Number、String、Boolean、Symbol
+
+本质就是原始类型 number、string、boolean、symbol 的包装对象，算是一种对象类型吧。
+
+兼容性上，原始类型都兼容各自对应的对象类型，但是对象类型却不能兼容对应的原始类型。
+
+```ts
+let num: number
+let Num: Number
+Num = num // ok
+num = Num // ts(2322)报错
+```
+
+> 所以记住：不要使用对象类型来注解值的类型，这样做没有意义
+
+### object、Object 和 {}
+
+统一一下对应的称呼先：`object（小obj）`、`Object（大Obj）`、`{}（空对象）`
+
+小 obj 代表的是所有非原始类型，也就是说我们不能把 number、string、boolean、symbol等原始类型赋值给 object。在严格模式下，null 和 undefined 类型也不能赋给 object。
+
+> JavaScript 中以下类型被视为原始类型：string、boolean、number、bigint、symbol、null 和 undefined
+
+大Obj 代表所有拥有 toString、hasOwnProperty 方法的类型，所以所有原始类型、非原始类型都可以赋给 Object。同样，在严格模式下，null 和 undefined 类型也不能赋给 Object。
+
+{}空对象类型和大 Object 一样，也是表示原始类型和非原始类型的集合，并且在严格模式下，null 和 undefined 也不能赋给 {} 
+
+> 大Obj 包含原始类型，小obj 仅包含非原始类型，所以大 Object 似乎是小 object 的父类型。实际上，大 Object 不仅是小 object 的父类型，同时也是小 object 的子类型。  
+> 注意：尽管官方文档说可以使用小 object 代替大 Object，但是我们仍要明白大 Object 并不完全等价于小 object。
+
+综上结论：**{}、大 Obj 是比小 obj 更宽泛的类型（least specific），{} 和大 Object 可以互相代替，用来表示原始类型（null、undefined 除外）和非原始类型；而小 object 则表示非原始类型。**
+

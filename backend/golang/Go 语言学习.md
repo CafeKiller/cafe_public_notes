@@ -865,3 +865,159 @@ func describe(i interface{}) {
 	fmt.Printf("(%v, %T)\n", i, i)
 }
 ```
+### 类型断言
+
+类型断言 提供了访问接口值底层具体值的方式.
+
+```go
+t := i.(T)
+// 该语句断言接口值 i 保存了具体类型 T，并将其底层类型为 T 的值赋予变量 t。
+// 若 i 并未保存 T 类型的值，该语句就会触发一个 panic。
+
+
+// 为了 判断 一个接口值是否保存了一个特定的类型，类型断言可返回两个值：
+// 其底层值以及一个报告断言是否成功的布尔值。
+t, ok := i.(T)
+// 若 i 保存了一个 T，那么 t 将会是其底层值，而 ok 为 true。
+// 否则，ok 将为 false 而 t 将为 T 类型的零值，程序并不会产生 panic。
+
+func main() {
+	var i interface{} = "hello"
+
+	s := i.(string)
+	fmt.Println(s)
+
+	s, ok := i.(string)
+	fmt.Println(s, ok)
+
+	s, ok := i.(float64)
+	fmt.Println(s, ok)
+
+	s := i.(float64) // panic
+	fmt.Println(s)
+}
+```
+
+### 类型选择
+
+类型选择 是一种按顺序从几个类型断言中选择分支的结构。
+
+类型选择与一般的 switch 语句相似，不过类型选择中的 case 为类型（而非值）， 它们针对给定接口值所存储的值的类型进行比较。
+
+```go
+// 类型选择中的声明与类型断言 i.(T) 的语法相同，只是具体类型 T 被替换成了关键字 type。
+// 此选择语句判断接口值 i 保存的值类型是 T 还是 S。在 T 或 S 的情况下，变量 v 会分别按 T 或 S 类型保存 i 拥有的值。
+// 在默认（即没有匹配）的情况下，变量 v 与 i 的接口类型和值相同。
+
+switch v := i.(type) {
+	case T:
+		// v 的类型为T
+	case S:
+		// v 的类型为S
+	default:
+		// 没有匹配, v 与 i的类型相同
+}
+
+func do(i interface{}) {
+	switch v := i.(type) {
+	case int:
+		fmt.Printf("二倍的 %v 是 %v\n", v, v*2)
+	case string:
+		fmt.Printf("%q 长度为 %v 字节\n", v, len(v))
+	default:
+		fmt.Printf("我不知道类型 %T!\n", v)
+	}
+}
+
+func main() {
+	do(21)
+	do("hello")
+	do(true)
+}
+```
+
+### Stringer
+
+fmt 包中定义的 Stringer 是最普遍的接口之一。
+
+```go
+// 定义
+type Stringer interface {
+	String() string
+}
+```
+
+Stringer 是一个可以用字符串描述自己的类型。fmt 包（还有很多包）都通过此接口来打印值。
+
+> 类似于其他的语言的 toString
+
+```go
+import "fmt"
+
+type Person struct {
+	Name string
+	Age  int
+}
+
+func (p Person) String() string {
+	return fmt.Sprintf("%v (%v years)", p.Name, p.Age)
+}
+
+func main() {
+	a := Person{"Arthur Dent", 42}
+	z := Person{"Zaphod Beeblebrox", 9001}
+	fmt.Println(a,"|||", z)
+}
+```
+
+### 错误
+
+Go 程序使用 error 值来表示错误状态。
+
+与 fmt.Stringer 类似，error 类型是一个内建接口；与 fmt.Stringer 类似，fmt 包也会根据对 error 的实现来打印值。
+
+通常函数会返回一个 error 值，调用它的代码应当判断这个错误是否等于 nil 来进行错误处理。
+```go
+type error interface {
+    Error() string
+}
+
+// error 为 nil 时表示成功；非 nil 的 error 表示失败。
+i, err := strconv.Atoi("42")
+if err != nil {
+    fmt.Printf("couldn't convert number: %v\n", err)
+    return
+}
+fmt.Println("Converted integer:", i)
+```
+
+### Readers
+
+io 包指定了 io.Reader 接口，它表示数据流的读取端。
+
+Go 标准库包含了该接口的许多实现，包括文件、网络连接、压缩和加密等等。
+
+io.Reader 接口有一个 Read 方法
+
+```go
+func (T) Read(b []byte) (n int, err error)
+```
+
+Read 用数据填充给定的字节切片并返回填充的字节数和错误值。在遇到数据流的结尾时，它会返回一个 io.EOF 错误。
+
+```go
+// 示例代码创建了一个 strings.Reader 并以每次 8 字节的速度读取它的输出。
+func main() {
+	r := strings.NewReader("Hello, Reader!")
+
+	b := make([]byte, 8)
+	for {
+		n, err := r.Read(b)
+		fmt.Printf("n = %v err = %v b = %v\n", n, err, b)
+		fmt.Printf("b[:n] = %q\n", b[:n])
+		if err == io.EOF {
+			break
+		}
+	}
+}
+```
