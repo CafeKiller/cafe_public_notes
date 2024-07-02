@@ -437,9 +437,9 @@ function sayHello2(name:string) {
 ```ts
 // declare 用于 class 上的示例
 declare class Animal {
-  constructor(name:string);
-  eat():void;
-  sleep():void;
+    constructor(name:string);
+    eat():void;
+    sleep():void;
 }
 // 稍微复杂点的
 declare class C {
@@ -510,7 +510,6 @@ let myId:<T>(arg:T) = T = func1;
 let myId:{ <T>(arg:T): T } = func1;
 
 
-
 // 接口
 interface Box<Type> {
   contents: Type;
@@ -570,5 +569,3 @@ function getFirst<T = string>(
     return arr[0];
 }
 ```
-
-
