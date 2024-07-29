@@ -54,3 +54,21 @@ const newBuffer = buffer.slice(0, 3);
 ## ArrayBuffer.isView()
 
 ArrayBuffer有一个静态方法isView，返回一个布尔值，表示参数是否为ArrayBuffer的视图实例。这个方法大致相当于判断参数，是否为TypedArray实例或DataView实例。
+
+# TypedArray 视图
+
+ArrayBuffer对象作为内存区域，可以存放多种类型的数据。同一段内存，不同数据有不同的解读方式，这就叫做“视图”（view）。
+
+ArrayBuffer有两种视图，一种是TypedArray视图，另一种是DataView视图。前者的数组成员都是同一个数据类型，后者的数组成员可以是不同的数据类型。
+
+目前，TypedArray视图一共包括 9 种类型，每一种视图都是一种构造函数。
+
+- Int8Array：8 位有符号整数，长度 1 个字节。
+- Uint8Array：8 位无符号整数，长度 1 个字节。
+- Uint8ClampedArray：8 位无符号整数，长度 1 个字节，溢出处理不同。
+- Int16Array：16 位有符号整数，长度 2 个字节。
+- Uint16Array：16 位无符号整数，长度 2 个字节。
+- Int32Array：32 位有符号整数，长度 4 个字节。
+- Uint32Array：32 位无符号整数，长度 4 个字节。
+- Float32Array：32 位浮点数，长度 4 个字节。
+- Float64Array：64 位浮点数，长度 8 个字节。
