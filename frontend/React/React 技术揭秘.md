@@ -142,3 +142,16 @@ export const Deletion = /*              */ 0b0000000001000;
 ### Renderer（渲染器）
 
 Renderer 根据 Reconciler 为虚拟DOM打的标记，同步执行对应的DOM操作。
+
+在React16架构中整个更新流程为：
+
+![](https://static.sitestack.cn/projects/BetaSu-just-react/cf8dfdc57abcb54275cad374fef8474f.png)
+
+其中红框中的步骤随时可能由于以下原因被中断：
+
+- 有其他更高优任务需要先更新
+- 当前帧没有剩余时间
+
+由于红框中的工作都在内存中进行，不会更新页面上的DOM，所以即使反复中断，用户也不会看见更新不完全的DOM（即上一节演示的情况）。
+
+> 实际上，由于Scheduler和Reconciler都是平台无关的，所以React为他们单独发了一个包 react-Reconciler
