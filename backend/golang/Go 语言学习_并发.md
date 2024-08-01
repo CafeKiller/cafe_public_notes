@@ -109,3 +109,101 @@ func main() {
 
 > 注意1： 只应由发送者关闭信道，而不应油接收者关闭。向一个已经关闭的信道发送数据会引发程序 panic。  
 > 注意2： 信道与文件不同，通常情况下无需关闭它们。只有在必须告诉接收者不再有需要发送的值时才有必要关闭，例如终止一个 range 循环。
+
+### select 语句
+
+select 语句使一个 Go 程可以等待多个通信操作。
+
+select 会阻塞到某个分支可以继续执行为止，这时就会执行该分支。当多个分支都准备好时会随机选择一个执行。
+
+```go
+func fibonacci(c, quit chan int) {
+	x, y := 0, 1
+	for {
+		select {
+		case c <- x:
+			x, y = y, x+y
+		case <-quit:
+			fmt.Println("quit")
+			return
+		}
+	}
+}
+
+func main() {
+	c := make(chan int)
+	quit := make(chan int)
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println(<-c)
+		}
+		quit <- 0
+	}()
+	fibonacci(c, quit)
+}
+```
+
+__默认选择__
+
+当 select 中的其它分支都没有准备好时，default 分支就会执行。
+
+为了在尝试发送或者接收时不发生阻塞，可使用 default 分支
+
+```go
+func main() {
+	tick := time.Tick(100 * time.Millisecond)
+	boom := time.After(500 * time.Millisecond)
+	for {
+		select {
+		case <-tick:
+			fmt.Println("tick.")
+		case <-boom:
+			fmt.Println("BOOM!")
+			return
+		default: // 默认选择
+			fmt.Println("    .")
+			time.Sleep(50 * time.Millisecond)
+		}
+	}
+}
+```
+
+### sync.Mutex
+
+若我们只是想保证每次只有一个 Go 程能够访问一个共享的变量，从而避免冲突, 这里涉及的概念叫做 *互斥（mutual*exclusion）* ，我们通常使用 *互斥锁（Mutex）* 这一数据结构来提供这种机制。
+
+Go 标准库中提供了 sync.Mutex 互斥锁类型及其两个方法：`Lock` `Unlock`
+
+```go
+// SafeCounter 是并发安全的
+type SafeCounter struct {
+	mu sync.Mutex
+	v  map[string]int
+}
+
+// Inc 对给定键的计数加一
+func (c *SafeCounter) Inc(key string) {
+	c.mu.Lock()
+	// 锁定使得一次只有一个 Go 协程可以访问映射 c.v。
+	c.v[key]++
+	c.mu.Unlock()
+}
+
+// Value 返回给定键的计数的当前值。
+func (c *SafeCounter) Value(key string) int {
+	c.mu.Lock()
+	// 锁定使得一次只有一个 Go 协程可以访问映射 c.v。
+	defer c.mu.Unlock()
+	return c.v[key]
+}
+
+func main() {
+	c := SafeCounter{v: make(map[string]int)}
+	for i := 0; i < 1000; i++ {
+		go c.Inc("somekey")
+	}
+
+	time.Sleep(time.Second)
+	fmt.Println(c.Value("somekey"))
+}
+```
