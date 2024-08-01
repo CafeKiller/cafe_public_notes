@@ -90,3 +90,68 @@ React15架构可以分为两层：
 
 __递归更新的缺点__：由于递归执行，所以更新一旦开始，中途就无法中断。当层级很深时，递归更新时间超过了16ms，用户交互就会卡顿。
 
+## React 16+ 框架
+
+React16架构可以分为三层：
+
+- Scheduler（调度器）—— 调度任务的优先级，高优任务优先进入Reconciler
+- Reconciler（协调器）—— 负责找出变化的组件
+- Renderer（渲染器）—— 负责将变化的组件渲染到页面上
+
+> 相较于React15，React16中新增了Scheduler（调度器）
+
+### Scheduler（调度器）
+
+既然我们以浏览器是否有剩余时间作为任务中断的标准，那么我们需要一种机制，当浏览器有剩余时间时通知我们。
+
+其实部分浏览器已经实现了这个API，这就是 `requestIdleCallback`。但是由于以下因素，React放弃使用：
+
+- 浏览器兼容性
+- 触发频率不稳定，受很多因素影响。比如当我们的浏览器切换tab后，之前tab注册的 `requestIdleCallback` 触发的频率会变得很低
+
+基于以上原因，React 实现了功能更完备的 `requestIdleCallback` polyfill，这就是Scheduler。除了在空闲时触发回调的功能外，Scheduler还提供了多种调度优先级供任务设置。
+
+### Reconciler（协调器）
+
+在React15中Reconciler是递归处理虚拟DOM的。
+
+```javascript
+/** @noinline */
+function workLoopConcurrent() {
+    // Perform work until Scheduler asks us to yield
+    while (workInProgress !== null && !shouldYield()) {
+        workInProgress = performUnitOfWork(workInProgress);
+    }
+}
+
+// 可以看见，更新工作从递归变成了可以中断的循环过程。
+// 每次循环都会调用shouldYield判断当前是否有剩余时间。
+```
+
+在React16中，Reconciler与Renderer不再是交替工作。当Scheduler将任务交给Reconciler后，Reconciler会为变化的虚拟DOM打上代表增/删/更新的标记
+
+```javascript
+export const Placement = /*             */ 0b0000000000010;
+export const Update = /*                */ 0b0000000000100;
+export const PlacementAndUpdate = /*    */ 0b0000000000110;
+export const Deletion = /*              */ 0b0000000001000;
+```
+
+整个Scheduler与Reconciler的工作都在内存中进行。只有当所有组件都完成Reconciler的工作，才会统一交给Renderer。
+
+### Renderer（渲染器）
+
+Renderer 根据 Reconciler 为虚拟DOM打的标记，同步执行对应的DOM操作。
+
+在React16架构中整个更新流程为：
+
+![](https://static.sitestack.cn/projects/BetaSu-just-react/cf8dfdc57abcb54275cad374fef8474f.png)
+
+其中红框中的步骤随时可能由于以下原因被中断：
+
+- 有其他更高优任务需要先更新
+- 当前帧没有剩余时间
+
+由于红框中的工作都在内存中进行，不会更新页面上的DOM，所以即使反复中断，用户也不会看见更新不完全的DOM（即上一节演示的情况）。
+
+> 实际上，由于Scheduler和Reconciler都是平台无关的，所以React为他们单独发了一个包 react-Reconciler
