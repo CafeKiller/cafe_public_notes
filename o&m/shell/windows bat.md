@@ -311,3 +311,172 @@ if errorlevel 2 goto mem
 
 if errotlevel 1 goto end
 ```
+
+# 其他命令
+
+## ping 命令
+
+测试网络联接状况以及信息包发送和接收状况。但是不能够测试端口。
+
+语法：ping IP地址或主机名 [-t] [-a] [-n count] [-l size]
+
+参数含义：
+
+-t 不停地向目标主机发送数据；
+
+-a 以IP地址格式来显示目标主机的网络地址；
+
+-n count 指定要Ping多少次，具体次数由count来指定；
+
+-l size 指定发送到目标主机的数据包的大小。
+
+```shell
+ping 192.168.0.1 -t # (不停的测试192.168.0.1，按ctrl+c停止)
+
+# (ping一下所有的局域网电脑)
+for /L %%a in (0,1,255) do ping 192.168.0.%%a -n 1 >> tmp.txt 
+```
+
+##  telnet 命令
+
+测试端口使用 telnet IP地址或主机名 端口，使用tcp协议的
+
+```shell
+telnet 192.168.0.1 80 # (测试192.168.0.1的80端口)
+```
+
+## color 命令
+
+设置背景及字体颜色
+
+语法： color bf
+
+b 是指定背景色的十六进制数字； f 指定前景颜色(即字体颜色)。
+
+颜色值: 0:黑色 1:蓝色 2:绿色 3:湖蓝 4:红色 5:紫色 6:** 7:白色
+
+8:灰色 9:淡蓝 A:淡绿 B:浅绿 C:淡红 D:淡紫 E:淡黄 F:亮白
+
+如果没有给定任何参数，该命令会将颜色还原到 CMD.EXE 启动时的颜色。
+
+如果两参数一样，视为无效输入。只有一个参数时，设置字体。
+
+## random 命令
+
+产生随机数(正整数0~)
+
+## exit 命令
+
+结束程序。即时是被调用的程序，结束后也不会返回原程序
+
+## shutdown命令
+
+shutdown -s 关机
+
+# 字符串处理
+
+## 分割字符串，以查看时间为例
+
+%源字符串:~起始值,截取长度% (起始值从0开始；截取长度是可选的，如果省略逗号和截取长度，将会从起始值截取到结尾；
+
+截取长度如果是负数，表示截取到倒数第几个。)
+
+"%time%" 显示如："11:04:23.03" (完整的时间"hh:mm:ss.tt")
+
+"%time:~0,5%" 显示"hh:mm"(即"11:04")，其中0表示从右向左移位操作的个数，5表示从左向右移位操作的个数
+
+"%time:~0,8%" 显示标准时间格式"hh:mm:ss"(即"11:04:23"，前8个字符串)
+
+"%time:~3,-3%"显示"mm:ss"(即从第4个开始,截去最后3个的字符串)
+
+"%time:~3%" 显示"04:23.03"(即去掉前4个字符串)
+
+"%time:~-3%" 显示".tt"(即最后3个字符串)
+
+上面的字串分割格式，也可以用于其它地方，如目录路径："%cd:~0,10%"
+
+## 替换字符串
+
+set a="abcd1234"
+
+echo %a% 显示："abcd1234"
+
+set a=%a:1=kk% 替换“1”为“kk”
+
+echo %a% 显示："abcdkk234"
+
+## 字符串合并
+
+由于没有直接的字符串合并函数，只能用笨方法了。
+
+set str1=%str1%%str2% (合并 str1 和 str2)
+
+## 计算字符串长度
+
+没有现成的函数。如下程序利用 goto形成循环，不断将字符串截短1，并记录截短的次数，到字符串变成空时的次数即长度。
+
+```shell
+set testStr=This is a test string
+
+:: 将 testStr 复制到str，str 是个临时字符串
+
+set str=%testStr%
+
+:: 标签，用于goto跳转
+
+:next1
+
+:: 判断str是不是空，如果不是则执行下边的语句
+
+if not "%str%"=="" (
+
+:: 算术运算，使num的值自增1，相当于num++或者++num语句
+
+set /a num+=1
+
+:: 截取字符串，每次截短1
+
+set "str=%str:~1%"
+
+:: 跳转到next1标签: 这里利用goto和标签，构成循环结构
+
+goto next1
+
+)
+
+:: 当以上循环结构执行完毕时，会执行下边的语句
+
+echo testStr=%testStr%
+
+echo testStr的长度为：%num%
+```
+
+## 截取字符串时，需要传递参数
+
+直接 echo %args:~%num%,-5% 没办法想要的字符串，需要如下两步
+
+setlocal enabledelayedexpansion
+
+echo !args:~%num%,-5!
+
+# 系统服务
+
+停止服务：NET STOP 服务名
+
+启动服务：NET Start 服务名
+
+## 设置启动类型
+
+自动： SC CONFIG 服务名 START= auto
+
+手动： SC CONFIG 服务名 START= demand
+
+已禁用：SC CONFIG 服务名 START= disabled
+
+附：“START= ”等号后面必须要有一个空格。(start还有boot,system两个值)
+
+```shell
+SC CONFIG Spooler START= demand # (打印机加载项，设置成手动，默认自动)
+```
+
+## 查看系统服务：start %SystemRoot%\system32\services.msc /s
