@@ -57,6 +57,34 @@ fun main() {
 }
 ```
 
+### 变量的高级操作
+
+在kotlin中一个变量的完整声明其实这样的：
+
+```kotlin
+var <propertyName>[: <PropertyType>] [= <property_initializer>]
+    [<getter>]
+    [<setter>]
+```
+
+对于这种顶层定义的变量（包括后面类中会用到的成员属性变量）可以具这两个可选的函数，它们本质上是一个get和set函数: 
+
+- `getter` ：用于获取这个变量的值，默认情况下直接返回当前这个变量的值
+- `setter` ：用于修改这个变量的值，默认情况下直接对这个变量的值进行修改
+
+也就是说我们可以这样子进行操作
+
+```
+var str: String = "尊嘟假嘟"
+    get() = field + field
+    set(value) {    //这里的value就是给过来的值
+        println("设置变量的值")
+        field = value   //注意，对于val类型的变量，没有set函数，因为不可变
+    }
+```
+
+> 这种写法其实有点类似于 javascript 中的代理模式；不过一般情况都不会去重写 getter 和 setter 的。
+
 ## 流程控制
 
 `if-else` 完整语法展示：
@@ -118,3 +146,141 @@ fun main() {
     }
 }
 ````
+
+需要注意的是，when 作用于表达式时，else 分支是必须存在的（防止空值，保证代码运行的安全性），除非编译器能够推断出所有的可能情况都包含分支条件。
+
+```kotlin
+// 这种情况下就必须存在 else 分支
+fun main() {
+    val a = 'A'
+    val res = when(a) { 
+        'B' -> 0
+        'A' -> 1
+        else -> -1
+    }
+}
+
+// 这种情况下就可以不用 else 分支，因为 boolean 类型只有两种值，同理枚举也是允许不存在 else。
+fun main() {
+    val a = true
+    val res = when(a) { 
+        false -> 0
+        true -> 1
+    }
+}
+```
+
+总之 when 是一个很强大的分支控制语句，灵活好用，也更加现代。补充示例：
+
+```kotlin
+// 多个不同值共享同一分支
+when(value) {
+    0, -1 -> print("value 不能为0或者-1")
+    else -> print("value 校验合法")
+}
+
+// 使用in判断目标变量值是否在指定范围内
+fun main() {
+    val score = 60
+    val grade = when(score) {
+        in 100..90 -> '优秀'
+        in 89..80 -> "良好"
+        in 79..70 -> "及格"
+        in 69..60 -> "牛逼"
+        in 59..0 -> "不合格"
+        else -> "不合法成绩"
+    }
+}
+```
+
+__for循环__: koltin 中没有类似于C那种非常传统的三目式的for循环，kotlin采用的是更现代的 for..in 循环。
+
+语法：``` for (遍历出来的单个目标变量 in 可遍历目标) 循环体 ```
+
+> 可遍历目标主要是指：数组、区间、任何实现类运算符重载函数 iterator 的类。
+
+示例：
+```kotlin
+fun main() {
+    for (i in 1..3)
+        println("大烟杆嘴里塞，我只抽第五代：$i")
+}
+
+// step 用于控制步长
+fun main() {
+    for (i in 1..10 step 2) {
+        println(i)
+    }
+}
+
+// downTo 1 倒序循环至1
+fun main() {
+    for (i in 10 downTo 1) {
+        println(i)
+    }
+}
+```
+
+> `continue` 和 `break` 和其他语言完全一致，前者跳过当次循环，后者跳出整个循环；  
+> `while` 和 `do...while` 这里就都不介绍了，和其他语言也都是完全一致的。
+
+## 函数
+
+函数是 kotlin 中的一等公民，kotlin 中对函数的使用非常接近于 javascript（事实上kotlin的函数也确实有不少是借鉴了 javascript 的）。
+
+kotlin 中函数的定义：
+
+```koltin
+// 函数的标准结构（伪代码）
+fun 函数名称([函数参数...]): 返回值类型 {
+    // 函数体
+}
+
+// 如果函数不带返回值类型，那么函数的默认返回值就是：Unit ,这点类似于 Java 的 void
+fun hello(): Unit {  
+    println("PHP是世界上最好的语言.kt")
+}
+
+fun say(message: String){
+    println("我说：$message")
+}
+```
+
+> kotlin 的数据类型声明采用的是更现代的后置声明，据说是这样的效率更高（程序员很多情况下其实是可以根据变量名推测出数据的大致类型的，所以类型声明后置可以让代码阅读起来更加舒服）
+
+与 javascript 类似，kotlin 的函数也允许函数内部再声明函数；那么同样的 kotlin 中的函数也可以像参数一样进行传递：
+
+```kotlin
+// 这里提供的函数接受一个Int参数返回string，那么我们可以像普通函数一样传入参数调用它
+fun test(other: (Int) -> String){
+    println(other(1))  
+}
+
+// 套娃
+var func: (Int) -> ((String) -> Double)
+
+// 可以使用 typealias 类型别名来美化这种套娃现象
+typealias HelloWorld = (String) -> Double
+fun main() {
+    var func: HelloWorld
+}
+
+// 使用 :: 引用现成的函数
+val func:: (Stting) -> Int = ::test
+fun test(str: String): Int {
+    return 666
+}
+
+// 匿名函数
+val func: (String) -> Int = fun(str: String): Int {
+    println("我是匿名函数")
+    return 777
+}
+
+// Lambda 表达式
+var func: (String) -> Int = {
+    println("传入的参数是 $it") // 当你传入的参数只有一个时，可以it替代
+    666 // 最后一行表达式为返回结果
+}
+```
+
