@@ -127,3 +127,63 @@ ufw reload
 # 查看网络连接
 netstat -aptn
 ```
+
+## ubuntu 安装 golang
+
+```shell
+# 下载并解压
+wget https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
+tar -zxvf go1.8.linux-amd64.tar.gz
+
+# 设置 golang 环境变量
+sudo vim /etc/profile
+# 添加以下内容
+export GOROOT=/usr/local/go # 注意此处为解压后文件夹的路径
+export GOPATH=$GOROOT/bin
+export PATH=$PATH:$GOPATH
+
+# 让配置生效
+source /etc/profile
+
+# 查看 golang 版本
+go version
+```
+
+## ubuntu 配置 ngrok 
+
+```shell
+# 下载安装 ngrok
+wget htps://coding.net/u/sfantree/p/self_use_OSS/git/raw/master/source/ngrok.tar.gz
+tar zxvf ngrok.tar.gz
+cd ngrok
+
+# 生成签名证书
+NGROK_DOMAIN="xxx.com" # 此处为公网服务器域名
+openssl genrsa -out rootCA.key 2048
+openssl req -x509 -new -nodes -key rootCA.key -subj "/CN=$NGROK_DOMAIN" -days 5000 -out rootCA.pem
+openssl genrsa -out device.key 2048
+openssl req -new -key device.key -subj "/CN=$NGROK_DOMAIN" -out device.csr 
+openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 5000
+
+# ngrok 目录下会生成6个新的文件
+# device.crt        device.csr      device.key
+# rootCA.key        rootCA.pem      rootCA.srl
+
+# 替换证书
+cp rootCA.pem assets/client/tls/ngrokroot.crt
+cp device.crt assets/server/tls/snakeoil.crt
+cp device.key assets/server/tls/snakeoil.key
+
+# 编译服务端与客户端口
+make release-server release-client
+
+# 运行服务端
+ngrokd -domain="xxxx.com" -httpAddr=":5200" -httpsAddr=":8081"
+
+# 将ngrok拷贝到客户端上，并在同级文件夹下新建ngrok.cfg文件
+server_addr: "xxxx.com:4443" # xxxx.com是公网主机的域名，4443是公网主机默认的端口
+trust_host_root_certs: false
+
+# 启动
+./ngrok -subdomain pub -proto=http -config=ngrok.cfg 5000 # -subdomain是子域名，这里取pub，那么在浏览器访问时打入pub.xxxx.com:5200，5000是真正提供服务的端口
+```
