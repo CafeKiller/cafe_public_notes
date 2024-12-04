@@ -22,6 +22,29 @@ rustc --version
 rustc [filename]    
 ```
 
+### VSCode 安装 rust-analyzer
+
+[参考教程](https://blog.csdn.net/xiaojin21cen/article/details/129767672)
+
+在 VSCode 中的插件市场直接搜索 `rust-analyzer` 进行安装。（如果安装好后，你的插件没有正常启动请进行以下操作）
+
+> rust-analyzer 是一款 Rust 代码补全、检查、增强插件，常用于提升 Rust 程序开发效率。
+
+在使用官方下载的 `rustup-init.exe` 安装 Rust 时，请选择自定义安装 `2) Customize installation`
+
+并输入 `x86_64-pc-windows-gnu` 使用 64位的 gun 版本，其余配置全默认即可，随后等待下载。
+
+> 即使你已通过 `rustup-init.exe` 安装过 Rust 也没事，Rust 允许同时存在不同的版本。
+
+安装好后，请本机前往 `x86_64-pc-windows-gnu` 的 bin 目录下复制路径；
+
+> 如果你的 bin 目录下没有 `rust-analyzer.exe` 需要自行安装一下，在当前 bin 目录的命令行窗口内使用下面的命令进行安装  
+> `rustup component add rust-analyzer-preview`
+
+返回 VSCode 进入 settings.json 配置文件中，添加 `"rust-analyzer.server.path": "C:/User/XXXXX/.rustup/toolchains/stable-x86_64-pc-windows-gnu/bin/rust-analyzer"`
+
+此时就可以正常启动 `rust-analyzer` 了
+
 ## Cargo 基础命令
 
 创建一个后缀为 .rs 的文件
@@ -155,9 +178,36 @@ spaces = spaces.len();
 // error: could not compile `variables` due to previous error 
 ```
 
+### 数据类型
 
+需要注意的时 Rust 是一种静态类型的编程语言，这就意味着它必须在编译期确定所有变量的数据类型；
 
+通常编译可以根据 值 或者 值的使用方式 来推导出变量的使用类型（即隐式标注数据类型）；
 
+而在值的类型可能存在多种情况的环境下，就必须显式标注数据类型了；否则会出现编译时错误。
+
+```rust
+let guess: u32 = "42".parse().expect("这不是数字"); 
+// 此处语法会将 字符串42 转换为 整数42，此时如果不标注数据类型，会出现编译错误: 
+// error: could not compile `no_type_annotations` due to previous error
+```
+
+在 Rust 中，数据类型可分为两种: `标量` 和 `复合`;
+
+**标量**
+
+这基本和其他语言中的「基本数据类型」差不多，就不过多着墨介绍了。
+
+- 整数类型: 
+  - 有符号：i8、i16、i32、i64、i128、isize
+  - 无符号：u8、u16、u32、u64、u128、usize
+
+> `isize` 和 `usize` 类型的取值范围是受操作系统影响的；  
+> 
+> `整数溢出` 是指当使用的整数值超过了标注类型的取值范围，就会发生 整数溢出；  
+> 此时如果在 `debug模式` 下就会出现一个 *`panic`*；  
+> 若处于 `release模式` 下，Rust 则会自动进行 `二进制补码包裹` 操作；简而言之，大于该类型最大值的数值会被“包裹”成该类型能够支持的对应数字的最小值。如：u8 变量取值 256 就会被自动转换为 0；
+---
 
 
 
