@@ -1,4 +1,4 @@
-# GraphQL 基础学习
+# [自用]__GraphQL基础学习
 
 参考文章：
 > https://www.freecodecamp.org/chinese/news/a-detailed-guide-to-graphql/   
