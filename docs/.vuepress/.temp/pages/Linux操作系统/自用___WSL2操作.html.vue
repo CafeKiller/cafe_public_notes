@@ -1,0 +1,26 @@
+<template><div><h1 id="win11-wsl2-操作" tabindex="-1"><a class="header-anchor" href="#win11-wsl2-操作"><span>Win11 WSL2 操作</span></a></h1>
+<blockquote>
+<p>本文使用的 Windows 版本限定为 ： windows11 23H2
+WSL2 算是一个比较新鲜的功能，很多地方不完善也不稳定，文档中的内容很可能会失效，请留意</p>
+</blockquote>
+<h2 id="开启-wsl2" tabindex="-1"><a class="header-anchor" href="#开启-wsl2"><span>开启 WSL2</span></a></h2>
+<p>建议直接查看网上的教程，如 <a href="https://www.cnblogs.com/ubirdy/articles/18246999" target="_blank" rel="noopener noreferrer">博客园 - windows11 安装WSL2全流程</a></p>
+<p>但还是更建议自己用 bing 或 google 搜索一下，避免版本问题或者其他问题</p>
+<p><a href="https://cn.bing.com/search?q=win11%E5%BC%80%E5%90%AF+wsl2+-site:csdn.net" target="_blank" rel="noopener noreferrer">bing 搜索（屏蔽csdn）</a></p>
+<h2 id="wsl2-外网访问" tabindex="-1"><a class="header-anchor" href="#wsl2-外网访问"><span>WSL2 外网访问</span></a></h2>
+<p>WSL使用的自己的一套虚拟网络，通过桥接的方式与外部网络连通。如果需要使用其他主机访问则需要额外设置。</p>
+<div class="language-shell line-numbers-mode" data-highlighter="shiki" data-ext="shell" data-title="shell" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34"><pre v-pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span style="--shiki-light:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic"># 使用 超管模式下 的 powershell 输入以下命令即可转发 22 端口</span></span>
+<span class="line"><span style="--shiki-light:#4078F2;--shiki-dark:#61AFEF">netsh</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> interface</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> portproxy</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> add</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> v4tov4</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> listenport=</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66">22</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> listenaddress=</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66">0.0.0.0</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> connectport=</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66">22</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> connectaddress=localhost</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic"># 查看 WSL2 被转发的所有接口</span></span>
+<span class="line"><span style="--shiki-light:#4078F2;--shiki-dark:#61AFEF">netsh</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> interface</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> portproxy</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> show</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> all</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic"># 移除 22 端口的转发</span></span>
+<span class="line"><span style="--shiki-light:#4078F2;--shiki-dark:#61AFEF">netsh</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> interface</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> portproxy</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> delete</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> v4tov4</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> listenport=</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66">22</span><span style="--shiki-light:#50A14F;--shiki-dark:#98C379"> listenaddress=</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66">0.0.0.0</span></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>使用上面的方法可以让你的 WSL2 在局域网内直接暴露，但如果是想要公网（外网）访问，则必须要求你的 WindowsPC 也必须可以直接暴露公网，但这种很不安全。如果有这个需求还是更推荐用代理或者内网穿透。</p>
+<blockquote>
+<p>WSL2 是个轻量级的 Linux子系统，用来学习或者临时使用时OK的，但是想当作主机服务器去搞还是建议直接买台云服务器吧（或者自己组装服务器？）</p>
+</blockquote>
+</div></template>
+
+

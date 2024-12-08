@@ -42,3 +42,6 @@ build/
 .obsidian/
 .obsidian/*
 .obsidian/*/
+
+
+node_modules
