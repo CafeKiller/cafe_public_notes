@@ -4,6 +4,8 @@ import { hopeTheme } from "vuepress-theme-hope";
 export default hopeTheme({
     // 主题配置
     encrypt: {
-      
+        config: {
+            "/shards/": ["1234"],
+        }
     }
 });

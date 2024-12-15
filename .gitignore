@@ -43,5 +43,10 @@ build/
 .obsidian/*
 .obsidian/*/
 
-
+### Nodejs ###
 node_modules
+
+/docs/.vuepress/.temp
+/docs/.vuepress/.temp/*/
+/docs/.vuepress/.temp/*/*
+/docs/.vuepress/.temp/components/
