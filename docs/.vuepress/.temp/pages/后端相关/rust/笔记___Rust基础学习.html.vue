@@ -198,9 +198,25 @@
 <p>Rust 代码中的函数和变量名使用 <code v-pre>snake</code> 风格。也即蛇形命名法：<strong>所有字母都是小写并使用下划线分隔单词</strong>。</p>
 <p>Rust 不关心函数定义于何处，只要定义了就行。</p>
 <div class="language-rust line-numbers-mode" data-highlighter="shiki" data-ext="rust" data-title="rust" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34"><pre v-pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span style="--shiki-light:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">// fn 关键字 定义函数</span></span>
-<span class="line"><span style="--shiki-light:#A626A4;--shiki-dark:#C678DD">fn</span><span style="--shiki-light:#4078F2;--shiki-dark:#61AFEF"> get_user_age</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">() {</span></span>
+<span class="line"><span style="--shiki-light:#A626A4;--shiki-dark:#C678DD">fn</span><span style="--shiki-light:#4078F2;--shiki-dark:#61AFEF"> get_user_age</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">() -> </span><span style="--shiki-light:#C18401;--shiki-dark:#E5C07B">i32</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
 <span class="line"><span style="--shiki-light:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">    // pass</span></span>
 <span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">}</span></span></code></pre>
-<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div></template>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="语句和表达式" tabindex="-1"><a class="header-anchor" href="#语句和表达式"><span>语句和表达式</span></a></h3>
+<p>函数是由一系列语句构成的，也可以选择使用表达式作为结尾。</p>
+<p>Rust 是一门基于表达式的语言，所以需要区分一下「表达式」和「语句」的区别。</p>
+<ul>
+<li>表达式： 计算并产生一个值；</li>
+<li>语句： 执行一些操作但不返回值；</li>
+</ul>
+<p>在 Rust 中可以直接将一个表达式放在函数的末尾，这样表达式产生的值就是函数的返回值（不用单独写 return）</p>
+<p>不过需要注意的是用表示返回函数的值需要省略 <code v-pre>;</code> ；否则会直接出现错误。</p>
+<div class="language-rust line-numbers-mode" data-highlighter="shiki" data-ext="rust" data-title="rust" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34"><pre v-pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span style="--shiki-light:#A626A4;--shiki-dark:#C678DD">fn</span><span style="--shiki-light:#4078F2;--shiki-dark:#61AFEF"> add</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">(</span><span style="--shiki-light:#E45649;--shiki-dark:#E06C75">x</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">:</span><span style="--shiki-light:#C18401;--shiki-dark:#E5C07B">i32</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">, </span><span style="--shiki-light:#E45649;--shiki-dark:#E06C75">y</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">:</span><span style="--shiki-light:#C18401;--shiki-dark:#E5C07B">i32</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">) -> </span><span style="--shiki-light:#C18401;--shiki-dark:#E5C07B">i32</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF"> {</span></span>
+<span class="line"><span style="--shiki-light:#E45649;--shiki-dark:#E06C75">    x</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">++;</span></span>
+<span class="line"><span style="--shiki-light:#E45649;--shiki-dark:#E06C75">    y</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">++;</span></span>
+<span class="line"><span style="--shiki-light:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">    // return x + y;</span></span>
+<span class="line"><span style="--shiki-light:#E45649;--shiki-dark:#E06C75">    x</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF"> + </span><span style="--shiki-light:#E45649;--shiki-dark:#E06C75">y</span><span style="--shiki-light:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic"> // 最后一个表示式就是返回值</span></span>
+<span class="line"><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">}</span></span>
+<span class="line"><span style="--shiki-light:#4078F2;--shiki-dark:#61AFEF">add</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">(</span><span style="--shiki-light:#986801;--shiki-dark:#D19A66">1</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">, </span><span style="--shiki-light:#986801;--shiki-dark:#D19A66">2</span><span style="--shiki-light:#383A42;--shiki-dark:#ABB2BF">); </span><span style="--shiki-light:#A0A1A7;--shiki-light-font-style:italic;--shiki-dark:#7F848E;--shiki-dark-font-style:italic">// 5</span></span></code></pre>
+<div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div></template>
 
 
