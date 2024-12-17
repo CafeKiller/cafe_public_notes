@@ -47,6 +47,8 @@ build/
 node_modules
 
 /docs/.vuepress/.temp
-/docs/.vuepress/.temp/*/
-/docs/.vuepress/.temp/*/*
-/docs/.vuepress/.temp/components/
+/docs/.vuepress/.temp/**
+/docs/.vuepress/.temp/**/*
+/docs/.vuepress/.cache
+/docs/.vuepress/.cache/**
+/docs/.vuepress/.cache/**/*

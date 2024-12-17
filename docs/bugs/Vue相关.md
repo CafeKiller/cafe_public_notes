@@ -1,4 +1,13 @@
-# 前端 vue 相关
+---
+category: 自用
+tag:
+  - Vue
+  - 前端
+  - Bug
+---
+<!-- 笔记 -->
+
+# 前端 Vue 框架相关
 
 ## yarn create vite 报错：文件名、目录名或卷标语法不正确
 

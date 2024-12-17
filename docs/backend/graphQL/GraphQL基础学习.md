@@ -1,4 +1,13 @@
-# [自用]__GraphQL基础学习
+---
+category: 笔记
+tag:
+  - API
+  - GraphQL
+  - 后端
+---
+<!-- 笔记 -->
+
+# GraphQL基础学习
 
 参考文章：
 > https://www.freecodecamp.org/chinese/news/a-detailed-guide-to-graphql/   

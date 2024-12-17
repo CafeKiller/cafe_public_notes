@@ -1,4 +1,9 @@
-# [笔记]__HTML 进阶知识
+---
+category: 笔记
+---
+<!-- 笔记 -->
+
+# HTML 进阶知识
 
 > 主要参考资料/书籍/文章:    
 > [JavaScript高级程序设计](https://book.douban.com/subject/35175321/)  

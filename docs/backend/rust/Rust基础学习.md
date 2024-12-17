@@ -1,4 +1,11 @@
-# [笔记]__Rust基础学习
+---
+category: 笔记
+tag:
+  - Golang
+---
+<!-- 笔记 -->
+
+# Rust基础学习
 
 ## Windows 安装 
 
