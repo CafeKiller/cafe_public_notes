@@ -1,3 +1,7 @@
+---
+sidebar: false
+---
+
 # cafe_public_notes
 
 收录一些可以公开访问笔记或示例代码。笔记的主要记录格式为 markdown 文本。规范请参考：[Markdown书写规范](./rules/Markdown.md)

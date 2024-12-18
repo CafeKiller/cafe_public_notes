@@ -8,12 +8,21 @@ export default hopeTheme({
             "/shards/": ["queen"],
         }
     },
-    navbar: [],
-    sidebar: [
+    // 全屏
+    fullscreen: true,
+    // 导航栏
+    navbar: [
         {
-            text: "说明",
-            link: "/rules/README.md",
+            text: "DESCRIPTION",
+            link: "/rules/README.md"
         },
+        {
+            text: "DIRECTORY",
+            link: "/",
+        },
+    ],
+    // 侧边栏
+    sidebar: [
         {
             text: "后端知识",
             link: "/backend/",
@@ -24,7 +33,7 @@ export default hopeTheme({
         },
         {
             text: "运维知识",
-            link: "/o&m/",
+            link: "/o_m/",
         },
         {
             text: "踩坑日志",
@@ -38,4 +47,5 @@ export default hopeTheme({
     plugins: {
         search: true,
     },
+    
 });
