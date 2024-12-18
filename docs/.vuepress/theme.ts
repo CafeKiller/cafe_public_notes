@@ -9,6 +9,32 @@ export default hopeTheme({
         }
     },
     navbar: [],
+    sidebar: [
+        {
+            text: "说明",
+            link: "/rules/README.md",
+        },
+        {
+            text: "后端知识",
+            link: "/backend/",
+        },
+        {
+            text: "前端知识",
+            link: "/frontend/",
+        },
+        {
+            text: "运维知识",
+            link: "/o&m/",
+        },
+        {
+            text: "踩坑日志",
+            link: "/bugs/",
+        },
+        {
+            text: "理论基础",
+            link: "/computers/",
+        },
+    ],
     plugins: {
         search: true,
     },

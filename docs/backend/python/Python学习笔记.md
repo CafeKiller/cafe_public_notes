@@ -5,7 +5,7 @@ tag:
 ---
 <!-- 自用 -->
 
-# [自用]__Python学习笔记
+# Python学习笔记
 
 > 主要参考资料/书籍/文章:  
 > [Python - 100天从新手到大师](https://github.com/jackfrued/Python-100-Days)
