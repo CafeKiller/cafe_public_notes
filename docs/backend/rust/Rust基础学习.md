@@ -354,3 +354,15 @@ let number = if number > 5 {
 
 Rust 中提供了三种循环方式：`loop` `while` `for`
 
+使用 __loop__ 重复执行
+
+loop 关键字告诉 Rust 一遍又一遍的执行代码，只要在你明确要求停止时才会停止。
+
+```rust
+fn main() {
+    loop {
+        println!("Loop");
+    }
+}
+```
+可以使用 `break` 停止 loop 循环。
