@@ -365,4 +365,76 @@ fn main() {
     }
 }
 ```
-可以使用 `break` 停止 loop 循环。
+可以使用 `break` 停止 loop 循环。（rust 同样也是有 `continue` 用于跳过当前循环）
+
+同时 rust 是允许使用 `break` 返回值。
+
+```rust
+// 使用标签 counting_up 打断循环
+fn main() {
+    let mut count = 0;
+    'counting_up: loop {
+        print!("count = {} \n", count);
+        let mut remaining = 10;
+
+        loop {
+            print!("remaining = {} \n", remaining);
+            if remaining == 0 {
+                break;
+            }
+            if count == 2 {
+                break 'counting_up;
+            }
+            remaining -= 1;
+        }
+
+        count += 1;
+    }
+    print!("End count = {} \n", count);
+}
+
+// 使用 break 返回 loop 内的值
+fn main() {
+    let mut count = 0;
+
+    let result = loop {
+        count += 1;
+
+        if count == 10 {
+            break count * 2; 
+        };
+    };
+    print!("result = {}", result);
+}
+```
+
+使用 __while__ 进行条件循环
+
+rust 中的 `while` 和其他语言并没有太多区别。
+
+```rust
+fn main() {
+    let mut number = 5;
+
+    while number != 0 {
+        println!("{}!", number);
+        number -= 1;
+    }
+
+    print!("while 循环测试结束！！！");
+}
+```
+
+使用 __for__ 循环进行遍历
+
+rust 中的 `for` 循环语法是更现代的 `for...in` 形式的。
+
+```rust
+fn main() {
+    let nums = [10, 20, 30, 40, 50];
+
+    for num in nums {
+        print!("{}\n", num);
+    }
+}
+```
