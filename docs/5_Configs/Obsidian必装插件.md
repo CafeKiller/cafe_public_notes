@@ -1,1 +1,0 @@
-**StyleText** - 使 Obsidian 可以像 Word 文档一样对文字进行格式化样式处理。

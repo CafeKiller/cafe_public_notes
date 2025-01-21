@@ -1,3 +1,14 @@
+---
+category: 学习笔记
+tags:
+  - Redis
+  - NoSQL
+  - 数据库
+original: 非原创，整理整合
+original_link:
+  - https://piaosanlang.gitbooks.io/redis/content/01_huan_jing_an_zhuang.html
+---
+
 # redis的基本使用
 
 > 主要参考书/资料:   

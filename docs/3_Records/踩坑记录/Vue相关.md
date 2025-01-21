@@ -34,6 +34,7 @@ info Visit https://yarnpkg.com/en/docs/cli/create for documentation about this c
 
 > 解决方案: https://segmentfault.com/a/1190000043503907
 
+---
 
 ## TS2307: Cannot find module './App.vue' or its corresponding type declarations.
 
