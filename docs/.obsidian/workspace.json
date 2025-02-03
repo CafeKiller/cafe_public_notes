@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3_Records/日记/2025年01月22日.md",
+                "file": "3_Records/日记/2025年01月27日.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025年01月22日"
+              "title": "2025年01月27日"
             }
           }
         ]
@@ -164,6 +164,11 @@
   },
   "active": "34bf19405dfc58da",
   "lastOpenFiles": [
+    "3_Records/日记/2025年01月24日.md",
+    "3_Records/日记/2025年01月27日.md",
+    "3_Records/日记/2025年01月25日.md",
+    "3_Records/开源项目汇总.md",
+    "3_Records/未命名",
     "3_Records/日记/2025年01月23日.md",
     "3_Records/日记/2025年01月22日.md",
     "3_Records/日记/2025年01月21日.md",
@@ -191,7 +196,6 @@
     "5_Configs/template/daynote.md",
     "5_Configs/Template",
     "3_Records/日记",
-    "3_Records/未命名.md",
     "4_Creates/知识碎片/运维领域.md",
     "4_Creates/知识碎片/前端领域.md",
     "4_Creates/知识碎片/后端领域.md",
