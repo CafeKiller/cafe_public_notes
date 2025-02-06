@@ -11,7 +11,7 @@ tag:
 
 ## yarn create vite 报错：文件名、目录名或卷标语法不正确
 
-```info
+```log
 $ yarn create vite cafe_cosmos --template vue
 yarn create v1.22.22
 [1/4] Resolving packages...
