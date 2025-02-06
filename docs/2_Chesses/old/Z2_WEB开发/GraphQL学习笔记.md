@@ -5,11 +5,15 @@ tags:
   - GraphQL
   - 网络
 original: 非原创，整理整合
-original_link:
-  - https://www.freecodecamp.org/chinese/news/a-detailed-guide-to-graphql/
-  - https://graphql.cn/learn/  
 ---
-<!-- 笔记 -->
+
+> [!help] 参考资料
+> 
+> [在线教程 - freeCodeCamp/SHERlocked93/GraphQL入门](https://wangchujiang.com/linux-command/hot.html)
+>
+> [中文官网 - GraphQL入门](https://graphql.cn/learn/)
+
+---
 
 # 基础
 

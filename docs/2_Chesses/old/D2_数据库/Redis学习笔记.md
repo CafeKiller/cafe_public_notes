@@ -5,15 +5,19 @@ tags:
   - NoSQL
   - 数据库
 original: 非原创，整理整合
-original_link:
-  - https://piaosanlang.gitbooks.io/redis/content/01_huan_jing_an_zhuang.html
+---
+
+> [!help] 参考资料
+> 
+> [视频教程 - IT黑马/Redis入门到实战教程](https://www.bilibili.com/video/BV1cr4y1671t)
+>
+> [教程 - 菜鸟/Redis教程](https://www.runoob.com/redis/redis-tutorial.html)
+>
+> [中文官网 - Redis教程](https://www.redis.net.cn/tutorial/3501.html)
+
 ---
 
 # redis的基本使用
-
-> 主要参考书/资料:   
-> [redis学习教程](https://piaosanlang.gitbooks.io/redis/content/01_huan_jing_an_zhuang.html)  
-
 ## 安装
 
 ### linux 编译安装

@@ -1,8 +1,12 @@
-# Git 学习笔记
+> [!help] 参考资料
+> 
+> [教程 - 掘金/lihouyi/Git从安装到基本使用](https://juejin.cn/post/7245176801491894333)
+>
+> [教程 - 菜鸟/Git教程](https://www.runoob.com/git/git-tutorial.html)
 
-> __推荐文档、网站：__  
-> [Git从安装到基本使用（保姆教程）](https://juejin.cn/post/7245176801491894333)  
-> [菜鸟教程 - Git教程](https://www.runoob.com/git/git-tutorial.html)
+---
+
+# Git 学习笔记
 
 ## git 配置
 

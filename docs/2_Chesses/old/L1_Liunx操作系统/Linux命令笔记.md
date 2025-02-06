@@ -4,10 +4,13 @@ tags:
   - Liunx
   - 命令
 original: 非原创，整理整合
-original_link:
-  - https://wangchujiang.com/linux-command/hot.html
 ---
-<!-- 笔记 -->
+
+> [!help] 参考资料
+> 
+> [在线文档 - 小弟调调/Linux命令集合](https://wangchujiang.com/linux-command/hot.html)
+
+---
 
 # Linux命令
 
