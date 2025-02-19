@@ -1,8 +1,11 @@
-# 安装教程
+---
+category: 自用
+tag:
+  - Python
+  - Bug
+---
 
-一些 WINDOWS 环境下各类语言或软件的安装说明书（比较复杂的会记录，过于简单的就不单独花篇幅整了）
-
-## Python 安装虚拟环境
+## Python 需要安装虚拟环境
 
 ```shell
 # 安装 virtualenv
