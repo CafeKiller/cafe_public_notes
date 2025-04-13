@@ -1,16 +1,16 @@
 ---
-category: ±Ê¼Ç
+category: ç¬”è®°
 tags:
   - Liunx
-  - ÃüÁî
+  - å‘½ä»¤
 ---
 
-# »ù´¡½Ì³Ì
+# Shell å‘½ä»¤
 
-> [!help] ²Î¿¼×ÊÁÏ
+> [!help] å‚è€ƒèµ„æ–™
 > 
-> [ÔÚÏßÎÄµµ - Ğ¡µÜµ÷µ÷/LinuxÃüÁî¼¯ºÏ](https://wangchujiang.com/linux-command/hot.html)
+> [åœ¨çº¿æ–‡æ¡£ - å°å¼Ÿè°ƒè°ƒ/Linuxå‘½ä»¤é›†åˆ](https://wangchujiang.com/linux-command/hot.html)
 
-# À©Õ¹ÖªÊ¶
+# æ‰©å±•çŸ¥è¯†
 
-# ÃæÊÔÎÊ´ğ
+# é¢è¯•é—®ç­”

@@ -3,7 +3,7 @@ category: 学习笔记
 tags:
   - Rust
 ---
-# 基础教程
+# Rust
 
 > [!help] 参考资料
 > 

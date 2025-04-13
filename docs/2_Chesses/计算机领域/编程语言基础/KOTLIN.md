@@ -8,7 +8,7 @@ original_link:
   - https://www.itbaima.cn/document/urw2e6gg1lprv65w
 ---
 
-# 基础教程
+# Kotlin
 
 > [!help] 参考资料
 > 

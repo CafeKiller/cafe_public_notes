@@ -4,7 +4,7 @@ tags:
   - nginx
 ---
 
-# 基础教程
+# Nginx
 
 # 扩展知识
 

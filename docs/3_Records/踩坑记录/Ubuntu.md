@@ -5,6 +5,8 @@ tag:
   - Linux
 ---
 
+# Ubuntu 相关
+
 ## 开启 ssh
 
 ```shell

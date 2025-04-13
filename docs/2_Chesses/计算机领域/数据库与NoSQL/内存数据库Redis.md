@@ -1,19 +1,19 @@
 ---
-category: Ñ§Ï°±Ê¼Ç
+category: å­¦ä¹ ç¬”è®°
 tags:
   - Redis
 ---
 
-# »ù´¡½Ì³Ì
+# Redis
 
-> [!help] ²Î¿¼×ÊÁÏ
+> [!help] å‚è€ƒèµ„æ–™
 > 
-> [ÊÓÆµ½Ì³Ì - ITºÚÂí/RedisÈëÃÅµ½ÊµÕ½½Ì³Ì](https://www.bilibili.com/video/BV1cr4y1671t)
+> [è§†é¢‘æ•™ç¨‹ - ITé»‘é©¬/Rediså…¥é—¨åˆ°å®æˆ˜æ•™ç¨‹](https://www.bilibili.com/video/BV1cr4y1671t)
 >
-> [½Ì³Ì - ²ËÄñ/Redis½Ì³Ì](https://www.runoob.com/redis/redis-tutorial.html)
+> [æ•™ç¨‹ - èœé¸Ÿ/Redisæ•™ç¨‹](https://www.runoob.com/redis/redis-tutorial.html)
 >
-> [ÖĞÎÄ¹ÙÍø - Redis½Ì³Ì](https://www.redis.net.cn/tutorial/3501.html)
+> [ä¸­æ–‡å®˜ç½‘ - Redisæ•™ç¨‹](https://www.redis.net.cn/tutorial/3501.html)
 
-# À©Õ¹ÖªÊ¶
+# æ‰©å±•çŸ¥è¯†
 
-# ÃæÊÔÎÊ´ğ
+# é¢è¯•é—®ç­”

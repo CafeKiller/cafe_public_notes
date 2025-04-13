@@ -14,36 +14,36 @@ export default hopeTheme({
     navbar: [
         {
             text: "DESCRIPTION",
-            link: "/rules/README.md"
+            link: "/"
         },
         {
             text: "DIRECTORY",
-            link: "/",
+            link: "/0_Collects/",
         },
     ],
     // 侧边栏
-    sidebar: [
-        {
-            text: "后端知识",
-            link: "/backend/",
-        },
-        {
-            text: "前端知识",
-            link: "/frontend/",
-        },
-        {
-            text: "运维知识",
-            link: "/o_m/",
-        },
-        {
-            text: "踩坑日志",
-            link: "/bugs/",
-        },
-        {
-            text: "理论基础",
-            link: "/computers/",
-        },
-    ],
+    // sidebar: [
+    //     {
+    //         text: "后端知识",
+    //         link: "/backend/",
+    //     },
+    //     {
+    //         text: "前端知识",
+    //         link: "/frontend/",
+    //     },
+    //     {
+    //         text: "运维知识",
+    //         link: "/o_m/",
+    //     },
+    //     {
+    //         text: "踩坑日志",
+    //         link: "/bugs/",
+    //     },
+    //     {
+    //         text: "理论基础",
+    //         link: "/computers/",
+    //     },
+    // ],
     plugins: {
         search: true,
     },

@@ -4,7 +4,7 @@ tags:
   - Java
 ---
 
-# 基础教程
+# Java
 
 > [!help] 参考资料
 > 

@@ -4,7 +4,7 @@ tags:
   - Golang
 ---
 
-# 基础教程
+# Golang
 
 > [!help] 参考资料
 > 

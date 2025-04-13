@@ -7,7 +7,7 @@ tags:
 original: 非原创，整理整合
 ---
 
-# 基础教程
+# GraphQL
 
 > [!help] 参考资料
 > 

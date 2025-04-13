@@ -4,7 +4,7 @@ tags:
   - Python
 ---
 
-# 基础教程
+# Python
 
 > [!help] 参考资料
 > 

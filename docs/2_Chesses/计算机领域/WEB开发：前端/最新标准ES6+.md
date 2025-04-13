@@ -4,7 +4,7 @@ tags:
   - ES6
 ---
 
-# 基础教程
+# ECMAScript
 
 > [!help] 参考资料
 > 
