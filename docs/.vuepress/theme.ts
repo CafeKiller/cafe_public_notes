@@ -13,11 +13,11 @@ export default hopeTheme({
     // 导航栏
     navbar: [
         {
-            text: "DESCRIPTION",
+            text: "阅读提醒",
             link: "/"
         },
         {
-            text: "DIRECTORY",
+            text: "基本目录",
             link: "/0_Collects/",
         },
     ],

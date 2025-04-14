@@ -4,7 +4,7 @@ tags:
   - HTML
 ---
 
-# HTML
+# HTML5 超文本标记语言
 
 > [!help] 参考资料
 > 
@@ -13,6 +13,3 @@ tags:
 >  
 > [实体书籍 - JavaScript高级程序设计](https://book.douban.com/subject/35175321/)
 
-# 扩展知识
-
-# 面试问答

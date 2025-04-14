@@ -4,7 +4,7 @@ tags:
   - Vue
 ---
 
-# Vue
+# 渐进式框架 Vue
 
 > [!help] 参考资料
 >
