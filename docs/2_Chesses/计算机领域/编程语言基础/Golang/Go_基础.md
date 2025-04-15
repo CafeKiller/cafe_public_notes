@@ -4,7 +4,7 @@ tags:
   - Golang
 ---
 
-# Golang
+# Go 基础
 
 > [!help] 参考资料
 > 
@@ -114,6 +114,50 @@ func split(sum int) (x, y int) {
 ```
 
 > 裸返回语句应当仅用在下面这样的短函数中。在长的函数中它们会影响代码的可读性。
+
+### 函数值
+
+函数也是值。它们可以像其他值一样传递。函数值可以用作函数的参数或返回值。
+
+```go
+func compute(fn func(float64, float64) float64) float64 {
+	return fn(3, 4)
+}
+
+func main() {
+	hypot := func(x, y float64) float64 {
+		return math.Sqrt(x*x + y*y)
+	}
+	fmt.Println(hypot(5, 12))
+
+	fmt.Println(compute(hypot))
+	fmt.Println(compute(math.Pow))
+}
+```
+### 闭包
+
+Go 函数可以是一个闭包。闭包是一个函数值，它引用了其函数体之外的变量。 该函数可以访问并赋予其引用的变量值，换句话说，该函数被“绑定”到了这些变量。
+
+```go
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+
+func main() {
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
+}
+```
+
 
 ## 变量
 
@@ -233,6 +277,27 @@ func main() {
 }
 ```
 
+### range 遍历
+
+for 循环的 range 形式可遍历切片或映射。
+
+当使用 for 循环遍历切片时，每次迭代都会返回两个值。 第一个值为当前元素的下标，第二个值为该下标所对应元素的一份副本。
+
+```go
+var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+
+func main() {
+	for i, v := range pow {
+		fmt.Printf("2**%d = %d\n", i, v)
+	}
+
+    // 可以使用 _ 来忽略不需要的返回值
+    for _, value := range pow {
+		fmt.Printf("%d\n", value)
+	}
+}
+```
+
 ### if else 判断
 
 go 的 if 语句与 for 循环类似，表达式外无需小括号 ( )，而大括号 { } 则是必须的。
@@ -345,3 +410,258 @@ func main() {
 }
 ```
 > 与 C 不同，Go 没有指针运算。
+
+## 结构体
+
+一个 结构体（struct）就是一组 字段（field）。
+
+结构体字段可通过点号 `.` 来访问。
+
+结构体字段可通过结构体指针来访问。
+
+```go
+type Vertex struct {
+	X int
+	Y int
+}
+
+func main() {
+	v := Vertex{1, 2}
+	p := &v
+	p.X = 1e9
+	fmt.Println(v)
+}
+
+// 使用 Name: 语法可以仅列出部分字段（字段名的顺序无关）。
+var (
+	v1 = Vertex{X: 1}  // Y:0 被隐式地赋予零值
+	v2 = Vertex{1, 2}  // 创建一个 Vertex 类型的结构体
+	v3 = Vertex{}      // X:0 Y:0
+	p  = &Vertex{1, 2} // 创建一个 *Vertex 类型的结构体（指针）
+)
+```
+> 特殊的前缀 & 返回一个指向结构体的指针。(返回的并不是一串类地址的值)
+
+## 数组
+
+类型 `[n]T` 表示一个数组，它拥有 n 个类型为 T 的值。
+
+```go
+func main() {
+	var a [2]string
+	a[0] = "Hello"
+	a[1] = "World"
+	fmt.Println(a[0], a[1])
+	fmt.Println(a)
+
+	primes := [6]int{2, 3, 5, 7, 11, 13}
+	fmt.Println(primes)
+}
+```
+
+## 切片
+
+每个数组的大小都是固定的。而切片则为数组元素提供了动态大小的、灵活的视角。 在实践中，切片比数组更常用。
+
+**切片的零值是 nil**。nil 切片的长度和容量为 0 且没有底层数组。
+
+类型 `[]T` 表示一个元素类型为 T 的切片。切片通过两个下标来界定，一个下界和一个上界，二者以冒号分隔：
+
+```go
+func main() {
+	primes := [6]int{2, 3, 5, 7, 11, 13}
+
+    // 它会选出一个半闭半开区间，包括第一个元素，但排除最后一个元素。
+	var s []int = primes[1:4]
+	fmt.Println(s)
+}
+```
+切片就像数组的引用 切片并不存储任何数据，它只是描述了底层数组中的一段。
+
+更改切片的元素会修改其底层数组中对应的元素。和它共享底层数组的切片都会观测到这些修改。
+
+```go
+func main() {
+	names := [4]string{"青子","有珠","草十郎","橙子",}
+	fmt.Println(names)
+
+	a := names[0:2]
+	b := names[1:3]
+	fmt.Println(a, b)
+
+	b[1] = "金鹿"
+	fmt.Println(a, b)
+	fmt.Println(names)
+}
+```
+
+
+```go
+// 数组字面量
+[3]bool{true, true, false}
+
+// 切片字面量，这样会创建一个和上面相同的数组，然后再构建一个引用了它的切片
+[ ]bool{true, true, false}
+```
+> 切片字面量类似于没有长度的数组字面量。
+
+### 默认行为
+
+在进行切片时，你可以利用它的默认行为来忽略上下界。
+
+切片下界的默认值为 0，上界则是该切片的长度。
+
+```go
+func main() {
+	s := []int{2, 3, 5, 7, 11, 13}
+	fmt.Println(s)
+
+	fmt.Println("===============")
+
+	fmt.Println(s[0:6])
+	fmt.Println(s[0:])
+    fmt.Println(s[:6])
+    fmt.Println(s[:])
+}
+```
+
+### 长度与容量
+
+切片的长度就是它所包含的元素个数。
+
+切片的容量是从它的第一个元素开始数，到其底层数组元素末尾的个数。
+
+切片 s 的长度和容量可通过表达式 len(s) 和 cap(s) 来获取。
+
+```go
+func main() {
+	s := []int{2, 3, 5, 7, 11, 13}
+	printSlice(s)
+
+	// 截取切片使其长度为 0
+	s = s[:0]
+	printSlice(s)
+
+	// 扩展其长度
+	s = s[:4]
+	printSlice(s)
+
+	// 舍弃前两个值
+	s = s[2:]
+	printSlice(s)
+}
+
+func printSlice(s []int) {
+	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+}
+```
+
+### make 创建切片
+
+切片可以用内置函数 make 来创建，这也是你创建动态数组的方式。make 函数会分配一个元素为零值的数组并返回一个引用了它的切片
+
+```go
+func main() {
+	a := make([]int, 5)
+	printSlice("a", a)
+
+	b := make([]int, 0, 5)
+	printSlice("b", b)
+
+	c := b[:2]
+	printSlice("c", c)
+
+	d := c[2:5]
+	printSlice("d", d)
+}
+
+func printSlice(s string, x []int) {
+	fmt.Printf("%s len=%d cap=%d %v\n",
+		s, len(x), cap(x), x)
+}
+```
+
+为切片追加新的元素是种常见的操作，为此 Go 提供了内置的 append 函数。
+
+```go
+func main() {
+	var s []int
+	printSlice(s)
+
+	// 可在空切片上追加
+	s = append(s, 0)
+	printSlice(s)
+
+	// 这个切片会按需增长
+	s = append(s, 1)
+	printSlice(s)
+
+	// 可以一次性添加多个元素
+	s = append(s, 2, 3, 4)
+	printSlice(s)
+}
+
+func printSlice(s []int) {
+	fmt.Printf("len=%d cap=%d %v\n", len(s), cap(s), s)
+}
+```
+> 当 s 的底层数组太小，不足以容纳所有给定的值时，它就会分配一个更大的数组。 返回的切片会指向这个新分配的数组。
+
+## map 映射
+
+map 映射将键映射到值。映射的零值为 nil 。nil 映射既没有键，也不能添加键。
+
+make 函数会返回给定类型的映射，并将其初始化备用。
+
+
+```go
+type Vertex struct {
+	Lat, Long float64
+}
+
+var m map[string]Vertex
+
+func main() {
+	m = make(map[string]Vertex)
+	
+	m["Bell Labs"] = Vertex{
+		40.68433, -74.39967,
+	}
+	
+	fmt.Println(m["Bell Labs"])
+}
+
+// 若顶层类型只是一个类型名，那么你可以在字面量的元素中省略它。
+var m = map[string]Vertex{
+	"Bell Labs": {40.68433, -74.39967},
+	"Google":    {37.42202, -122.08408},
+}
+```
+
+```go
+// 映射的字面量和结构体类似，只不过必须有键名。
+var m = map[string]Vertex{
+	"Bell Labs": Vertex{
+		40.68433, -74.39967,
+	},
+	"Google": Vertex{
+		37.42202, -122.08408,
+	},
+}
+```
+
+### 操作 map
+
+```go
+// 插入or修改元素
+m[key] = elem
+
+// 获取元素
+elem := m[key]
+
+// 删除元素
+delete(m, key)
+
+// 通过双赋值检测某个键存在：
+elem, ok := m[key]
+```
