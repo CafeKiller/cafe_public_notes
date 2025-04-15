@@ -2,11 +2,11 @@
 
 > [!help] 参考资料
 > 
-> [中文文档](https://swiper.com.cn/usage/index.html)
+> [Swiper中文网 - 中文文档](https://swiper.com.cn/usage/index.html)
 >
-> [官方文档](https://swiperjs.com/)
+> [SwiperJS 官方文档](https://swiperjs.com/)
 
-## 前言
+# 前言
 
 swiper 当前还在活跃状态，每年都有更新，**但中文文档中的相关配置和信息都基本停留在了 7.0 版本，后续版本的更新可能存在差异**，如果你使用的是最新版本或者比较新的版本（大概是8.0以上的）我都推荐通过阅读官方的文档，以此为标准。
 
@@ -16,7 +16,7 @@ swiper 当前还在活跃状态，每年都有更新，**但中文文档中的�
 
 
 
-## 安装
+# 安装
 
 **CDN安装**
 
@@ -77,3 +77,10 @@ const swiper = new Swiper('.swiper', {
 
 > 如果你想配合 Vue 和 React 使用，可以阅读一下官方文档，这两个框架官方都有提供。
 
+# 实际应用场景
+
+**双轮播图 双向联动滚动**
+
+不止适用于双轮播图，多个轮播图也是允许的，使用时请按实际需求添加或移除配置。
+
+@[code](../../../../1_Projects/代码仓库/前端相关/JavaScript/SwiperDemo1.js)

@@ -1,4 +1,5 @@
 import { hopeTheme } from "vuepress-theme-hope";
+import sidebar from "./sidebar";
 
 // 我们默认导出了主题对象
 export default hopeTheme({
@@ -22,28 +23,23 @@ export default hopeTheme({
         },
     ],
     // 侧边栏
-    // sidebar: [
-    //     {
-    //         text: "后端知识",
-    //         link: "/backend/",
-    //     },
-    //     {
-    //         text: "前端知识",
-    //         link: "/frontend/",
-    //     },
-    //     {
-    //         text: "运维知识",
-    //         link: "/o_m/",
-    //     },
-    //     {
-    //         text: "踩坑日志",
-    //         link: "/bugs/",
-    //     },
-    //     {
-    //         text: "理论基础",
-    //         link: "/computers/",
-    //     },
-    // ],
+    sidebar: [
+        {
+            text: "收集箱",
+            prefix: "/0_Collects/",
+            children: 'structure',
+        },
+        {
+            text: "知识箱",
+            prefix: "/2_Chesses/",
+            children: 'structure',
+        },
+        {
+            text: "记录箱",
+            prefix: "/3_Records/",
+            children: "structure",
+        },
+    ],
     plugins: {
         search: true,
     },
