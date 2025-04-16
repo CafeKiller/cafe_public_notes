@@ -27,16 +27,19 @@ export default hopeTheme({
         {
             text: "收集箱",
             prefix: "/0_Collects/",
+            expanded: true,
             children: 'structure',
         },
         {
             text: "知识箱",
             prefix: "/2_Chesses/",
+            expanded: true,
             children: 'structure',
         },
         {
             text: "记录箱",
             prefix: "/3_Records/",
+            expanded: true,
             children: "structure",
         },
     ],
