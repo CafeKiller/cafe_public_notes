@@ -12,7 +12,3 @@ tags:
 > 
 > [在线书籍 - Vue3.0 从入门到实战](https://github.com/SJanJan/Vue3-book)
 
-
-# 扩展知识
-
-# 面试问答

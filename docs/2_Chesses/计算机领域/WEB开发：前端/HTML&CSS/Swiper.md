@@ -1,4 +1,11 @@
-# Swiper 轮播组件
+---
+tags:
+  - CSS
+  - JavaScript
+---
+
+
+# 轮播组件 Swiper 
 
 > [!help] 参考资料
 > 
