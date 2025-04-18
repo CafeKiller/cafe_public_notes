@@ -7,7 +7,7 @@ tags:
 
 # CSS增强语言 SCSS
 
-> [!help] 参考资料
+> [!tip] 参考资料
 > 
 > [教程 - 菜鸟 / SCSS教程](https://www.runoob.com/sass/sass-tutorial.html)
 >

@@ -10,6 +10,3 @@ tags:
 > 
 > [教程 - 廖雪峰 / JAVA教程](https://liaoxuefeng.com/books/java/introduction/index.html)
 
-# 扩展知识
-
-# 面试问答

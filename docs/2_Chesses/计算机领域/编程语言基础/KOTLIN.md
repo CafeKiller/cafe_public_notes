@@ -11,11 +11,11 @@ original_link:
 # Kotlin
 
 > [!help] 参考资料
-> 
-> [教程 - Kotlin入门](https://book.kotlincn.net/text/getting-started.html)
 >
-> [教程 - 柏码 / Kotlin程序设计](https://www.itbaima.cn/document/urw2e6gg1lprv65w)
-
-# 扩展知识
-
-# 面试问答
+> <br/>
+> 
+> [在线综合性书籍 - Kotlin入门](https://book.kotlincn.net/text/getting-started.html)
+> 
+> <br/>
+> 
+> [基础教程 - 柏码Kotlin程序设计](https://www.itbaima.cn/document/urw2e6gg1lprv65w)

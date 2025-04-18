@@ -8,5 +8,10 @@ tags:
 
 > [!help] 参考资料
 >
-> [在线教程 - 阮一峰 / JavaScript教程](https://wangdoc.com/javascript/index.html)
-> [在线教程 - 阮一峰 / TypeScript教程](https://wangdoc.com/typescript/index.html)
+> <br/>
+>
+> [基础教程 - 阮一峰的JavaScript教程](https://wangdoc.com/javascript/index.html)
+>
+> <br/> 
+> 
+> [在线教程 - 阮一峰的TypeScript教程](https://wangdoc.com/typescript/index.html)
