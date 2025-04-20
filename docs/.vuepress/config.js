@@ -8,4 +8,7 @@ export default defineUserConfig({
   lang: "zh-CN",
   bundler: viteBundler(),
   theme,
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.png' }]
+  ]
 })
