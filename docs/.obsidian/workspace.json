@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2_Chesses/计算机领域/编程语言基础/JAVASCRIPT.md",
+                "file": "2_Chesses/计算机领域/编程语言基础/Golang.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JAVASCRIPT"
+              "title": "Golang"
             }
           }
         ]
@@ -40,7 +40,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
@@ -165,7 +166,14 @@
   "active": "b42193b6738f72c9",
   "lastOpenFiles": [
     "2_Chesses/计算机领域/编程语言基础/JAVA.md",
+    "2_Chesses/计算机领域/编程语言基础/JAVASCRIPT.md",
+    "2_Chesses/计算机领域/编程语言基础/PYTHON.md",
+    "2_Chesses/计算机领域/编程语言基础/RUST.md",
+    "2_Chesses/计算机领域/编程语言基础/KOTLIN.md",
     "2_Chesses/计算机领域/编程语言基础/Golang.md",
+    "2_Chesses/计算机领域/编程语言基础/resources/Pasted image 20250424114938.png",
+    "2_Chesses/计算机领域/编程语言基础/resources/企业微信截图_17454658322433.png",
+    "2_Chesses/计算机领域/编程语言基础/resources",
     "2_Chesses/计算机领域/编程语言基础/Golang/Go_进阶.md",
     "2_Chesses/计算机领域/编程语言基础/Golang/Go_基础.md",
     "2_Chesses/Markdown 学习.md",
@@ -198,11 +206,7 @@
     "3_Records/日记/2025_01_21.md",
     "2025_01_21.md",
     "5_Configs/Template/未命名.canvas",
-    "5_Configs/template/daynote.md",
     "5_Configs/Template",
-    "3_Records/日记",
-    "3_Records/未命名.md",
-    "4_Creates/知识碎片/运维领域.md",
-    "4_Creates/知识碎片/前端领域.md"
+    "3_Records/日记"
   ]
 }
