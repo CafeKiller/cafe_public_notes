@@ -27,6 +27,7 @@ sidebar: false
 本仓库内的所有文章都推荐使用 Obsidian 进行阅读
 
 文章字体使用的是：[JetBrains Maple Mono](https://github.com/SpaceTimee/Fusion-JetBrainsMapleMono)，建议再阅读前安装
+> 请安装: Thin、Regular、Medium、Bold 四个版本
 
 > 特别声明一点，笔记内很多内容本质都是我拾人牙慧的。
 > 
