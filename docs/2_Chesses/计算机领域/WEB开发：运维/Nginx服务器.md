@@ -2,6 +2,8 @@
 category: 学习笔记
 tags:
   - nginx
+  - 运维
+  - 网络代理
 ---
 
 # Nginx

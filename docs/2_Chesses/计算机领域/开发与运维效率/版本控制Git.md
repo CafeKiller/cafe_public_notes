@@ -1,7 +1,8 @@
 ---
 category: 学习笔记
 tags:
-  - 算法
+  - Git
+  - 版本控制
 ---
 
 # Git

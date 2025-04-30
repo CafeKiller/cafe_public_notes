@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2_Chesses/计算机领域/编程语言基础/Golang.md",
+                "file": "2_Chesses/计算机领域/WEB开发：运维/Nginx服务器.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Golang"
+              "title": "Nginx服务器"
             }
           }
         ]
@@ -165,12 +165,20 @@
   },
   "active": "b42193b6738f72c9",
   "lastOpenFiles": [
+    "2_Chesses/计算机领域/计算机科学基础/计算机图形.md",
+    "2_Chesses/计算机领域/计算机科学基础/操作系统.md",
+    "2_Chesses/计算机领域/计算机科学基础/计算机网络/计算机网络.md",
+    "2_Chesses/计算机领域/计算机科学基础/计算机网络/常见提问与解答.md",
+    "2_Chesses/计算机领域/操作系统Linux/Shell命令.md",
+    "2_Chesses/计算机领域/编程语言基础/RUST.md",
+    "2_Chesses/计算机领域/编程语言基础/PYTHON.md",
+    "0_Collects/WSL2操作.md",
+    "0_Collects/收藏夹.md",
+    "2_Chesses/计算机领域/编程语言基础/Golang.md",
+    "2_Chesses/计算机领域/WEB开发：前端/SSG 框架.md",
     "2_Chesses/计算机领域/编程语言基础/JAVA.md",
     "2_Chesses/计算机领域/编程语言基础/JAVASCRIPT.md",
-    "2_Chesses/计算机领域/编程语言基础/PYTHON.md",
-    "2_Chesses/计算机领域/编程语言基础/RUST.md",
     "2_Chesses/计算机领域/编程语言基础/KOTLIN.md",
-    "2_Chesses/计算机领域/编程语言基础/Golang.md",
     "2_Chesses/计算机领域/编程语言基础/resources/Pasted image 20250424114938.png",
     "2_Chesses/计算机领域/编程语言基础/resources/企业微信截图_17454658322433.png",
     "2_Chesses/计算机领域/编程语言基础/resources",
@@ -186,25 +194,17 @@
     "3_Records/日记/2025年01月25日.md",
     "3_Records/日记/2025年01月24日.md",
     "3_Records/日记/2025年01月23日.md",
-    "3_Records/日记/2025年01月22日.md",
-    "3_Records/日记/2025年01月21日.md",
-    "5_Configs/Template/日记模版.md",
     "3_Records/日记/resources/2025_01_21.jpg",
     "3_Records/日记/resources/wallhaven-l858zl.jpg",
     "3_Records/日记/resources/未命名",
     "3_Records/日记/resources/wallhaven-l858zl 5.jpg",
-    "resources/wallhaven-l858zl.md",
     "resources",
     "3_Records/日记/resources/wallhaven-l858zl 4.jpg",
     "3_Records/日记/resources/wallhaven-l858zl 3.jpg",
     "3_Records/日记/resources/wallhaven-l858zl 2.jpg",
-    "wallhaven-l858zl.md",
-    "![[wallhaven-l858zl.md",
     "3_Records/日记/resources/wallhaven-l858zl 1.jpg",
     "3_Records/日记/resources",
     "wallhaven-l858zl.jpg",
-    "3_Records/日记/2025_01_21.md",
-    "2025_01_21.md",
     "5_Configs/Template/未命名.canvas",
     "5_Configs/Template",
     "3_Records/日记"

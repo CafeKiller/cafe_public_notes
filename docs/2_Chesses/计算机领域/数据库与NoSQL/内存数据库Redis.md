@@ -2,6 +2,7 @@
 category: 学习笔记
 tags:
   - Redis
+  - 数据库
 ---
 
 # Redis

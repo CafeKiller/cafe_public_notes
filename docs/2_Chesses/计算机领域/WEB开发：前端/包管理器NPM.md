@@ -1,6 +1,7 @@
 ---
 category: 学习笔记
 tags:
+  - 前端开发
   - NPM
   - PNPM
   - Yarn

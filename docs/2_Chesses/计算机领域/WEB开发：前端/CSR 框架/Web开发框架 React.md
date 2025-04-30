@@ -2,7 +2,9 @@
 category: 学习笔记
 tags:
   - React
-  - tsx
+  - TSX
+  - 前端框架
+  - 前端开发
 ---
 
 # Web开发框架 React

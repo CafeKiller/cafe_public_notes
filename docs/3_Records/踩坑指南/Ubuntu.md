@@ -1,11 +1,11 @@
 ---
-category: 自用
+category: 踩坑指南
 tag:
   - Ubuntu
   - Linux
 ---
 
-# Ubuntu 相关
+# Ubuntu 踩坑指南
 
 ## 开启 ssh
 

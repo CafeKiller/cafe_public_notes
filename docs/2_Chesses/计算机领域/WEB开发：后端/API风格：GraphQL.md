@@ -1,10 +1,9 @@
 ---
-category: 笔记
+category: 学习笔记
 tags:
   - API风格
   - GraphQL
   - 网络
-original: 非原创，整理整合
 ---
 
 # GraphQL

@@ -1,8 +1,8 @@
 ---
-category: 笔记
+category: 学习笔记
 tags:
   - Liunx
-  - 命令
+  - Shell
 ---
 
 # Shell 命令

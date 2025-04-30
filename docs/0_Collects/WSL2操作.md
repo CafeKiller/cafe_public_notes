@@ -1,3 +1,10 @@
+---
+category: 实操体验
+tag:
+    - WSL2
+    - Linux
+---
+
 # WSL2 操作
 
 > 本文使用的 Windows 版本限定为 ： windows11 23H2

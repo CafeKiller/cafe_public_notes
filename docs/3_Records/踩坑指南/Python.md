@@ -1,11 +1,10 @@
 ---
-category: 自用
+category: 踩坑指南
 tag:
   - Python
-  - Bug
 ---
 
-# Python 相关
+# Python 踩坑
 
 ## Python 需要安装虚拟环境
 

@@ -19,7 +19,7 @@ export default hopeTheme({
         },
         {
             text: "基本目录",
-            link: "/0_Collects/",
+            link: "/article/",
         },
     ],
     // 侧边栏
@@ -45,6 +45,7 @@ export default hopeTheme({
     ],
     plugins: {
         search: true,
+        blog: true,
     },
-    
+    hotReload: true,
 });

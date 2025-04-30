@@ -1,9 +1,8 @@
 ---
-category: 自用
+category: 踩坑指南
 tag:
   - Vue
   - 前端
-  - Bug
 ---
 # Vue 相关
 

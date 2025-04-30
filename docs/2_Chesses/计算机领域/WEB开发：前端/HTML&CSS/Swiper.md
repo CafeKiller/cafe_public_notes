@@ -1,7 +1,9 @@
 ---
+category: 学习笔记
 tags:
   - CSS
   - JavaScript
+  - 前端开发
 ---
 
 

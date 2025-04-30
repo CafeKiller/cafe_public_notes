@@ -1,7 +1,9 @@
 ---
 category: 学习笔记
 tags:
-  - ES6
+  - ES6+
+  - 前端开发
+  - JavaScript
 ---
 
 # 最新标准 ECMAScript

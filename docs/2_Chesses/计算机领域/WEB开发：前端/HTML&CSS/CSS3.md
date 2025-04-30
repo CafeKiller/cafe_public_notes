@@ -2,6 +2,7 @@
 category: 学习笔记
 tags:
   - CSS
+  - 前端开发
 ---
 
 # 层叠样式表 CSS
@@ -30,4 +31,36 @@ tags:
 
 AnimateCSS 相对比较简单，上手比较轻松，只需记住 AnimateCSS 的核心是 「类名」 即可。
 
+## 系统环境
+
+### 深色主题
+
+```css
+@media (prefers-color-scheme: dark) {
+    /* 深色主题的样式 */
+    html {
+        --color-text: #ffffff;
+        --bg-color: #1d2025;
+        --theme-color: deepskyblue;
+    }
+}
+```
+
+或者也可以使用 Javascript 脚本监听
+
+```js
+const theme = window.matchMedia("(prefers-color-scheme: dark)");
+if (theme.matches) {
+    document.body.classList.add("dark");
+}
+
+// 监听主题变化
+theme.addEventListener("change", (e) => {
+    if (e.matches) {
+        document.body.classList.add("dark");
+    } else {
+        document.body.classList.remove("dark");
+    }
+});
+```
 

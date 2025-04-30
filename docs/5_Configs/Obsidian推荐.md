@@ -1,3 +1,10 @@
+---
+category: 自用
+tag: 
+- Obsidian
+- 写作
+star: false
+---
 
 本仓库内的所有本地文档都推荐使用 Obsidian 阅读与编写，同时也推荐以下几个插件或第三方小工具。
 

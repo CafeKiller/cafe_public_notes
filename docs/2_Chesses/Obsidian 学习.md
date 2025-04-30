@@ -1,6 +1,9 @@
 ---
 category: 学习笔记
-original: 原创，自用归纳
+tag:
+    - Obsidian
+    - Markdown
+    - 写作
 ---
 
 # Obsidian 学习

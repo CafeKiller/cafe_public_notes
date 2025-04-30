@@ -2,6 +2,8 @@
 category: 学习笔记
 tags:
   - Vue
+  - 前端开发
+  - 前端框架
 ---
 
 # 渐进式框架 Vue

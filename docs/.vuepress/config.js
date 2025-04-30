@@ -10,5 +10,5 @@ export default defineUserConfig({
   theme,
   head: [
     ['link', { rel: 'icon', href: '/favicon.png' }]
-  ]
+  ],
 })
