@@ -8,14 +8,6 @@ tags:
 
 # CSS增强语言 SCSS
 
-> [!tip] 参考资料
-> 
-> [教程 - 菜鸟 / SCSS教程](https://www.runoob.com/sass/sass-tutorial.html)
->
-> [教程 - 阮一峰 / SASS用法指南](https://ruanyifeng.com/blog/2012/06/sass.html)
->
-> [官方中文 - SASS中文网DOCS](https://www.sass.hk/docs/)
-
 ## 安装 
 
 原生建议直接使用 VScode 插件，或者 WebStorm 中内置的。
@@ -181,3 +173,13 @@ body {
     background-color: #fff;
 }
 ```
+
+## 参考
+
+> [!tip] 参考资料
+> 
+> [教程 - 菜鸟 / SCSS教程](https://www.runoob.com/sass/sass-tutorial.html)
+>
+> [教程 - 阮一峰 / SASS用法指南](https://ruanyifeng.com/blog/2012/06/sass.html)
+>
+> [官方中文 - SASS中文网DOCS](https://www.sass.hk/docs/)

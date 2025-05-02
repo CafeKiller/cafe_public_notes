@@ -12,27 +12,27 @@ tags:
 > 
 > [教程 - ]()
 
-# 扩展知识
+## 扩展知识
 
-## requestAnimationFrame 函数
+### requestAnimationFrame 函数
 
 简单来说这个 requestAnimationFrame 函数就是用于取代 setInterval 函数的。不同于 setInterval 和 setTimeout 完全固定时间运行，而 requestAnimationFrame 则有点类似于 Unity 中的 update 生命周期函数，是「自适应当前帧数」运行的。在性能表现上会更优秀。
 
 > [深入理解requestAnimationFrame](https://www.cnblogs.com/chaogex/p/3960175.html)
 
-# 面试问答
+## 面试问答
 
-## 如何调用字符串中的「代码」？
+### 如何调用字符串中的「代码」？
 
 使用 `eval` 函数 或者 `new Function` 构造函数。
 
 > [避免使用eval函数：在ES7中的替代方案](https://www.javascriptcn.com/post/66f0f8f76fbf96019734ba5c)
 
-# 历年 ES 更新内容
+## 历年 ES 更新内容
 
-## ES2016(ES7)
+### ES2016(ES7)
 
-### Array扩展
+#### Array扩展
 
 Array.prototype.includes()
 
@@ -44,7 +44,7 @@ console.log(arr.includes('es6')) // true
 console.log(arr.includes('es9')) // false
 ```
 
-### 幂运算符**
+#### 幂运算符
 
 不再需要借助 `Math.pow` 方法来计算幂运算。
 
@@ -52,9 +52,9 @@ console.log(arr.includes('es9')) // false
 console.log(2 ** 10) // 1024
 ```
 
-## ES2017(ES8)
+### ES2017(ES8)
 
-### Async/Await
+#### Async/Await
 
 async 用于声明一个 function 是异步的，await 用于等待一个异步方法执行完成，只有当异步完成后才会继续往后执行。await不是必须的并且await 只能出现在 async 函数中。
 
@@ -80,7 +80,7 @@ async function() {
 }
 ```
 
-### Object 扩展
+#### Object 扩展
 
 **Object.values()**
 
@@ -109,14 +109,14 @@ for (let [k, v] of Object.entries(obj)) {
 }
 ```
 
-## ES2018
+### ES2018
 
-## ES2019
+### ES2019
 
-## ES2020
+### ES2020
 
-## ES2021
+### ES2021
 
-## ES2022
+### ES2022
 
-## ES2023
+### ES2023
