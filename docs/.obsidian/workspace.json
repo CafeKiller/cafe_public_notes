@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2_Chesses/计算机领域/WEB开发：前端/包管理器NPM.md",
+                "file": "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/SCSS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "包管理器NPM"
+              "title": "SCSS"
             }
           }
         ]
@@ -166,9 +166,11 @@
   },
   "active": "034e87da802b2846",
   "lastOpenFiles": [
-    "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/Swiper.md",
+    "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/SCSS copy.md",
     "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/SCSS.md",
     "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/HTML5.md",
+    "2_Chesses/计算机领域/WEB开发：前端/包管理器NPM.md",
+    "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/Swiper.md",
     "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/CSS3.md",
     "2_Chesses/计算机领域/WEB开发：前端/CSR 框架/渐进式框架 Vue.md",
     "2_Chesses/计算机领域/WEB开发：前端/CSR 框架/Web开发框架 React.md",
@@ -190,8 +192,6 @@
     "3_Records/开源项目汇总.md",
     "2_Chesses/计算机领域/计算机科学基础/计算机图形.md",
     "2_Chesses/计算机领域/计算机科学基础/操作系统.md",
-    "2_Chesses/计算机领域/编程语言基础/RUST.md",
-    "2_Chesses/计算机领域/编程语言基础/PYTHON.md",
     "2_Chesses/计算机领域/编程语言基础/resources/Pasted image 20250424114938.png",
     "2_Chesses/计算机领域/编程语言基础/resources/企业微信截图_17454658322433.png",
     "2_Chesses/计算机领域/编程语言基础/resources",
