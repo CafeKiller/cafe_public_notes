@@ -8,14 +8,6 @@ tags:
 
 # CSS增强语言 SCSS
 
-> [!tip] 参考资料
-> 
-> [教程 - 菜鸟 / SCSS教程](https://www.runoob.com/sass/sass-tutorial.html)
->
-> [教程 - 阮一峰 / SASS用法指南](https://ruanyifeng.com/blog/2012/06/sass.html)
->
-> [官方中文 - SASS中文网DOCS](https://www.sass.hk/docs/)
-
 ## 安装 
 
 原生建议直接使用 VScode 插件，或者 WebStorm 中内置的。
@@ -35,7 +27,6 @@ sass --watch input.scss:output.css
 # 监听整个文件夹
 sass --watch app/sass:public/stylesheets
 ```
-
 ## 基本语法
 
 **嵌套**
@@ -118,6 +109,7 @@ $font-size: 12px * 2;
 
 /* 
     多行注释，
+    也是 css 的原生注释，
     最终会被编译至 css 文件中
 */
 ```
@@ -154,7 +146,6 @@ p {
 ```
 > 判断相较于循环用的比较少
 
-
 ## SASS 和 SCSS 的区别
 
 SASS 和 SCSS 其实是一样的 CSS 预处理语言，SCSS 是 SASS3 引入新的语法，其后缀名是分别为 `.sass` 和 `.scss` 两种
@@ -163,7 +154,7 @@ SASS 和 SCSS 其实是一样的 CSS 预处理语言，SCSS 是 SASS3 引入新�
 
 目前因为 SCSS 可以与 CSS 更好的兼容，所以一般使用 SCSS 编写样式（.css 文件可以直接修改后缀为 .scss 文件，同时还不出现问题）。
 
-```sass
+```scss
 // SASS 语法
 $primary-color: #333
 
@@ -181,3 +172,13 @@ body {
     background-color: #fff;
 }
 ```
+
+## 参考
+
+> [!tip] 参考资料
+> 
+> [教程 - 菜鸟 / SCSS教程](https://www.runoob.com/sass/sass-tutorial.html)
+>
+> [教程 - 阮一峰 / SASS用法指南](https://ruanyifeng.com/blog/2012/06/sass.html)
+>
+> [官方中文 - SASS中文网DOCS](https://www.sass.hk/docs/)

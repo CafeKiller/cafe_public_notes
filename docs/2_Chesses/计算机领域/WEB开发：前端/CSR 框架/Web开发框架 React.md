@@ -16,7 +16,3 @@ tags:
 > [在线书籍 - React技术揭秘](https://github.com/BetaSu/just-react)
 >  
 > [技术文章 - ReactFiber架构的原理和工作模式](https://segmentfault.com/a/1190000044468085)
-
-# 扩展知识
-
-# 面试问答

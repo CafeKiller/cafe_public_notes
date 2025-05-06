@@ -9,12 +9,6 @@ tags:
 
 # 包管理器 NPM
 
-> [!help] 参考资料
-> 
-> [教程 - ]()
-
-# 扩展知识
-
 # 面试问答
 
 ## NPM、PNPM、Yarn 之间的区别？
@@ -37,6 +31,39 @@ npm 是 Nodejs 官方指定的包管理，最大的优点就是有官方的背�
 
 ## PNPM
 
+使用 npm 安装
+
+```shell
+# 安装
+npm install -g pnpm
+
+# 查看版本
+pnpm -v
+
+# 更新
+pnpm add -g pnpm to update
+
+# 配置镜像
+pnpm set registry https://registry.npmmirror.com
+
+# 允许设置全局安装包的 bin 文件的目标目录。
+pnpm config set global-bin-dir "E:\pnpm-store"
+
+# 包元数据缓存的位置。
+pnpm config set cache-dir "E:\pnpm-store\pnpm-cache"
+
+# pnpm 创建的当前仅由更新检查器使用的 pnpm-state.json 文件的目录。
+pnpm config set state-dir "E:\pnpm-store\pnpm-state"
+
+# 指定储存全局依赖的目录。
+pnpm config set global-dir "E:\pnpm-store\global"
+
+# 所有包被保存在磁盘上的位置。（可选，以下这条命令可以选择不执行也是OK的）
+pnpm config set store-dir "E:\pnpm-store\pnpm-store"
+```
+
 ## Yarn
+
+
 
 ## Bun
