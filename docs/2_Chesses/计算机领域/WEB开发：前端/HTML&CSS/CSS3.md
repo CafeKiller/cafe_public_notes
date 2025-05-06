@@ -64,3 +64,34 @@ theme.addEventListener("change", (e) => {
 });
 ```
 
+### 横竖屏切换
+
+```css
+@media screen and (orientation: portrait) {
+    /* 竖屏样式 */
+}
+
+@media screen and (orientation: landscape) {
+    /* 横屏样式 */
+}
+```
+
+使用 javascript 监听
+
+```js
+const screen = window.matchMedia("(orientation: portrait)");
+if (screen.matches) {
+    // 竖屏
+} else {
+    // 横屏
+}
+
+// 监听屏幕变化
+screen.addEventListener("change", (e) => {
+    if (e.matches) {
+        // 竖屏
+    } else {
+        // 横屏
+    }
+});
+```
