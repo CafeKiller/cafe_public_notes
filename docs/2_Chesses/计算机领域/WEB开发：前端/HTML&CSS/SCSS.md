@@ -173,6 +173,46 @@ body {
 }
 ```
 
+## 个人常用
+
+```scss
+// 背景
+@mixin iBackGround($backgroundUrl, $backgroundSize: 100% 100%,$backgroundPoP: left top,$backgroundRepeat: no-repeat) {
+	background-iamge: $backgroundUrl;
+    background-repeat: $backgroundRepeat;
+    background-size: $backgroundSize;
+    background-position: $backgroundPoP;
+}
+
+  
+// 字体渐变
+@mixin fontLinder($linear) {
+    background: $linear;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+  
+// 文字隐藏
+@mixin fontHide {
+    font-size: 0;
+    text-indent: -9999em;
+    overflow: hidden;
+}
+
+  
+// 文字
+@mixin iFont($fontFamily,$fontSize,$color,$lineHeight: 1.2,$textAlign: left, $fontWeight: normal) {
+    font-family: $fontFamily;
+    font-size: $fontSize;
+    line-height: $lineHeight;
+    text-align: $textAlign;
+    font-weight: $fontWeight;
+    color: $color;
+}
+```
+
 ## 参考
 
 > [!tip] 参考资料
