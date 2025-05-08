@@ -8,6 +8,8 @@ tags:
 
 # CSS增强语言 SCSS
 
+SASS（SCSS）是一类辅助 CSS 的插件，它在 CSS 语法的基础上进行了增强，增加了一些高级功能（函数、混合、循环、变量...），且在语法上相对 CSS 更直观和优雅，编写完成进行编译后可以完全兼容 CSS，覆盖几乎所有的浏览器。
+
 ## 安装 
 
 原生建议直接使用 VScode 插件，或者 WebStorm 中内置的。
@@ -27,9 +29,12 @@ sass --watch input.scss:output.css
 # 监听整个文件夹
 sass --watch app/sass:public/stylesheets
 ```
-## 基本语法
 
-**嵌套**
+> 也可以参考官方安装教程：[安装Sass | Sass中文网](https://www.sass.hk/install/)
+
+## SCSS 基本语法
+
+### 嵌套
 
 ```scss
 div {
@@ -47,7 +52,7 @@ div {
 }
 ```
 
-**变量**
+### 变量
 
 ```scss
 $font-size: 12px;
@@ -58,14 +63,14 @@ p {
 ```
 > 这个在 CSS 变量出现后，慢慢的用的就比较少了
 
-**运算**
+### 运算
 
 ```scss
 // 注意单位要一致
 $font-size: 12px * 2;
 ```
 
-**函数**
+### 函数
 
 ```scss
 @function toRem($value) {
@@ -73,7 +78,7 @@ $font-size: 12px * 2;
 }
 ```
 
-**循环**
+### 循环
 
 ```scss
 @for $i from 1 through 100 {
@@ -83,7 +88,7 @@ $font-size: 12px * 2;
 }
 ```
 
-**继承**
+### 继承
 
 ```scss
 .box-type1 {
@@ -102,7 +107,7 @@ $font-size: 12px * 2;
 >
 > 建议把需要继承的样式放在最外层，然后再进行继承。同时也方便管理。
 
-**注释**
+### 注释
 
 ```scss
 // 单行注释，不会被编译至 css 文件中
@@ -114,7 +119,7 @@ $font-size: 12px * 2;
 */
 ```
 
-**属性嵌套**
+### 属性嵌套
 
 ```scss
 p {
@@ -131,7 +136,7 @@ p {
 >
 > 二是这些 css 属性本身就支持复合写法，且常用写法并不难。
 
-**if判断**
+### if判断
 
 ```scss
 @function toRem($value) {
@@ -146,34 +151,7 @@ p {
 ```
 > 判断相较于循环用的比较少
 
-## SASS 和 SCSS 的区别
-
-SASS 和 SCSS 其实是一样的 CSS 预处理语言，SCSS 是 SASS3 引入新的语法，其后缀名是分别为 `.sass` 和 `.scss` 两种
-
-两者是有不同的，即 SASS 之后 SCSS 的编写规范基本和 CSS 一致，SASS 时代是有严格的缩进规范并且没有 `{}` 和 `；`。
-
-目前因为 SCSS 可以与 CSS 更好的兼容，所以一般使用 SCSS 编写样式（.css 文件可以直接修改后缀为 .scss 文件，同时还不出现问题）。
-
-```scss
-// SASS 语法
-$primary-color: #333
-
-body
-    font: 100% $primary-color
-    background-color: #fff
-```
-
-```scss
-// SCSS 语法
-$primary-color: #333;
-
-body {
-    font: 100% $primary-color;
-    background-color: #fff;
-}
-```
-
-## 个人常用
+## 个人常用 SCSS 代码
 
 ```scss
 // 背景
@@ -210,6 +188,33 @@ body {
     text-align: $textAlign;
     font-weight: $fontWeight;
     color: $color;
+}
+```
+
+## 关于 SASS 和 SCSS 的区别
+
+SASS 和 SCSS 其实是一样的 CSS 预处理语言，SCSS 是 SASS3 引入新的语法，其后缀名是分别为 `.sass` 和 `.scss` 两种
+
+两者是有不同的，即 SASS 之后 SCSS 的编写规范基本和 CSS 一致，SASS 时代是有严格的缩进规范并且没有 `{}` 和 `；`。
+
+目前因为 SCSS 可以与 CSS 更好的兼容，所以一般使用 SCSS 编写样式（.css 文件可以直接修改后缀为 .scss 文件，同时还不出现问题）。
+
+```scss
+// SASS 语法
+$primary-color: #333
+
+body
+    font: 100% $primary-color
+    background-color: #fff
+```
+
+```scss
+// SCSS 语法
+$primary-color: #333;
+
+body {
+    font: 100% $primary-color;
+    background-color: #fff;
 }
 ```
 

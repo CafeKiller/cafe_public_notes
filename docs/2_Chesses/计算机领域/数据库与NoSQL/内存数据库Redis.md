@@ -14,7 +14,3 @@ tags:
 > [教程 - 菜鸟/Redis教程](https://www.runoob.com/redis/redis-tutorial.html)
 >
 > [中文官网 - Redis教程](https://www.redis.net.cn/tutorial/3501.html)
-
-# 扩展知识
-
-# 面试问答

@@ -91,7 +91,3 @@ xxx/**/*.txt
 ```
 
 > 这里推荐一个 .gitignore 文件模版生成网站：https://www.toptal.com/developers/gitignore/
-
-# 扩展知识
-
-# 面试问答

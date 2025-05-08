@@ -14,6 +14,8 @@ star: false
 
 **StyleText** - 使 Obsidian 可以像 Word 文档一样对文字进行格式化样式处理。
 
+**Git** - git 同步工具，可以实现自动推送和自动拉取等功能。
+
 ## 非 Obsidian 内置
 
 > 以下推荐的第三方插件or组件，需要在外部安装下载

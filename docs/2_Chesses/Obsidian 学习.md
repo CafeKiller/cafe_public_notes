@@ -8,9 +8,7 @@ tag:
 
 # Obsidian 学习
 
-> [!help] 参考资料
-> 
-> [官方中文 - ObsidianPublish](https://publish.obsidian.md/help-zh)
+先说一下关于本篇笔记的定性，Obsidian 虽然在绝大多数情况下都是使用 markdown 通用语法进行编写，但是其也继承有部分属于 Obsidian 独有的语法，本篇文章只记录这些语法的使用方式。
 
 ## 标注语法
 
@@ -70,3 +68,9 @@ obsidian 标注语法支持的类型标识符如下：
 
 > [!quote] quote 引用
 > 别名: cite
+
+## 参考
+
+> [!help] 参考资料
+> 
+> [官方中文 - ObsidianPublish](https://publish.obsidian.md/help-zh)
