@@ -1,11 +1,12 @@
 ---
 category: 学习笔记
 tags:
-  - Liunx
+  - Linux
   - Shell
 ---
+# Linux 笔记
 
-# Shell 命令
+## Shell 命令
 
 > [!help] 参考资料
 > 

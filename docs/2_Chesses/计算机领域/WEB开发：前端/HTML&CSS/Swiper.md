@@ -82,7 +82,33 @@ const swiper = new Swiper('.swiper', {
 
 不止适用于双轮播图，多个轮播图也是允许的，使用时请按实际需求添加或移除配置。
 
-@[code](../../../../1_Projects/代码仓库/前端相关/JavaScript/SwiperDemo1.js)
+```javascript
+let isSliding = false;
+const leftSwiper = new Swiper('.leftSwiper', {
+    direction: "vertical",
+    slidesPerView: "auto",
+    slidesPerGroup: 1,
+    on: {
+        // 这里使用到了 防抖函数，防止快速滑动时出现问题
+        sliderMove: debounce(function(this) {
+            rightSwiper.slideTo(this.activeIndex, 0, false);
+        }, 100),
+        touchEnd: function() { isSliding = false },
+    }
+})
+
+const rightSwiper = new Swiper('.rightSwiper', {
+    direction: "vertical",
+    slidesPerView: "auto",
+    slidesPerGroup: 1,
+    on: {
+        sliderMove: debounce(function(this) {
+            leftSwiper.slideTo(this.activeIndex, 0, false);
+        }, 100),
+        touchEnd: function() { isSliding = false },
+    }
+})
+```
 
 
 ## 参考
