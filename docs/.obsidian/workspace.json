@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "a439096a1d8af201",
+        "id": "0ff7b9e31b49d3f6",
         "type": "tabs",
         "children": [
           {
-            "id": "034e87da802b2846",
+            "id": "01ec0454ba73dec0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/CSS3.md",
+                "file": "2_Chesses/计算机领域/Web前端.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CSS3"
+              "title": "Web前端"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:Python",
+                "query": "tag:ES6+",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/CSS3.md",
+                "file": "2_Chesses/计算机领域/Web前端.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "CSS3 的大纲"
+              "title": "Web前端 的大纲"
             }
           }
         ],
@@ -167,36 +167,39 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "034e87da802b2846",
+  "active": "01ec0454ba73dec0",
   "lastOpenFiles": [
-    "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/HTML5.md",
-    "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/CSS3.md",
-    "2_Chesses/计算机领域/WEB开发：前端/浏览器基本原理.md",
-    "2_Chesses/计算机领域/WEB开发：前端/SSG 框架.md",
     "2_Chesses/计算机领域/编程语言.md",
+    "2_Chesses/计算机领域/Web前端.md",
+    "2_Chesses/Obsidian 学习.md",
+    "2_Chesses/Markdown 学习.md",
+    "2_Chesses/计算机领域/Linux操作系统.md",
     "2_Chesses/计算机领域/服务器运维.md",
-    "2_Chesses/计算机领域/计算机图形.md",
-    "2_Chesses/计算机领域/计算机科学基础/计算机图形.md",
     "2_Chesses/计算机领域/操作系统.md",
-    "2_Chesses/计算机领域/计算机科学基础/操作系统.md",
+    "1_Projects/文章仓库/计算机相关/SCSS.md",
+    "1_Projects/文章仓库/计算机相关/Swiper.md",
+    "1_Projects/文章仓库/计算机相关/浏览器基本原理.md",
+    "1_Projects/文章仓库/计算机相关/ES6新机制.md",
+    "2_Chesses/计算机领域/WEB开发：前端/ECMAScript.md",
+    "1_Projects/文章仓库/计算机相关/包管理器相关问题.md",
+    "1_Projects/文章仓库/计算机相关/其他主流包管理器.md",
+    "1_Projects/文章仓库/计算机相关/EMCAScript新函数.md",
+    "1_Projects/文章仓库/计算机相关/CSS环境适配.md",
+    "3_Records/踩坑指南/JavaScript.md",
+    "3_Records/踩坑指南/Python.md",
+    "3_Records/踩坑指南/Vue.md",
+    "5_Configs/Obsidian推荐.md",
+    "3_Records/开源项目汇总.md",
+    "2_Chesses/计算机领域/后端开发.md",
+    "3_Records/踩坑指南/Ubuntu.md",
+    "2_Chesses/计算机领域/数据库.md",
+    "2_Chesses/计算机领域/计算机图形.md",
+    "2_Chesses/计算机领域/开发效率.md",
+    "1_Projects/文章仓库/计算机相关",
+    "1_Projects/文章仓库",
+    "未命名",
     "2_Chesses/计算机领域/resources/Pasted image 20250510155641.png",
     "2_Chesses/计算机领域/resources",
-    "2_Chesses/计算机领域/后端开发.md",
-    "2_Chesses/计算机领域/计算机网络.md",
-    "2_Chesses/计算机领域/开发效率.md",
-    "2_Chesses/计算机领域/数据库.md",
-    "2_Chesses/计算机领域/算法.md",
-    "2_Chesses/计算机领域/Linux操作系统.md",
-    "2_Chesses/计算机领域/编程语言基础/RUST.md",
-    "2_Chesses/计算机领域/编程语言基础/PYTHON.md",
-    "2_Chesses/计算机领域/编程语言基础/KOTLIN.md",
-    "2_Chesses/计算机领域/编程语言基础/JAVASCRIPT.md",
-    "2_Chesses/计算机领域/编程语言基础/Golang.md",
-    "2_Chesses/计算机领域/编程语言基础/JAVA.md",
-    "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/SCSS.md",
-    "2_Chesses/计算机领域/WEB开发：前端/HTML&CSS/Swiper.md",
-    "2_Chesses/Markdown 学习.md",
-    "2_Chesses/Obsidian 学习.md",
     "2_Chesses/计算机领域/编程语言基础/resources/Pasted image 20250424114938.png",
     "2_Chesses/计算机领域/编程语言基础/resources/企业微信截图_17454658322433.png",
     "2_Chesses/计算机领域/编程语言基础/resources",
