@@ -75,7 +75,7 @@ star: true
 
 ### 常用操作
 
-[环境适配 - 判断主题色 | 横竖屏切换](../../1_Projects/文章仓库/计算机相关/CSS环境适配.md)
+[环境适配 - 判断主题色 | 横竖屏切换](../../1_Projects/文章仓库/计算机相关/CSS环境适配)
 
 ## 项目工程化
 
@@ -101,9 +101,11 @@ star: true
 
 ## ECMAScript
 
-[ES6 上的一些坑](../../3_Records/踩坑指南/JavaScript.md)
+[ES6+ 上的一些坑](../../3_Records/踩坑指南/JavaScript.md)
 
-[]()
+[ES6+ 上的一些新函数 | requestAnimationFrame](../../1_Projects/文章仓库/计算机相关/ECMAScript新函数.md)
+
+[ES6+ 历年新变化](../../1_Projects/文章仓库/计算机相关/ES6新机制)
 
 ## CSR 框架
 
