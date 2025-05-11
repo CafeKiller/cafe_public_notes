@@ -52,6 +52,7 @@ star: true
 > 
 > [使用教程 | 安装 | 基础语法 | 常用SCSS片段](../../1_Projects/文章仓库/计算机相关/SCSS.md)
 > 
+> [关于 SCSS 和 SASS 的区别](../../1_Projects/文章仓库/计算机相关/SCSS#关于SASS和SCSS的区别)
 
 ### 动画相关
 

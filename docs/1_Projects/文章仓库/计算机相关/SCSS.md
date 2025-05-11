@@ -191,7 +191,7 @@ p {
 }
 ```
 
-## 关于 SASS 和 SCSS 的区别
+## 关于SASS和SCSS的区别
 
 SASS 和 SCSS 其实是一样的 CSS 预处理语言，SCSS 是 SASS3 引入新的语法，其后缀名是分别为 `.sass` 和 `.scss` 两种
 
