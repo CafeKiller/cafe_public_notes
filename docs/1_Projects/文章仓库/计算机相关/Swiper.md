@@ -102,7 +102,23 @@ const rightSwiper = new Swiper('.rightSwiper', {
 })
 ```
 
+```javascript
+const swiper = new Swiper(".show-swiper", {
+    slidesPerView: 3,
+    spaceBetween: 37,
+    slidesPerGroup: 3,  // 每次滚动一组（3个幻灯片）
+    autoplay: {
+        delay: 3500,     // 5秒自动切换
+        disableOnInteraction: false, // 用户操作后继续自动播放
+        pauseOnMouseEnter: true, // 鼠标悬停时暂停
+    },
+    navigation: {
+        nextEl: ".swiper-next-btn",
+        prevEl: ".swiper-prev-btn",
+    },
 
+});
+```
 ## 参考
 
 > [!help] 参考资料
