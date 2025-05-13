@@ -86,11 +86,23 @@ star: true
 > 
 > #### eslint
 > 
+> 用于检测代码语法以及代码质量，能实时检测和提示可能存在的bug，也允许通过预设的命令行指令进行修复
+> 
+> [掘金 - ESlint配置流程](https://juejin.cn/post/7402572475719827475)
+> 
+> [ESLint 官方中文文档](https://zh-hans.eslint.org/docs/latest/use/getting-started)
+> 
 > #### prettierrc
 > 
 > #### stylelintrc
 > 
 > #### husky
+> 
+> 适用于前端团队开发，可以在前端开发中简化 git hooks 管理的工具，能让开发者在 git 操作的特定阶段自动触发脚本（比如在 push 前没有进行单元测试就会阻拦 push）
+> 
+> [掘金 - husky 简易配置与教程](https://juejin.cn/post/6982192362583752741)
+> 
+> [husky 中文文档](https://husky.nodejs.cn/get-started.html)
 > 
 > #### Commitlint
 
