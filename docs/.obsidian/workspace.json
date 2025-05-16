@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2_Chesses/计算机领域/编程语言.md",
+                "file": "1_Projects/文章仓库/计算机相关/抗锯齿算法.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "编程语言"
+              "title": "抗锯齿算法"
             }
           }
         ]
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 310.5086555480957,
-    "collapsed": true
+    "width": 310.5086555480957
   },
   "right": {
     "id": "5ac60da306b54b1f",
@@ -171,21 +170,22 @@
   },
   "active": "01ec0454ba73dec0",
   "lastOpenFiles": [
+    "2_Chesses/计算机领域/计算机图形.md",
+    "2_Chesses/计算机领域/计算机网络.md",
+    "1_Projects/文章仓库/计算机相关/抗锯齿算法.md",
+    "2_Chesses/计算机领域/服务器运维.md",
+    "2_Chesses/计算机领域/后端开发.md",
+    "2_Chesses/计算机领域/开发效率.md",
+    "2_Chesses/计算机领域/算法.md",
+    "2_Chesses/计算机领域/编程语言.md",
     "2_Chesses/计算机领域/Web前端.md",
     "1_Projects/文章仓库/计算机相关/Swiper.md",
     "1_Projects/文章仓库/计算机相关/SCSS.md",
-    "2_Chesses/计算机领域/算法.md",
     "2_Chesses/计算机领域/数据库.md",
     "2_Chesses/Markdown 学习.md",
     "README.md",
     "2_Chesses/计算机领域/Linux操作系统.md",
-    "2_Chesses/计算机领域/服务器运维.md",
-    "2_Chesses/计算机领域/后端开发.md",
-    "2_Chesses/计算机领域/计算机图形.md",
-    "2_Chesses/计算机领域/计算机网络.md",
-    "2_Chesses/计算机领域/开发效率.md",
     "2_Chesses/计算机领域/操作系统.md",
-    "2_Chesses/计算机领域/编程语言.md",
     "2_Chesses/Obsidian 学习.md",
     "1_Projects/文章仓库/计算机相关/ECMAScript新函数.md",
     "1_Projects/文章仓库/计算机相关/CSS环境适配.md",
@@ -196,7 +196,6 @@
     "1_Projects/文章仓库/计算机相关/包管理器相关问题.md",
     "3_Records/踩坑指南/JavaScript.md",
     "3_Records/踩坑指南/Python.md",
-    "3_Records/踩坑指南/Vue.md",
     "1_Projects/文章仓库/计算机相关",
     "1_Projects/文章仓库",
     "未命名",
