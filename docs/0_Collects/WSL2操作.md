@@ -24,15 +24,31 @@ tag:
 
 WSL使用的自己的一套虚拟网络，通过桥接的方式与外部网络连通。如果需要使用其他主机访问则需要额外设置。
 
-```shell
+```powershell
 # 使用 超管模式下 的 powershell 输入以下命令即可转发 22 端口
-netsh interface portproxy add v4tov4 listenport=22 listenaddress=0.0.0.0 connectport=22 connectaddress=localhost
+# netsh interface portproxy add v4tov4 listenport=22 listenaddress=0.0.0.0 connectport=22 connectaddress=localhost
+
+# 踩坑优化（尽量使用这个脚本来转发，可以动态获取wsl2的ip）
+$wsl_ip = (wsl hostname -I).Trim()
+netsh interface portproxy add v4tov4 listenport=22 listenaddress=0.0.0.0 connectport=22 connectaddress=$wsl_ip
 
 # 查看 WSL2 被转发的所有接口
 netsh interface portproxy show all
 
 # 移除 22 端口的转发
 netsh interface portproxy delete v4tov4 listenport=22 listenaddress=0.0.0.0
+
+# 全部重置
+netsh interface portproxy reset
 ```
 
 使用上面的方法可以让你的 WSL2 在局域网内直接暴露，但如果是想要公网（外网）访问，则必须要求你的 WindowsPC 也必须可以直接暴露公网，但这种很不安全。如果有这个需求还是更推荐用代理或者内网穿透。
+
+踩坑：[WSL2 踩坑 | 局域网无法正常访问WSL2的服务](../3_Records/踩坑指南/WSL2#局域网无法正常访问wsl2的服务)
+
+## VsCode如何连接WSL2
+
+如果是本机连接，直接通过 VsCode 插件商店内微软官方推荐的 WSL 插件即可，下载安装后根据提示或者打开相关命令操作即可连接。
+
+
+
