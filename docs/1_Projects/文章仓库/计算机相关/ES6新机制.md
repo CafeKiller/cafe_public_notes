@@ -5,7 +5,7 @@ tags:
   - ES6
 ---
 
-# 历年 ES 新标准新机制
+# 历年ES新标准新机制
 
 ## ES2016(ES7)
 
@@ -28,6 +28,9 @@ console.log(arr.includes('es9')) // false
 ```js
 console.log(2 ** 10) // 1024
 ```
+
+
+---
 
 ## ES2017(ES8)
 
@@ -57,43 +60,48 @@ async function() {
 }
 ```
 
-### Object 扩展
-
-**Object.values()**
+### Object.values()
 
 `Object.values()` 返回一个数组，其元素是在对象上找到的可枚举属性值。属性的顺序与通过手动循环对象的属性值所给出的顺序相同(`for...in`，但是 `for...in` 还会遍历原型上的属性值)。
 
-```js
-const obj = {
-    name: 'randy',
-    age: 24
-}
-console.log(Object.values(obj)) // ["randy", 24]
-```
-
-**Object.entries()**
+### Object.entries()
 
 `Object.entries()` 方法返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 `for...in` 循环遍历该对象时返回的顺序一致。（区别在于 `for-in` 循环也枚举原型链中的属性）
 
-```js
-const obj = {
-    name: 'randy',
-    age: 24
-}
+### Object.getOwnPropertyDescriptors()
 
-for (let [k, v] of Object.entries(obj)) {
-    console.log(k, v) // name randy    // age 24
+`Object.getOwnPropertyDescriptors()` 用来获取一个对象的所有自身属性的描述符.
+
+### String.prototype.padStart()
+
+把指定字符串填充到字符串头部，返回新字符串。
+
+### String.prototype.padEnd()
+
+把指定字符串填充到字符串尾部，返回新字符串。
+
+### Trailing commas
+
+也就是允许对象最后一个参数有逗号。
+
+```javascript
+obj = {
+	k1: "value1",
+	k2: "value2",
+	len: 2,
 }
 ```
 
-### ES2018
+---
 
-### ES2019
+## ES2018
 
-### ES2020
+## ES2019
 
-### ES2021
+## ES2020
 
-### ES2022
+## ES2021
 
-### ES2023
+## ES2022
+
+## ES2023
