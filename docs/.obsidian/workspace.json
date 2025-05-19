@@ -168,8 +168,11 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "01ec0454ba73dec0",
+  "active": "f36b7c1fde1cd1e3",
   "lastOpenFiles": [
+    "3_Records/踩坑指南/WSL2.md",
+    "1_Projects/文章仓库/游戏开发相关/游戏开发名词.md",
+    "1_Projects/文章仓库/游戏开发相关",
     "2_Chesses/计算机领域/算法.md",
     "2_Chesses/计算机领域/数据库.md",
     "1_Projects/文章仓库/计算机相关/抗锯齿算法.md",
@@ -194,8 +197,6 @@
     "1_Projects/文章仓库/计算机相关/浏览器基本原理.md",
     "2_Chesses/计算机领域/WEB开发：前端/ECMAScript.md",
     "1_Projects/文章仓库/计算机相关/包管理器相关问题.md",
-    "3_Records/踩坑指南/JavaScript.md",
-    "3_Records/踩坑指南/Python.md",
     "1_Projects/文章仓库/计算机相关",
     "1_Projects/文章仓库",
     "未命名",
@@ -215,7 +216,6 @@
     "3_Records/日记/resources/wallhaven-l858zl 1.jpg",
     "3_Records/日记/resources",
     "5_Configs/Template/未命名.canvas",
-    "5_Configs/Template",
-    "3_Records/日记"
+    "5_Configs/Template"
   ]
 }
