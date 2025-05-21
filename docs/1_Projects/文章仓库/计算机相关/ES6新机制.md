@@ -328,17 +328,204 @@ console.log(baz); // 0
 console.log(baz2); // 42
 ```
 
+> 将 `??` 直接与 AND（`&&`）和 OR（`||`）操作符组合使用是不可取的。
+
+```javascript
+null || undefined ?? "foo"; // 抛出 SyntaxError
+true || undefined ?? "foo"; // 抛出 SyntaxError
+```
+
+### 可选链OptionalChaining
 
 
+可选链操作符( `?.` )允许读取位于连接对象链深处的属性的值，而不必明确验证链中的每个引用是否有效。`?.` 操作符的功能类似于 `.` 链式操作符，不同之处在于，在引用为 `null` 或者 `undefined` 的情况下不会引起错误，该表达式短路返回值是 `undefined`。与函数调用一起使用时，如果给定的函数不存在，则返回 `undefined`。
+
+```javascript
+const user = {
+    address: {
+        street: 'xx街道',
+        getNum() {
+            return '80号'
+        }
+    }
+}
+
+// 原先
+const street = user && user.address && user.address.street
+const num = user && user.address && user.address.getNum && user.address.getNum()
+console.log(street, num)
+
+// 现在
+const street2 = user?.address?.street
+const num2 = user?.address?.getNum?.()
+console.log(street2, num2)
+
+// 甚至可以和 空值合并符 一起使用
+const age = user?.userAge ?? 18
+console.log(age)
+```
+
+### globalThis
+
+在以前，从不同的 JavaScript 环境中获取全局对象需要不同的语句。在 Web 中，可以通过 `window`、`self` 取到全局对象，在 Node.js 中，它们都无法获取，必须使用 `global`。
+
+在松散模式下，可以在函数中返回 `this` 来获取全局对象，但是在严格模式和模块环境下，`this` 会返回 `undefined`。
+
+现在`globalThis` 提供了一个标准的方式来获取不同环境下的全局 `this`  对象（也就是全局对象自身）。不像 `window` 或者 `self` 这些属性，它确保可以在有无窗口的各种环境下正常工作。所以，你可以安心的使用 `globalThis`，不必担心它的运行环境。
+
+为便于记忆，你只需要记住，全局作用域中的 `this` 就是 `globalThis`。以后就用`globalThis` 就行了。
+
+### BigInt
+
+**`BigInt`** 是一种内置对象，它提供了一种方法来表示大于 `2的53次方 - 1` 的整数。这原本是 Javascript中可以用 `Number` 表示的最大数字。**`BigInt`** 可以表示任意大的整数。
+
+> BigInt 不能用于 [`Math`] 对象中的方法；不能和任何 [`Number`] 实例混合运算，两者必须转换成同一种类型。在两种类型来回转换时要小心，因为 `BigInt` 变量在转换成 [`Number`] 变量时可能会丢失精度。
+  
+
+### String.prototype.matchAll()
+
+`matchAll()` 方法返回一个包含所有匹配正则表达式的结果及分组捕获组的迭代器。
+
+```javascript
+const regexp = /t(e)(st(\d?))/g;
+const str = 'test1test2';
+
+const array = [...str.matchAll(regexp)];
+console.log(array[0]);  // ["test1", "e", "st1", "1"]
+console.log(array[1]); // ["test2", "e", "st2", "2"]
+```
 
 
+### Promise.allSettled()
 
+我们都知道 `Promise.all()` 具有并发执行异步任务的能力。但它的最大问题就是如果其中某个任务出现异常(reject)，所有任务都会挂掉，Promise直接进入reject 状态。
+
+假设一个场景：现在页面上有三个请求，分别请求不同的数据，如果一个接口服务异常，整个都是失败的，都无法渲染出数据。
+
+我们需要一种机制，如果并发任务中，无论一个任务正常或者异常，都会返回对应的的状态，这就是 `Promise.allSettled()` 的作用
+
+### DynamicImport
+
+`import()`可以在需要的时候，再加载某个模块。
+
+```javascript
+button.addEventListener('click', event => {
+	  import('./dialogBox.js')
+	  .then(dialogBox => {
+	    dialogBox.open();
+	  })
+	  .catch(console.error)
+});
+```
 
 
 
 ---
-## ES2021
+## ES2021(ES12)
 
+### 逻辑运算符和赋值表达式
+
+即：`&&=` `||=` `??=`
+
+```javascript
+// 分别等效为：
+// &&=
+num && (num = 100) // num 为真时，赋值为100
+
+// ||=
+num || (num = 233) // num 为非时，赋值为233
+
+// ??=
+num || (num = 300) // num 为null或undefined时，赋值为300
+```
+
+
+### String.prototype.replaceAll()
+
+`replaceAll()`  方法返回一个新字符串，新字符串中所有满足 `pattern` 的部分都会被 `replacement` 替换。`pattern` 可以是一个字符串或一个 `RegExp`，`replacement` 可以是一个字符串或一个在每次匹配被调用的函数。
+
+原始字符串保持不变。
+
+```javascript
+'aabbcc'.replaceAll('b', '.')  // 'aa..cc'
+'aabbcc'.replaceAll(/b/, '.')  // error
+'aabbcc'.replaceAll(/b/g, '.') // 'aa..cc'
+```
+> 使用正则表达式搜索值时，它必须是全局的。
+
+
+### 数字分隔符
+
+欧美语言中，较长的数值允许每三位添加一个分隔符（通常是一个逗号），增加数值的可读性。比如，`1000`可以写作`1,000`。
+
+`ES2021`中允许 JavaScript 的数值使用下划线（`_`）作为分隔符。
+
+```javascript
+let budget = 100_000_000_000
+```
+
+
+### Promise.any()
+
+方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例返回。
+
+```javascript
+const promise1 = () => {
+	return new Promise((resolve, reject) => {
+	    setTimeout(() => {
+		    resolve("promise1");
+			//  reject("error promise1 ");
+	    }, 3000);
+	});
+};
+const promise2 = () => {
+    return new Promise((resolve, reject) => {
+	    setTimeout(() => {
+	        resolve("promise2");
+	        // reject("error promise2 ");
+	    }, 1000);
+    });
+};
+const promise3 = () => {
+    return new Promise((resolve, reject) => {
+	    setTimeout(() => {
+		      resolve("promise3");
+		      // reject("error promise3 ");
+	    }, 2000);
+    });
+};
+Promise.any([promise1(), promise2(), promise3()])
+	.then((first) => {
+	    // 只要有一个请求成功 就会返回第一个请求成功的
+	    console.log(first); // 会返回promise2
+	})
+	.catch((error) => {
+	    // 所有三个全部请求失败 才会来到这里
+	    console.log("error", error);
+    });
+```
+
+只要参数实例有一个变成 `fulfilled` 状态，包装实例就会变成 `fulfilled` 状态；如果所有参数实例都变成 `rejected` 状态，包装实例就会变成 `rejected` 状态。
+
+`Promise.any()` 跟 `Promise.race()` 方法很像，只有一点不同，就是`Promise.any()`不会因为某个 Promise 变成 `rejected` 状态而结束，必须等到所有参数 Promise 变成 `rejected` 状态才会结束。
+
+### WeakRef
+
+
+
+### Finalizers
+
+
+
+---
 ## ES2022
 
 ## ES2023
+
+## ES2024
+
+
+## 参考资料
+
+[掘金社区 | ES2016 至 ES2021 更新汇总](https://juejin.cn/post/7046217976176967711)
+
