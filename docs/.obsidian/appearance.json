@@ -2,5 +2,7 @@
   "textFontFamily": "JetBrains Maple Mono",
   "monospaceFontFamily": "JetBrains Maple Mono,Fira Code Retina",
   "interfaceFontFamily": "JetBrains Maple Mono",
-  "theme": "system"
+  "theme": "system",
+  "baseFontSize": 14,
+  "baseFontSizeAction": true
 }

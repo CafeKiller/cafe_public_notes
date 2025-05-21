@@ -301,7 +301,7 @@ console.log(foo.toString())
 ```
 
 ---
-## ES2020
+## ES2020(ES11)
 
 ### 空值合并运算符
 
@@ -518,14 +518,344 @@ Promise.any([promise1(), promise2(), promise3()])
 
 
 ---
-## ES2022
+## ES2022(ES13)
 
-## ES2023
+### 声明类的字段
 
-## ES2024
+此前在ES规范中，类的字段定义和初始化是在类的构造函数中完成的。但是在新的提案中，类字段可以在类的顶层被定义和初始化
+
+```javascript
+class Point {
+   name;
+   title;
+   size = 1;
+}
+```
+
+
+### 私有方法&字段
+
+用 `#前缀` 来定义类的私有方法和字段。
+
+```javascript
+class Person {
+	name;
+	#age;
+	get #age(){
+		return #age;
+	}
+	$initValue(){
+	    this.name = '';
+	    this.#age = 12;
+	}
+}
+```
+
+### 类的静态公共方法和字段
+
+在之前的「类的字段」和「私有方法」提案的基础上，为 JavaScript 类增加了`静态公共字段`、`静态私有方法`和`静态私有字段`的特性。
+
+```js
+class Enum {
+	static collectStaticFields() {
+		// Static methods are not enumerable and thus ignored
+		this.enumKeys = Object.keys(this);
+	}
+}
+class ColorEnum extends Enum {
+	static red = Symbol('red');
+	static green = Symbol('green');
+	static blue = Symbol('blue');
+	static _ = this.collectStaticFields(); // (A)
+	
+	static logColors() {
+		for (const enumKey of this.enumKeys) { // (B)
+			console.log(enumKey);
+		}
+	}
+}
+ColorEnum.logColors();
+```
+
+### 私有字段检查
+
+使用 `in` 操作符检测某一实例是否包含要检测的私有字段。
+
+```javascript
+class Person {
+	#name = 'Ergonomic brand checks for Private Fields';
+	
+	static check(obj) {
+		return #name in obj;
+	}
+}
+```
+
+### ECMScript 类静态初始化块
+
+类静态块提议提供了一种优雅的方式，在类声明/定义期间评估静态初始化代码块，可以访问类的私有字段。
+
+```javascript
+class Person {
+	static name;
+	age;
+}
+try {
+	Person.name = getNameA();
+} catch {
+	Person.name = getNameB();
+}
+```
+
+### Top-level await
+
+以前 `await` 必须随着 `async` 一起出现，只有在 `async` 函数内才可用。当需要在一些文件顶部进行初始化的场景中使用时就有不支持了，顶级 `await` 可以解决这个问题，但它仅支持 `ES Modules`。
+
+```javascript
+let jQuery;
+try {
+	jQuery = await import('https://cdn-a.com/jQuery');
+} catch {
+	jQuery = await import('https://cdn-b.com/jQuery');
+}
+```
+
+
+### 正则新增 /d 修饰符
+
+以前的正则表达式支持 3 个修饰符：`/i`（忽略大小写）、`/g`（全局匹配）、`/m`（多行），当执行正则表达式的 `exec()` 方法时，新增一个 `/d` 修饰符，它会返回一个 `indices` 属性，包含了匹配元素的开始、结束位置索引。
+
+```javascript
+const str = 'ECMAScript_JavaScript'
+const regexp = /sc/igd // 忽略大小全局匹配并返回匹配元素的开始、结束位置索引
+console.log(regexp.exec(str).indices[0]) // [ 4, 6 ]
+console.log(regexp.exec(str).indices[0]) // [ 15, 17 ]
+
+// 包含组信息
+const text = 'zabbcdef';
+const re = /ab+(cd(ef))/d;
+const result = re.exec(text);
+
+result.indices; // [ [1, 8], [4, 8], [6, 8] ]
+
+// 具名组匹配
+const text = 'zabbcdef';
+const re = /ab+(?<Z>cd)/d;
+const result = re.exec(text);
+
+result.indices.groups; // { Z: [ 4, 6 ] }
+```
+
+
+### Array.prototype.at()
+
+根据指定索引获取数组元素，不同的是它支持传递负数，例如 -1 获取最后一个元素。
+
+```javascript
+const arr = ['a', 'b', 'c']
+console.log(arr.at(0));
+console.log(arr.at(-1)); // 等价于 arr[arr.length - 1]
+```
+
+### Object.hasOwn()
+
+`Object.hasOwn()` 提供了一种更安全的方法来检查对象是否具有自己的属性，适用于检查所有的对象。`Object.prototype.hasOwnProperty()` 方法遇到 `obj = null` 这种情况会报错，参见以下示例：
+
+```javascript
+const person = Object.create({ name: 'Tom' })
+person.age = 18;
+console.log(Object.hasOwn(person, 'name')); // false
+console.log(Object.hasOwn(person, 'age')); // true
+
+// 遇到这种情况 hasOwnProperty 会报错
+const p1 = null
+console.log(p1.hasOwnProperty('name')); // TypeError: Cannot read properties of null (reading 'hasOwnProperty')
+```
+
+
+### ErrorCause
+
+`Error Cause` 是由阿里巴巴提出的一个提案，为 Error 构造函数增加了一个 `options`，可设置 `cause` 的值为任意一个有效的 `JavaScript` 值。
+
+```javascript
+// 例如，自定义错误 `message`，将错误原因赋给 `cause` 属性，传递给下一个捕获的地方。
+try {
+	await fetch().catch(err => {
+		throw new Error('Request failed', { cause: err })
+	})
+} catch (e) {
+	console.log(e.message);
+	console.log(e.cause);
+}
+```
+
+
+
+----
+
+## ES2023(ES14)
+
+### 数组，从末尾查找元素
+
+新增两个方法： `.findLast()`、`.findLastIndex()` 从数组的最后一个元素开始查找，可以同 `find()`、`findIndex()` 做一个对比。
+
+```javascript
+const arr = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }];
+
+// find vs findLast
+console.log(arr.find(n => n.value % 2 === 1)); // { value: 1 }
+console.log(arr.findLast(n => n.value % 2 === 1)); // { value: 3 }
+
+// findIndex vs findLastIndex
+console.log(arr.findIndex(n => n.value % 2 === 1)); // 0
+console.log(arr.findLastIndex(n => n.value % 2 === 1)); // 2
+```
+
+
+### 将 Symbols 作为 WeakMap 的键
+
+这允许使用唯一的 `Symbols` 作为键。目前 `WeakMaps` 只允许对象作为键。因为它们共享同样的身份特性。
+
+`Symbol`是`ECMAScript`中唯一的原始类型，允许使用唯一的值，因此可以使用`Symbol`作为键，而不是创建一个新的带有`WeakMap`的对象。
+
+```javascript
+const weak = new WeakMap();const key = Symbol('my ref');
+const someObject = { a:1 };weak.set(key, someObject);
+console.log(weak.get(key));
+```
+
+
+### 通过复制改变数组
+
+这在 `Array.prototype` 上提供了额外的方法，通过返回带有更改的新数组副本，而不是更新原始数组来更改数组。
+
+新引入的 `Array.prototype` 函数包括：
+- `Array.prototype.toReversed()`
+- `Array.prototype.toSorted(compareFn)`
+- `Array.prototype.toSpliced(start, deleteCount, …items)`
+- `Array.prototype.with(index, value)`
+
+```javascript
+const sequence = [1, 2, 3];
+sequence.toReversed() // [3, 2, 1]
+sequence // [1, 2, 3]
+
+const outOfOrder = [3, 1, 2];
+outOfOrder.toSorted() // [1, 2, 3]
+outOfOrder // [3, 1, 2]
+
+const array = [1, 2, 3, 4];
+array.toSpliced(1, 2, 5, 6, 7) // [1, 5, 6, 7, 4]
+array // [1, 2, 3, 4]
+
+const correctionNeeded = [1, 1, 3];
+correctionNeeded.with(1, 2) // [1, 2, 3]
+correctionNeeded // [1, 1, 3]
+```
+
+
+---
+
+
+## ES2024(ES15)
+
+### Promise.withResolvers()
+
+`Promise.withResolvers()` 允许创建一个新的 `Promise`，并同时获得 `resolve` 和 `reject` 函数。
+
+```javascript
+let resolve, reject;  
+const promise = new Promise((res, rej) => {  
+    resolve = res;  
+    reject = rej;  
+});
+// new 
+const { promise, resolve, reject } = Promise.withResolvers();  
+  
+// 在这里可以使用 resolve 和 reject 函数  
+setTimeout(() => resolve('成功！'), 8000);  
+  
+promise.then(value => {  
+    console.log(value); // 输出: 成功！  
+});
+```
+
+### Object.groupBy() 和 Map.groupBy()
+
+`Object.groupBy()` 和 `Map.groupBy()` 方法用于数组分组。
+
+```javascript
+const fruits = [
+    { name: "Apple", color: "red" },
+    { name: "Banana", color: "yellow" },
+    { name: "Cherry", color: "red" },
+    { name: "Lemon", color: "yellow" },
+    { name: "Grape", color: "purple" },
+];
+
+// 原先
+const fruitsByColor = {};
+fruits.forEach(fruit => {
+    const color = fruit.color;
+    if (!fruitsByColor[color]) {
+        fruitsByColor[color] = [];
+    }
+    fruitsByColor[color].push(fruit);
+});
+console.log(fruitsByColor);
+
+// 现在
+const fruitsByColor = Object.groupBy(fruits, (fruit) => fruit.color)
+```
+
+
+`Map.groupBy`和`Object.groupBy`的功能一样，只是返回的结果类型不同。`Map.groupBy`返回一个 Map 对象，而`Object.groupBy`返回一个普通对象。
+
+```javascript
+const fruitsByColor = Map.groupBy(fruits, (fruit) => fruits.color); // 返回map对象
+
+fruitsByColor.get("red");
+// [{"name": "Apple", "color": "red"}, {"name": "Cherry", "color": "red"}]
+```
+
+### Atomics.waitAsync()
+
+`Atomics.waitAsync()`静态方法在共享内存位置异步等待并返回一个Promise。与`Atomics.wait()`不同，`waitAsync`是非阻塞的，并且可以在主线程上使用。
+
+```javascript
+const sab = new SharedArrayBuffer(1024);
+const int32 = new Int32Array(sab);
+
+const result = Atomics.waitAsync(int32, 0, 0, 1000);
+// { async: true, value: Promise {<pending>} }
+```
+
+
+### ArrayBuffer.prototype.resizable
+
+`resizable`属性是一个访问器属性，其`set`访问器函数是未定义的，这意味着您只能读取该属性。该值是在构造数组时建立的。如果在构造函数中设置了`maxByteLength`选项，`resizable`将返回true;如果不是，它将返回`false`。当其为`true`时，则可以调整大小：
+
+```javascript
+const buffer1 = new ArrayBuffer(8, { maxByteLength: 16 });
+const buffer2 = new ArrayBuffer(8);
+
+console.log(buffer1.resizable);
+// Expected output: true
+
+console.log(buffer2.resizable);
+// Expected output: false
+
+if (buffer1.resizable) {
+	console.log("Buffer is resizable!");
+	buffer.resize(12);
+}
+```
+
 
 
 ## 参考资料
 
 [掘金社区 | ES2016 至 ES2021 更新汇总](https://juejin.cn/post/7046217976176967711)
+
+[掘金社区 | JavaScript 新特性最全指南](https://juejin.cn/post/7282994349444857893)
 
