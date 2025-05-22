@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 240.51103591918945
+    "width": 240.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "5ac60da306b54b1f",
@@ -154,7 +155,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 322.5
+    "width": 322.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -167,7 +169,7 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "f36b7c1fde1cd1e3",
+  "active": "01ec0454ba73dec0",
   "lastOpenFiles": [
     "2_Chesses/计算机领域/操作系统.md",
     "2_Chesses/计算机领域/后端开发.md",
