@@ -41,6 +41,8 @@ star: true
 > [权威教程 | MDN](https://developer.mozilla.org/zh-CN/docs/Learn_web_development/Core/Styling_basics/Getting_started)
 > 
 > [业内规范 | TGIdea团队前端规范（腾讯业务）](https://tgideas.qq.com/doc/frontend/spec/common/css.html)
+> 
+> [推荐 | 常更新 |张鑫旭的 CSS 博客](https://www.zhangxinxu.com/wordpress/category/css/)
 
 ### 增强语言
 
