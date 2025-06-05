@@ -31,6 +31,14 @@ star: true
 > 除非你的项目也是远古项目，否则不推荐使用，若一定需要使用一定要真准对应版本的文档（swiper 中文网有提供）。
 > 
 > [使用教程 | 安装 | 实际应用场景](../../1_Projects/文章仓库/计算机相关/Swiper.md)
+> 
+> 
+> #### Viewer
+> 
+> 功能相对齐全的图片预览插件，开发者是国人，使用起来也比较简单。
+> 
+> [Viewer.js 官方网站](https://fengyuanchen.github.io/viewerjs/)
+> [Viewer.js 图片预览插件使用](https://www.cnblogs.com/matanzhang/p/11495678.html)
 
 ## CSS
 
