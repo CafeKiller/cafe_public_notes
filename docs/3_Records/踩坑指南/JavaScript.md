@@ -16,3 +16,14 @@
 答案是：
 - **单纯一个永不 resolve 的 Promise 不会泄漏内存**，但需注意它可能阻塞代码执行，导致关联资源无法释放。
 - 实际开发中，建议为长期运行的 Promise 设计超时或取消逻辑，避免意外悬挂。
+
+
+---
+## 在使用 href 跳转时替换当前页面URL
+
+使用 replaceState 或者 pushState
+
+[history对象中replaceState详解](https://juejin.cn/post/7138361584648192007)
+
+
+---
