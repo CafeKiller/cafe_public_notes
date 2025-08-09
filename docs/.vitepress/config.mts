@@ -5,6 +5,8 @@ export default defineConfig({
   title: "咖啡de笔记站",
   description: "一个简易且对外公开的笔记仓库",
   lang: "zh-CN",
+  
+  ignoreDeadLinks: true,
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

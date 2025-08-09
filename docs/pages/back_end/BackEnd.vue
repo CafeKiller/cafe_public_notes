@@ -15,7 +15,7 @@ list.value = [...new Map(
   ).values()]
   .sort((noteBef, noteAft) => noteBef.level - noteAft.level)
 
-  console.log(notes)
+  // console.log(notes)
 
 const filterNotes = (subtit) => {
   return notes.filter(note => note.frontmatter.subcategory === subtit)
