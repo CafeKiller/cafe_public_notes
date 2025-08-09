@@ -1,0 +1,19 @@
+{
+    "liveSassCompile.settings.autoprefix": [
+        "> 1%",
+        "last 4 versions"
+    ],
+    "liveSassCompile.settings.generateMap": false,
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "compressed",
+            "extensionName": ".min.css",
+            "savePath": null,
+            "savePathReplacementPairs": null
+        }
+    ],
+    "files.autoGuessEncoding": false,
+    "files.encoding": "utf8",
+    "trae.tab.enableRename": false,
+    "trae.tab.enableAutoImport": false,
+}

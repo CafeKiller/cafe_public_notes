@@ -1,0 +1,26 @@
+---
+title: "Redis 学习笔记"
+category: 通用计算机
+subcategory: 数据库
+level: 5
+tags:
+  - Linux
+  - command
+  - shell
+---
+
+## Redis
+
+数据库类型： #NoSQL 
+
+一个开源的、基于内存的高性能键值存储系统，常被用作数据库、缓存和消息中间件。
+
+主要作用：高速缓存、数据结构存储、会话管理、消息队列、分布式锁...
+
+> [!help] 参考资料
+> 
+> [视频教程 - IT黑马/Redis入门到实战教程](https://www.bilibili.com/video/BV1cr4y1671t)
+>
+> [教程 - 菜鸟/Redis教程](https://www.runoob.com/redis/redis-tutorial.html)
+>
+> [中文官网 - Redis教程](https://www.redis.net.cn/tutorial/3501.html)

@@ -1,8 +1,5 @@
 {
-  "textFontFamily": "JetBrains Maple Mono",
-  "monospaceFontFamily": "JetBrains Maple Mono,Fira Code Retina",
-  "interfaceFontFamily": "OPPOSans,JetBrains Maple Mono",
-  "theme": "system",
-  "baseFontSize": 14,
-  "baseFontSizeAction": true
+  "interfaceFontFamily": "OPPO Sans 4.0,JetBrains Maple Mono",
+  "textFontFamily": "OPPO Sans 4.0,JetBrains Maple Mono",
+  "monospaceFontFamily": "Fira Code,JetBrains Maple Mono"
 }

@@ -1,56 +1,41 @@
 {
   "main": {
-    "id": "eed4f08367e0b42b",
+    "id": "0cbfb5b0693ac9f2",
     "type": "split",
     "children": [
       {
-        "id": "0ff7b9e31b49d3f6",
+        "id": "7da4f982e3b6b05d",
         "type": "tabs",
         "children": [
           {
-            "id": "01ec0454ba73dec0",
+            "id": "14c6a7b9f1c9c1e6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3_Records/键盘相关.md",
+                "file": "notes/others/records/favorites.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "键盘相关"
-            }
-          },
-          {
-            "id": "e5370208f01587c5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "0_Collects/WSL2操作.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "WSL2操作"
+              "title": "favorites"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "f58021b6cf10b2b5",
+    "id": "834a15fbbd95f438",
     "type": "split",
     "children": [
       {
-        "id": "087f6aa9c3853d2d",
+        "id": "4bdea8c3fc90a535",
         "type": "tabs",
         "children": [
           {
-            "id": "f36b7c1fde1cd1e3",
+            "id": "846c25452d708585",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -63,12 +48,12 @@
             }
           },
           {
-            "id": "292d60f44aed95b3",
+            "id": "4400e32a377231e0",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:ES6+",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -80,7 +65,7 @@
             }
           },
           {
-            "id": "182d905325821d40",
+            "id": "db686e81b00044cd",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -93,23 +78,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 305.5026054382324
+    "width": 300
   },
   "right": {
-    "id": "5ac60da306b54b1f",
+    "id": "16216db0e76c7b1e",
     "type": "split",
     "children": [
       {
-        "id": "0afd7e01d01ee027",
+        "id": "30bf788ed5c68d5a",
         "type": "tabs",
         "children": [
           {
-            "id": "05bc3face291cdfc",
+            "id": "c02f293efe0105d2",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2_Chesses/计算机领域/Web前端.md",
+                "file": "docs/5_Configs/Obsidian推荐.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,71 +104,62 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Web前端 的反向链接列表"
+              "title": "Obsidian推荐 的反向链接列表"
             }
           },
           {
-            "id": "251ee17c76cdbf74",
+            "id": "1bcd77d3ca3ca4ca",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3_Records/日记/2025年01月22日.md",
+                "file": "docs/5_Configs/Obsidian推荐.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "2025年01月22日 的出链列表"
+              "title": "Obsidian推荐 的出链列表"
             }
           },
           {
-            "id": "72d625d3a0a94a96",
+            "id": "c24e3466e5f633f9",
             "type": "leaf",
             "state": {
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-tags",
               "title": "标签"
             }
           },
           {
-            "id": "91e5d1dfa59aeb4a",
+            "id": "35f925cf645be711",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "2_Chesses/计算机领域/Web前端.md",
+                "file": "docs/5_Configs/Obsidian推荐.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Web前端 的大纲"
-            }
-          },
-          {
-            "id": "ab4ed78eba5438a1",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "title": "Obsidian推荐 的大纲"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 312.5
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
-      "obsidian-git:Open Git source control": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
@@ -192,55 +168,41 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "e5370208f01587c5",
+  "active": "14c6a7b9f1c9c1e6",
   "lastOpenFiles": [
-    "0_Collects/Win10使用指南.md",
-    "3_Records/踩坑指南/Ubuntu.md",
-    "3_Records/踩坑指南/Python.md",
-    "3_Records/键盘相关.md",
-    "3_Records/开源项目汇总.md",
-    "README.md",
-    "2_Chesses/计算机领域/服务器运维.md",
-    "2_Chesses/计算机领域/后端开发.md",
-    "2_Chesses/计算机领域/计算机图形.md",
-    "2_Chesses/计算机领域/计算机网络.md",
-    "2_Chesses/计算机领域/Web前端.md",
-    "2_Chesses/计算机领域/Linux操作系统.md",
-    "2_Chesses/计算机领域/算法.md",
-    "3_Records/踩坑指南/JavaScript.md",
-    "2_Chesses/计算机领域/编程语言.md",
-    "2_Chesses/计算机领域/操作系统.md",
-    "2_Chesses/计算机领域/开发效率.md",
-    "2_Chesses/计算机领域/数据库.md",
-    "2_Chesses/游戏开发/游戏引擎.md",
-    "2_Chesses/Markdown 学习.md",
-    "未命名.canvas",
-    "1_Projects/文章仓库/计算机相关/ES6新机制.md",
-    "1_Projects/文章仓库/计算机相关/ECMAScript新函数.md",
-    "2_Chesses/游戏开发",
-    "3_Records/踩坑指南/WSL2.md",
-    "1_Projects/文章仓库/游戏开发相关/游戏开发名词.md",
-    "1_Projects/文章仓库/游戏开发相关",
-    "1_Projects/文章仓库/计算机相关/抗锯齿算法.md",
-    "1_Projects/文章仓库/计算机相关/Swiper.md",
-    "1_Projects/文章仓库/计算机相关",
-    "1_Projects/文章仓库",
-    "未命名",
-    "2_Chesses/计算机领域/resources/Pasted image 20250510155641.png",
-    "2_Chesses/计算机领域/resources",
-    "2_Chesses/计算机领域/编程语言基础/resources/Pasted image 20250424114938.png",
-    "2_Chesses/计算机领域/编程语言基础/resources/企业微信截图_17454658322433.png",
-    "2_Chesses/计算机领域/编程语言基础/resources",
-    "3_Records/日记/resources/2025_01_21.jpg",
-    "3_Records/日记/resources/wallhaven-l858zl.jpg",
-    "3_Records/日记/resources/未命名",
-    "3_Records/日记/resources/wallhaven-l858zl 5.jpg",
-    "resources",
-    "3_Records/日记/resources/wallhaven-l858zl 4.jpg",
-    "3_Records/日记/resources/wallhaven-l858zl 3.jpg",
-    "3_Records/日记/resources/wallhaven-l858zl 2.jpg",
-    "3_Records/日记/resources/wallhaven-l858zl 1.jpg",
-    "3_Records/日记/resources",
-    "5_Configs/Template/未命名.canvas"
+    "notes/front_end/browser/image-1.png",
+    "notes/front_end/browser/image.png",
+    "notes/front_end/browser/v8_stack_heap.md",
+    "pages/introduction/index.md",
+    "notes/others/cheese/writing.md",
+    "notes/others/cheese/1ACE7473.png",
+    "notes/others/cheese/animation_production.md",
+    "notes/others/cheese",
+    "notes/others/records/game_download.md",
+    "notes/others/records/game_down.md",
+    "notes/others/records/open_project.md",
+    "notes/others/records/favorites.md",
+    "pages/front_end/notes.fe.data.ts.timestamp-1753889044328-eeffec1e8eb01.mjs",
+    "notes/back_end/nodejs/nodejs_base.md",
+    "notes/others/records/work.md",
+    "notes/others/records/software.md",
+    "pages/back_end/index.md",
+    "docs/notes/others/records/work.md",
+    "docs/notes/others/records/favorites copy.md",
+    "docs/notes/others/records/software.md",
+    "docs/notes/others/records/favorites.md",
+    "docs/pages/games/index.md",
+    "docs/pages/introduction/index.md",
+    "docs/pages/language/index.md",
+    "docs/api-examples.md",
+    "docs/markdown-examples.md",
+    "docs/index.md",
+    "docs/notes/front_end/javascript/es6_new_feature.md",
+    "docs/components/LinkItem.vue",
+    "docs/README.md",
+    "docs/notes/others/tools/obsidian_learn.md",
+    "docs/notes/5_Configs",
+    "docs/notes/0_Collects",
+    "docs/notes"
   ]
 }
