@@ -1,5 +1,5 @@
 ---
-title: 包管理器使用教程（含PNPM、Yran）
+title: 包管理器使用教程
 category: WEB前端
 subcategory: 工程质量
 level: 10
@@ -9,7 +9,7 @@ tags:
   - Yarn
 ---
 
-# 其他主流包管理器
+# 其他主流包管理器（含PNPM、Yran）
 
 ## PNPM
 

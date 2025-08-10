@@ -3,3 +3,24 @@
 收录一些可以公开访问笔记或示例代码。笔记的主要记录格式为 markdown 文本。
 
 > 这些笔记的来源主要取自书籍、文章、网络；如有侵权，联系删除
+
+## 目录结构
+
+```
+docs
+├ pages
+│  └ ...
+├ notes
+│  └ ...
+├ components
+│  └ ...
+└ index.md
+```
+
+`pages` : 页面相关
+
+`notes` : 使用 markdown 记录的笔记
+
+`components` : Vue 组件
+
+`index.md` : 首页
