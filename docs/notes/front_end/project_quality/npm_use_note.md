@@ -69,7 +69,8 @@ npm list 包名
 npm install --global 包名
 
 # 更新本地安装的模块
-# 它会先到远程仓库查询最新版本，然后查询本地版本。如果本地版本不存在，或者远程版本较新，就会安装
+# 它会先到远程仓库查询最新版本，然后查询本地版本。
+# 如果本地版本不存在，或者远程版本较新，就会安装
 npm update [package name]
 
 # 升级全局安装的模块
@@ -86,6 +87,42 @@ npm view 包名
 npm help
 
 # 查看某个命令的使用帮助
-# 例如我忘记了 uninstall 命令的简写了，这个时候，可以输入 `npm uninstall --help` 来查看使用帮助
+# 例如我忘记了 uninstall 命令的简写了，
+# 这个时候，可以输入 `npm uninstall --help` 来查看使用帮助
 npm 命令 --help
+```
+
+## 查看依赖包的安装路径
+
+```sh
+# 当前项目
+npm root
+
+# 全局
+npm root -g
+```
+
+## 清除缓存
+
+```sh
+npm cache clean -f
+```
+
+## 设置淘宝镜像
+
+```sh
+npm config set registry https://registry.npmmirror.com
+
+# 验证是否设置成功
+npm config get registry
+```
+
+## 打开文档
+
+```sh
+# 在浏览器中打开当前项目的文档
+npm docs
+
+# 在浏览器中打开指定 npm 包的文档
+npm docs [package-name]
 ```

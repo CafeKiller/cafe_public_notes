@@ -238,3 +238,37 @@ toString 方法的在 ECMAScript 5 下的大致执行过程
 
 - 显式类型转换
 - 隐式类型转换
+
+### 抽象操作
+
+在了解类型转换前我们需要知道 `JavaScript` 的 抽象操作 (类型转换规则)
+
+> **抽象操作** 是指仅供内部使用的操作
+
+- `ToPrimitive` 将引用类型转换成相应的基本类型值
+- `ToString` 将非字符串值转换成字符串
+- `ToBoolean` 将非布尔值转换成布尔值
+- `ToNumber` 将非数字值转换成数字值
+
+#### ToPrimitive
+
+`ToPrimitive` 用来处理引用类型到基本类型的类型转换
+
+> [!tip] ToPrimitive 转换规则
+>
+> - 检查是否存在 `Symbol.toPrimitive()`
+>   - 基本类型直接返回
+>   - 引用类型抛出 `TypeError` 错误
+> - 检查是否存在 `valueOf()`
+>   - 基本类型直接返回
+>   - 引用类型则继续调用 `toString()`
+> - 调用 `toString()`
+>   - 基本类型直接返回
+>   - 引用类型抛出 `TypeError` 错误
+
+> [!danger] 注意点
+> 
+> - 使用 `Object.create(null)` 创建的对象没有原型，即不存在 `valueOf()` 和 `toString()`，当对其进行类型转换时会抛出 `TypeError` 错误
+> - 在做显式类型转换时 `valueOf()` 和 `toString()` 的调用顺序会根据转换目标不同去做相应调整
+>   - 默认情况下都是先调用 `valueOf()` 再调用 `toString()`
+>   - 当需要转换的目标为字符串时，会先调用 `toString()` 再调用 `valueOf()`

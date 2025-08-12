@@ -16,9 +16,9 @@ AnimateCss是一个使用 CSS3 的 animation 制作的动画效果的 CSS 集合
 
 AnimateCSS 相对比较简单，上手比较轻松，只需记住 AnimateCSS 的核心是 「类名」 即可。
 
-> [!tips] 参考资料
+> [!tip] 参考资料
 > 
-> [（强烈建议阅读）官方文档](https://animate.style/)
+> [「强烈建议阅读」官方文档](https://animate.style/)
 >
 > [animate.css 动画库教程](https://www.tides.cn/p_css-animate.css-tutorial)
 
