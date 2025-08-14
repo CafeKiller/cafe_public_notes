@@ -10,15 +10,15 @@ list.value = [...new Map(
       {
         subtit: note.frontmatter.subcategory,
         level: note.frontmatter.level || 99,
+        zIndex: note.frontmatter.zIndex || 1
       }
     ])
   ).values()]
   .sort((noteBef, noteAft) => noteBef.level - noteAft.level)
 
-  // console.log(notes)
-
 const filterNotes = (subtit) => {
   return notes.filter(note => note.frontmatter.subcategory === subtit)
+        .sort((noteBef, noteAft) => noteAft.frontmatter.zIndex - noteBef.frontmatter.zIndex)
 }
 </script>
 
