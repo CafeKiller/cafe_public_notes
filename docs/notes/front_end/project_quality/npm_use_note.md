@@ -68,8 +68,7 @@ npm list 包名
 # 安装全局包
 npm install --global 包名
 
-# 更新本地安装的模块
-# 它会先到远程仓库查询最新版本，然后查询本地版本。
+# 更新本地安装的模块，它会先到远程仓库查询最新版本，然后查询本地版本。
 # 如果本地版本不存在，或者远程版本较新，就会安装
 npm update [package name]
 
@@ -87,42 +86,66 @@ npm view 包名
 npm help
 
 # 查看某个命令的使用帮助
-# 例如我忘记了 uninstall 命令的简写了，
-# 这个时候，可以输入 `npm uninstall --help` 来查看使用帮助
+# 例如我忘记了 uninstall 命令的简写了，这个时候，可以输入 `npm uninstall --help` 来查看使用帮助
 npm 命令 --help
+
+# 列出当前项目中需要更新的包
+npm outdated
+
+# 检查当前项目中的依赖项是否存在安全漏洞
+npm audit
+
+# 发布自己开发的包到 npm 库中
+npm publish 
+
+# 登录到 npm 账户。
+npm login
+# 注销当前 npm 账户。
+npm logout
+# 将本地模块链接到全局的 node_modules 目录下
+npm link
+
+# 用于列出所有的 npm 配置信息。执行该命令可以查看当前系统和用户级别的所有 npm 配置信息，以及当前项目的配置信息（如果在项目目录下执行该命令）
+npm config list
+
+# 用于获取当前 npm 配置中的 registry 配置项的值。registry 配置项用于指定 npm 包的下载地址，如果未指定，则默认使用 npm 官方的包注册表地址
+npm get registry 
+
+# 将 registry 配置项的值修改为指定的 <registry-url> 地址
+npm config set registry <registry-url> 
 ```
 
-## 查看依赖包的安装路径
+## Package JSON
 
-```sh
-# 当前项目
-npm root
+执行 `npm init` 便可以初始化一个 `package.json`
 
-# 全局
-npm root -g
-```
+- `name` 项目名称，必须是唯一的字符串，通常采用小写字母和连字符的组合。
+- `version` 项目版本号，通常采用语义化版本号规范。
+- `description` 项目描述。
+- `main` 项目的主入口文件路径，通常是一个 JavaScript 文件。
+- `keywords` 项目的关键字列表，方便他人搜索和发现该项目。
+- `author` 项目作者的信息，包括姓名、邮箱、网址等。
+- `license` 项目的许可证类型，可以是自定义的许可证类型或者常见的开源许可证（如 `MIT`、`Apache` 等）。
+- `dependencies` 项目所依赖的包的列表，这些包会在项目运行时自动安装。
+- `devDependencies` 项目开发过程中所需要的包的列表，这些包不会随项目一起发布，而是只在开发时使用。
+- `peerDependencies` 项目的同级依赖，即项目所需要的模块被其他模块所依赖。
+- `scripts` 定义了一些脚本命令，比如启动项目、运行测试等。
+- `repository` 项目代码仓库的信息，包括类型、网址等。
+- `bugs` 项目的 bug 报告地址。
+- `homepage` 项目的官方网站地址或者文档地址。
 
-## 清除缓存
+> [!tip] 版本号
+> 
+> `version` 三段式版本号一般是 `1.0.0` 即：`大版本号.次版本号.修订号`
+> 
+> - **大版本号** 一般是有重大变化才会升级
+> - **次版本号** 一般是增加功能进行升级 
+> - **修订号** 一般是修改 bug 进行升级
 
-```sh
-npm cache clean -f
-```
-
-## 设置淘宝镜像
-
-```sh
-npm config set registry https://registry.npmmirror.com
-
-# 验证是否设置成功
-npm config get registry
-```
-
-## 打开文档
-
-```sh
-# 在浏览器中打开当前项目的文档
-npm docs
-
-# 在浏览器中打开指定 npm 包的文档
-npm docs [package-name]
-```
+> `npm install` 安装模块的时候一般是扁平化安装的，但是有时候出现嵌套的情况是因为版本不同
+> 
+> A 依赖 C1.0,
+> B 依赖 C1.0,
+> D 依赖 C2.0,
+> 
+> 此时 `C 1.0` 就会被放到A B的 `node_moduels`，`C2.0` 会被放入D模块下面的 `node_moduels`
